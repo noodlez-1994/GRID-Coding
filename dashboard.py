@@ -662,7 +662,7 @@ with tab_raw:
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 6 – Ward Heatmap
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MAP_IMG_PATH = DATA_DIR.parent.parent / "lolmap.png"
+MAP_IMG_PATH = Path("lolmap.png")
 MAP_SIZE     = 15000  # LoL coordinate space (0-15000 for both x and z)
 
 WARD_TYPE_LABELS = {
