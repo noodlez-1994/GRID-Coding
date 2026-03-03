@@ -1038,7 +1038,7 @@ def _s3_client():
         "s3",
         aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
         aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"],
-        region_name="eu-west-1",
+        region_name="eu-west-3",
     )
 
 
@@ -1054,7 +1054,8 @@ def load_game_positions(series_id: str, game_num: int):
     try:
         raw    = _s3_client().get_object(Bucket="s3-lol-datastorage", Key=key)["Body"].read().decode()
         events = [json.loads(ln) for ln in raw.splitlines() if ln.strip()]
-    except Exception:
+    except Exception as e:
+        st.error(f"S3 error: {e}")
         return pd.DataFrame(), [], {}
 
     # participant info from game_info
