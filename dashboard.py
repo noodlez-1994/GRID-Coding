@@ -19,9 +19,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import streamlit as st
+import streamlit_authenticator as stauth
+import yaml
 from dotenv import load_dotenv
 from PIL import Image as PILImage
 from scipy.ndimage import gaussian_filter
+from yaml.loader import SafeLoader
 
 load_dotenv(Path(__file__).parent / ".env")
 
@@ -31,6 +34,28 @@ st.set_page_config(
     page_icon="⚔️",
     layout="wide",
 )
+
+# ── Authentication ─────────────────────────────────────────────────────────────
+with open(Path(__file__).parent / "config.yaml") as _f:
+    _auth_config = yaml.load(_f, Loader=SafeLoader)
+
+_authenticator = stauth.Authenticate(
+    _auth_config["credentials"],
+    _auth_config["cookie"]["name"],
+    _auth_config["cookie"]["key"],
+    _auth_config["cookie"]["expiry_days"],
+    auto_hash=False,
+)
+
+_authenticator.login()
+
+if st.session_state.get("authentication_status") is False:
+    st.error("Incorrect username or password.")
+    st.stop()
+elif st.session_state.get("authentication_status") is None:
+    st.stop()
+
+# ── Authenticated ──────────────────────────────────────────────────────────────
 
 DATA_DIR = Path(__file__).parent
 

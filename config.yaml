@@ -1,0 +1,11 @@
+credentials:
+  usernames:
+    hmblstreamlit:
+      email: ''
+      name: HMBL Streamlit
+      password: "$2b$12$rI.6vvqg80PKeLo7XaWo1.5FHhjeAeg7Ky2dqG2Z6zRmE8bLCQ/iG"
+
+cookie:
+  expiry_days: 30
+  key: grid2026_auth_secret_key
+  name: grid2026_auth
