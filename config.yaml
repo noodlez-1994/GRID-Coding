@@ -3,7 +3,7 @@ credentials:
     hmblstreamlit:
       email: ''
       name: HMBL Streamlit
-      password: "$2b$12$rI.6vvqg80PKeLo7XaWo1.5FHhjeAeg7Ky2dqG2Z6zRmE8bLCQ/iG"
+      password: "$2b$12$LreroND.nvZ7n2owuHITj.zTigGbkdOnXM29AhJUloDlmpojayY9S"
 
 cookie:
   expiry_days: 30
