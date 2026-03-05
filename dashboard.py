@@ -954,6 +954,43 @@ with tab_wards:
 # TAB 7 – Champion Movements
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+@st.cache_data(show_spinner=False)
+def load_games_meta() -> pd.DataFrame:
+    """Build game list (series_id, game_num, blue_team, red_team, date) from
+    the lightweight end_state_summary JSON files — no S3, no full picks load."""
+    rows: list[dict] = []
+    for path in DATA_DIR.glob("end_state_summary_riot_*.json"):
+        m = re.search(r"riot_(\d+)_(\d+)", path.name)
+        if not m:
+            continue
+        sid, gnum = m.group(1), int(m.group(2))
+        try:
+            with open(path) as f:
+                d = json.load(f)
+            ts_ms = d.get("gameStartTimestamp") or d.get("gameCreation", 0)
+            date  = pd.to_datetime(ts_ms, unit="ms").normalize()
+            teams: dict[int, str | None] = {100: None, 200: None}
+            for p in d.get("participants", []):
+                tid  = p.get("teamId", 0)
+                name = p.get("riotIdGameName", "")
+                if tid in teams and teams[tid] is None and " " in name:
+                    teams[tid] = name.split(" ", 1)[0]
+            rows.append({
+                "series_id": sid,
+                "game_num":  gnum,
+                "blue_team": teams[100] or "?",
+                "red_team":  teams[200] or "?",
+                "date":      date,
+            })
+        except Exception:
+            pass
+    if not rows:
+        return pd.DataFrame(columns=["series_id", "game_num", "blue_team", "red_team", "date"])
+    df = pd.DataFrame(rows)
+    df["series_id"] = df["series_id"].astype(str)
+    return df.sort_values(["date", "series_id", "game_num"]).reset_index(drop=True)
+
+
 _MOVE_OBJ_TYPES  = {"dragon", "baron", "riftHerald"}
 _MOVE_OBJ_LABELS = {"dragon": "Dragon", "baron": "Baron", "riftHerald": "Rift Herald"}
 _MOVE_ROLE_NORM  = {
@@ -1234,13 +1271,6 @@ def _build_gif(pos_df: pd.DataFrame, start_ms: int, end_ms: int,
     return out.getvalue()
 
 
-# ── Game metadata for selector ───────────────────────────────────────────────
-_games_meta = (
-    picks_raw[["series_id", "game_num", "blue_team", "red_team", "date"]]
-    .drop_duplicates(subset=["series_id", "game_num"])
-    .sort_values(["date", "series_id", "game_num"])
-)
-
 with tab_moves:
     st.subheader("Champion Movements")
     st.caption(
@@ -1250,6 +1280,14 @@ with tab_moves:
 
     # ── Step 1 – pick a game ────────────────────────────────────────────────
     st.markdown("#### 1 · Select a game")
+
+    _games_meta = load_games_meta()
+    if sel_teams:
+        _games_meta = _games_meta[
+            _games_meta["blue_team"].isin(sel_teams) |
+            _games_meta["red_team"].isin(sel_teams)
+        ].reset_index(drop=True)
+
     game_options: list[str] = []
     game_key_map: dict[str, tuple[str, int]] = {}
     for _, gr in _games_meta.iterrows():
@@ -1259,6 +1297,10 @@ with tab_moves:
         )
         game_options.append(label)
         game_key_map[label] = (str(gr["series_id"]), int(gr["game_num"]))
+
+    if not game_options:
+        st.info("No games found for the selected team filter.")
+        st.stop()
 
     sel_game_label = st.selectbox("Game", options=game_options, key="move_game")
     sel_sid, sel_gnum = game_key_map[sel_game_label]
