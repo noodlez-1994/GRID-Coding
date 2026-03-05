@@ -1167,9 +1167,19 @@ def _ms_to_mmss(ms: int) -> str:
     return f"{s // 60}:{s % 60:02d}"
 
 
+_WARD_DOT_COLORS = {
+    "yellowTrinket": "#F1C40F",
+    "control":       "#9B59B6",
+    "blueTrinket":   "#3498DB",
+    "sight":         "#27AE60",
+    "unknown":       "#AAAAAA",
+}
+
+
 def _build_gif(pos_df: pd.DataFrame, start_ms: int, end_ms: int,
                sample_s: float, fps: int, highlight_pids: set | None,
-               objective: dict | None) -> bytes | None:
+               objective: dict | None,
+               wards_df: pd.DataFrame | None = None) -> bytes | None:
     """Render champion movement as an animated GIF using PIL (no matplotlib)."""
     from PIL import ImageDraw
 
@@ -1238,6 +1248,20 @@ def _build_gif(pos_df: pd.DataFrame, start_ms: int, end_ms: int,
                 draw.ellipse(
                     [px - dot_r, py - dot_r, px + dot_r, py + dot_r],
                     fill=(cr, cg, cb, alpha), outline=(255, 255, 255, alpha),
+                )
+
+        # Ward placements: show all wards placed up to current timestamp
+        if wards_df is not None and not wards_df.empty:
+            placed = wards_df[wards_df["game_time_ms"] <= ts]
+            for w in placed.itertuples(index=False):
+                wx = int(float(w.x) / MAP_SIZE * W)
+                wz = int((1.0 - float(w.z) / MAP_SIZE) * H)
+                wr, wg, wb = _hex_to_rgb(
+                    _TEAM_COLOR.get(str(w.side), "#AAAAAA")
+                )
+                draw.ellipse(
+                    [wx - 4, wz - 4, wx + 4, wz + 4],
+                    fill=(wr, wg, wb, 220), outline=(0, 0, 0, 200), width=1,
                 )
 
         # Objective kill flash: marker visible for ±5 s around the kill
@@ -1409,6 +1433,18 @@ with tab_moves:
         f"GIF duration: ~**{est_frames / fps:.1f}s** at {fps} fps"
     )
 
+    # ── Ward overlay option ───────────────────────────────────────────────────
+    show_wards = st.checkbox("Show ward placements", value=True, key="move_show_wards")
+    game_wards_df: pd.DataFrame | None = None
+    if show_wards and not wards_raw.empty:
+        gw = wards_raw[
+            (wards_raw["series_id"].astype(str) == sel_sid) &
+            (wards_raw["game_num"] == sel_gnum)
+        ].copy()
+        gw["game_time_ms"] = (gw["game_time_s"] * 1000).astype(int)
+        gw = gw[(gw["game_time_ms"] >= start_ms) & (gw["game_time_ms"] <= end_ms)]
+        game_wards_df = gw if not gw.empty else None
+
     # ── Generate ─────────────────────────────────────────────────────────────
     if st.button("▶ Generate GIF", type="primary", key="move_gen"):
         with st.spinner(f"Rendering {est_frames} frames…"):
@@ -1417,6 +1453,7 @@ with tab_moves:
                 sample_s=sample_s, fps=fps,
                 highlight_pids=highlight_pids,
                 objective=active_objective,
+                wards_df=game_wards_df,
             )
 
         if gif_bytes is None:
