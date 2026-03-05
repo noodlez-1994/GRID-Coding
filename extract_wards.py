@@ -60,7 +60,7 @@ def main():
         "s3",
         aws_access_key_id=AWS_KEY,
         aws_secret_access_key=AWS_SECRET,
-        region_name="eu-west-1",
+        region_name="eu-west-3",
     )
 
     summary_files = sorted(
@@ -81,7 +81,6 @@ def main():
         patch, date = parse_game_meta(path)
 
         print(f"Processing series={series_id} game={game_num} ...", end=" ")
-
         events = fetch_events(s3, series_id, game_num)
         if not events:
             print("SKIP (no events)")
