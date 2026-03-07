@@ -72,25 +72,43 @@ def fetch_events(s3_client, series_id: str, game_num: int) -> list[dict] | None:
 
 
 # ── Draft extraction from events ─────────────────────────────────────────────
-def extract_pick_turns(events: list[dict]) -> dict[str, int]:
+def extract_pick_turns(events: list[dict]) -> dict[str, tuple[int, int]]:
     """
-    Returns {display_name: pick_turn_global} from the final champ-select snapshot.
-    pick_turn_global is the player's assigned action turn in the full draft (7-12 / 17-20).
+    Returns {display_name: (pick_turn_global, first_locked_champion_id)}.
+
+    Scans CHAMP_SELECT events chronologically and records, for each player,
+    their scheduled pick turn AND the champion they FIRST locked in (before any
+    end-of-draft swaps).  This is the champion that was actually committed to
+    that draft slot, not the champion the player ended up playing after swaps.
     """
-    cs_events = [e for e in events if e.get("gameState") == "CHAMP_SELECT"]
+    cs_events = sorted(
+        [e for e in events if e.get("gameState") == "CHAMP_SELECT"],
+        key=lambda e: (e["pickTurn"], e.get("sequenceIndex", 0)),
+    )
     if not cs_events:
         return {}
 
-    # Use the snapshot with highest pickTurn (most complete state)
-    final = max(cs_events, key=lambda e: (e["pickTurn"], e.get("sequenceIndex", 0)))
-
-    pick_turns: dict[str, int] = {}
+    # First pass: collect each player's scheduled pick turn from the final snapshot
+    final = cs_events[-1]
+    scheduled: dict[str, int] = {}
     for player in final.get("teamOne", []) + final.get("teamTwo", []):
         pt = player.get("pickTurn", 0)
         name = player.get("displayName") or player.get("gameName") or player.get("summonerName", "")
         if name and is_pick_turn(pt):
-            pick_turns[name] = pt
-    return pick_turns
+            scheduled[name] = pt
+
+    # Second pass: find the FIRST non-zero championID for each player as we walk
+    # forward through the event timeline.  The first lock-in is the actual draft
+    # pick; any later change is a post-draft swap and should be ignored.
+    first_champ: dict[str, int] = {}
+    for e in cs_events:
+        for player in e.get("teamOne", []) + e.get("teamTwo", []):
+            name = player.get("displayName") or player.get("gameName") or player.get("summonerName", "")
+            cid  = player.get("championID", 0)
+            if name and name in scheduled and name not in first_champ and cid != 0:
+                first_champ[name] = cid
+
+    return {name: (scheduled[name], first_champ.get(name, 0)) for name in scheduled}
 
 
 # ── Summary parsing ───────────────────────────────────────────────────────────
@@ -214,16 +232,24 @@ def main():
             continue
         bans, picks = result
 
-        # Enrich picks with pick-order from S3 events
+        # Enrich picks with pick-order and draft champion from S3 events
         events = fetch_events(s3, series_id, game_num)
-        pick_turns: dict[str, int] = {}
+        pick_turns: dict[str, tuple[int, int]] = {}
         if events:
             pick_turns = extract_pick_turns(events)
 
         for p in picks:
-            pt = pick_turns.get(p["display_name"])
+            info = pick_turns.get(p["display_name"])
+            if info:
+                pt, first_cid = info
+            else:
+                pt, first_cid = None, None
             p["pick_turn_global"] = pt          # 7-20 (None if events unavailable)
             p["pick_phase"]       = pick_phase(pt) if pt else None
+            # draft_champion: champion actually committed at this pick slot
+            # (before end-of-draft swaps).  Falls back to final champion when
+            # events are unavailable.
+            p["draft_champion"]   = champ_map.get(first_cid, p["champion"]) if first_cid else p["champion"]
             p["series_id"]        = series_id
             p["game_num"]         = game_num
             # Remove helper key
@@ -255,7 +281,7 @@ def main():
         "series_id", "game_num",
         "blue_team", "red_team",
         "team", "opp_team", "side",
-        "player", "champion", "role",
+        "player", "champion", "draft_champion", "role",
         "pick_order", "pick_turn_global", "pick_phase",
         "win", "result",
     ]

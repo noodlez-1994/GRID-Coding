@@ -292,10 +292,10 @@ with tab_wr:
     st.markdown("---")
     st.subheader("Draft Slot Analysis")
     st.caption(
-        "Each game has 10 pick slots. The table below shows the standard order: "
-        "**Slot 1** = Blue's 1st pick · **Slot 2** = Red's 1st · "
-        "**Slots 3-4** = Red's 2nd & 3rd · **Slots 5-6** = Blue's 2nd & 3rd · "
-        "**Slots 7-8** = Red's 4th & Blue's 4th · **Slots 9-10** = Blue's 5th & Red's 5th. "
+        "Each game has 10 pick slots ordered by draft turn: "
+        "**Slot 1** = Blue's 1st pick · **Slot 2** = Red's 1st · **Slot 3** = Red's 2nd · "
+        "**Slot 4** = Blue's 2nd · **Slot 5** = Blue's 3rd · **Slot 6** = Red's 3rd · "
+        "**Slot 7** = Red's 4th · **Slot 8** = Blue's 4th · **Slot 9** = Blue's 5th · **Slot 10** = Red's 5th. "
         "Expand a slot to see which champions are most picked there and their winrates."
     )
 
@@ -307,6 +307,12 @@ with tab_wr:
 
     picks_slots = picks.dropna(subset=["pick_order"]).copy()
     picks_slots["pick_order"] = picks_slots["pick_order"].astype(int)
+    # Use draft_champion (the champion locked in at this slot before post-draft
+    # swaps) when available, falling back to the final champion column.
+    if "draft_champion" in picks_slots.columns:
+        picks_slots["slot_champion"] = picks_slots["draft_champion"].fillna(picks_slots["champion"])
+    else:
+        picks_slots["slot_champion"] = picks_slots["champion"]
 
     min_slot_picks = st.slider("Min. picks per champion to show", 1, 5, 1, key="min_slot")
 
@@ -316,7 +322,7 @@ with tab_wr:
             continue
         side     = SLOT_SIDE.get(slot, "?")
         total    = len(slot_df)
-        slot_wr  = winrate_table(slot_df, "champion", min_slot_picks).head(15)
+        slot_wr  = winrate_table(slot_df, "slot_champion", min_slot_picks).head(15)
 
         with st.expander(
             f"Slot {slot}  ({side} side)  —  {total} picks across all games",
@@ -325,17 +331,17 @@ with tab_wr:
             c_left, c_right = st.columns([3, 2])
             with c_left:
                 st.bar_chart(
-                    slot_wr.set_index("champion")[["winrate"]].sort_values("winrate"),
+                    slot_wr.set_index("slot_champion")[["winrate"]].sort_values("winrate"),
                     color="#E8734A",
                     height=280,
                 )
             with c_right:
                 st.dataframe(
                     slot_wr.rename(columns={
-                        "champion": "Champion",
-                        "games":    "Picks",
-                        "wins":     "Wins",
-                        "winrate":  "WR %",
+                        "slot_champion": "Champion",
+                        "games":         "Picks",
+                        "wins":          "Wins",
+                        "winrate":       "WR %",
                     }).style.map(color_wr, subset=["WR %"]),
                     hide_index=True,
                     use_container_width=True,
