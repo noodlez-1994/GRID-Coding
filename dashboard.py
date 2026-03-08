@@ -9,6 +9,7 @@ Public access options:
   2) ngrok tunnel – run `ngrok http 8501` after starting streamlit
 """
 from pathlib import Path
+import base64
 import io
 import os
 import re
@@ -234,7 +235,7 @@ if picks.empty:
     st.stop()
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
-tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves = st.tabs([
+tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves, tab_draft = st.tabs([
     "🏆 Champion Winrates",
     "🎮 By Game #",
     "🛡️ Team Deep Dive",
@@ -242,6 +243,7 @@ tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves = st.tabs([
     "📋 Raw Data",
     "🗺️ Ward Heatmap",
     "🎬 Movements",
+    "📋 Draft Viewer",
 ])
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -701,6 +703,314 @@ def load_ward_data() -> pd.DataFrame:
 wards_raw = load_ward_data()
 
 
+# TAB 8 – Draft Viewer
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ── Draft helpers (defined once, used inside the tab) ─────────────────────────
+
+# Blue picks in team-pick order (1st through 5th blue pick by draft turn)
+_BLUE_PICK_ORDERS = [1, 4, 5, 8, 9]
+# Red picks in team-pick order
+_RED_PICK_ORDERS  = [2, 3, 6, 7, 10]
+# Paired rows to display (blue_pick_order, red_pick_order)
+_PHASE1_PAIRS = [(1, 2), (4, 3), (5, 6)]
+_PHASE2_PAIRS = [(8, 7), (9, 10)]
+
+_ROLE_ABBR = {"TOP": "T", "JGL": "J", "MID": "M", "BOT": "A", "SUP": "S"}
+_DDRAGON_VERSION = "16.3.1"
+
+
+@st.cache_data
+def _icon_b64(champion: str) -> str:
+    """Return base64-encoded PNG for a champion icon, downloading from DDragon if not cached."""
+    import urllib.request
+
+    icon_dir = DATA_DIR / "champ_icons"
+    icon_dir.mkdir(exist_ok=True)
+
+    names = [champion, re.sub(r"[^a-zA-Z0-9]", "", champion)]
+
+    # Check local cache first
+    for name in names:
+        p = icon_dir / f"{name}.png"
+        if p.exists():
+            return base64.b64encode(p.read_bytes()).decode()
+
+    # Download from DDragon and cache locally
+    for name in names:
+        url = (
+            f"http://ddragon.leagueoflegends.com/cdn/"
+            f"{_DDRAGON_VERSION}/img/champion/{name}.png"
+        )
+        dest = icon_dir / f"{name}.png"
+        try:
+            urllib.request.urlretrieve(url, dest)
+            return base64.b64encode(dest.read_bytes()).decode()
+        except Exception:
+            pass
+
+    return ""
+
+
+def _img_tag(b64: str, size: int, extra_style: str = "") -> str:
+    if b64:
+        return (
+            f'<img src="data:image/png;base64,{b64}" '
+            f'width="{size}" height="{size}" '
+            f'style="border-radius:4px;vertical-align:middle;{extra_style}">'
+        )
+    return (
+        f'<span style="display:inline-block;width:{size}px;height:{size}px;'
+        f'background:#444;border-radius:4px;vertical-align:middle;{extra_style}"></span>'
+    )
+
+
+def _ban_row(blue_champ: str | None, red_champ: str | None) -> str:
+    """One ban row: blue ban on left, red ban on right."""
+    def cell(champ, align):
+        if not champ:
+            return f'<td style="background:#1c2233;padding:2px 6px;"></td>'
+        img = _img_tag(_icon_b64(champ), 22, "opacity:0.65;margin-right:4px;" if align == "left" else "opacity:0.65;margin-left:4px;")
+        txt = f'<span style="color:#9aaacc;font-size:11px;">{champ}</span>'
+        inner = f'{img}{txt}' if align == "left" else f'{txt}{img}'
+        return (
+            f'<td style="background:#1c2233;padding:2px 6px;'
+            f'text-align:{align};vertical-align:middle;">{inner}</td>'
+        )
+    mid = '<td style="background:#222;padding:2px 4px;text-align:center;color:#777;font-size:9px;width:32px;">Ban</td>'
+    return f"<tr>{cell(blue_champ,'left')}{mid}{cell(red_champ,'right')}</tr>"
+
+
+def _pick_row(
+    blue_champ: str | None, blue_role: str,
+    red_champ: str | None, red_role: str,
+) -> str:
+    """One pick row: blue pick on left, red pick on right."""
+    def cell(champ, role, side):
+        if not champ:
+            bg = "#182038" if side == "blue" else "#381820"
+            return f'<td style="background:{bg};padding:3px 6px;"></td>'
+        img_style = "margin-right:4px;" if side == "blue" else "margin-left:4px;"
+        img = _img_tag(_icon_b64(champ), 28, img_style)
+        abbr = _ROLE_ABBR.get(role, "?")
+        role_color = "#6699ff" if side == "blue" else "#ff7777"
+        role_span = f'<span style="color:{role_color};font-size:9px;font-weight:bold;">[{abbr}]</span>'
+        champ_span = f'<span style="color:white;font-weight:bold;font-size:12px;">{champ}</span>'
+        if side == "blue":
+            inner = f'{img}{role_span}&nbsp;{champ_span}'
+            bg = "#182038"
+            align = "left"
+        else:
+            inner = f'{champ_span}&nbsp;{role_span}{img}'
+            bg = "#381820"
+            align = "right"
+        return (
+            f'<td style="background:{bg};padding:3px 6px;'
+            f'text-align:{align};vertical-align:middle;">{inner}</td>'
+        )
+    mid = '<td style="background:#1a1a1a;padding:3px 4px;width:32px;"></td>'
+    return f"<tr>{cell(blue_champ,blue_role,'blue')}{mid}{cell(red_champ,red_role,'red')}</tr>"
+
+
+def _phase_sep(label: str) -> str:
+    return (
+        f'<tr><td colspan="3" style="background:#111;padding:2px 8px;'
+        f'text-align:center;color:#555;font-size:10px;letter-spacing:1px;">'
+        f'{label}</td></tr>'
+    )
+
+
+def _render_draft_html(series_id, game_num, blue_team, red_team,
+                       game_picks: pd.DataFrame, game_bans: pd.DataFrame) -> str:
+    """Build and return the full HTML table for one game's draft."""
+
+    def get_ban(side, order):
+        rows = game_bans[(game_bans["side"] == side) & (game_bans["ban_order"] == order)]
+        return rows.iloc[0]["champion"] if not rows.empty else None
+
+    def get_pick(order):
+        rows = game_picks[game_picks["pick_order"] == order]
+        if rows.empty:
+            return None, ""
+        row = rows.iloc[0]
+        champ = row.get("draft_champion") or row["champion"]
+        # Role: find who actually played the draft_champion and use their role
+        played_rows = game_picks[game_picks["champion"] == champ]
+        if not played_rows.empty:
+            role = played_rows.iloc[0].get("role", "")
+        else:
+            role = row.get("role", "")
+        if pd.isna(role):
+            role = ""
+        return champ, str(role)
+
+    # Result
+    blue_rows = game_picks[game_picks["side"] == "Blue"]
+    blue_win  = bool(blue_rows["win"].iloc[0]) if not blue_rows.empty else False
+    win_label = (
+        f'<span style="color:#6699ff;">{blue_team}</span> won'
+        if blue_win else
+        f'<span style="color:#ff7777;">{red_team}</span> won'
+    )
+
+    # Game number badge color (G1=green, G2=blue, G3=orange, G4=purple, G5=red)
+    badge_colors = {1: "#28a745", 2: "#1a6cb4", 3: "#e07800", 4: "#7b2d8b", 5: "#c0392b"}
+    badge_bg = badge_colors.get(int(game_num), "#555")
+
+    header = (
+        f'<tr>'
+        f'<th style="background:#0d1a2e;padding:5px 8px;text-align:left;'
+        f'color:#88aaff;font-size:12px;">🟦 {blue_team}</th>'
+        f'<th style="background:#1a1a1a;padding:5px;text-align:center;">'
+        f'<span style="background:{badge_bg};color:white;border-radius:10px;'
+        f'padding:1px 7px;font-size:11px;font-weight:bold;">G{game_num}</span></th>'
+        f'<th style="background:#2e0d0d;padding:5px 8px;text-align:right;'
+        f'color:#ff8888;font-size:12px;">{red_team} 🟥</th>'
+        f'</tr>'
+    )
+
+    rows = [header, _phase_sep("BAN PHASE 1")]
+    for n in range(1, 4):
+        rows.append(_ban_row(get_ban("Blue", n), get_ban("Red", n)))
+
+    rows.append(_phase_sep("PICK PHASE 1"))
+    for bp, rp in _PHASE1_PAIRS:
+        bc, br = get_pick(bp)
+        rc, rr = get_pick(rp)
+        rows.append(_pick_row(bc, br, rc, rr))
+
+    rows.append(_phase_sep("BAN PHASE 2"))
+    for n in range(4, 6):
+        rows.append(_ban_row(get_ban("Blue", n), get_ban("Red", n)))
+
+    rows.append(_phase_sep("PICK PHASE 2"))
+    for bp, rp in _PHASE2_PAIRS:
+        bc, br = get_pick(bp)
+        rc, rr = get_pick(rp)
+        rows.append(_pick_row(bc, br, rc, rr))
+
+    footer = (
+        f'<tr><td colspan="3" style="background:#111;padding:4px;'
+        f'text-align:center;color:#888;font-size:11px;">{win_label}</td></tr>'
+    )
+    rows.append(footer)
+
+    return (
+        '<table style="width:100%;border-collapse:collapse;'
+        'margin-bottom:20px;font-family:sans-serif;">'
+        + "".join(rows)
+        + "</table>"
+    )
+
+
+with tab_draft:
+    st.subheader("Draft Viewer")
+
+    # ── Filters ───────────────────────────────────────────────────────────────
+    f_left, f_mid, _ = st.columns([2, 4, 2])
+
+    with f_left:
+        draft_side = st.radio(
+            "Side filter",
+            ["All", "🟦 Blue side", "🟥 Red side"],
+            horizontal=True,
+            key="dv_side",
+        )
+
+    with f_mid:
+        st.markdown("**Game # in series**")
+        avail_gnums = sorted(picks_raw["game_num"].unique())
+        g_cols = st.columns(len(avail_gnums))
+        badge_colors_css = {1: "#28a745", 2: "#1a6cb4", 3: "#e07800", 4: "#7b2d8b", 5: "#c0392b"}
+        sel_draft_gnums: list[int] = []
+        for i, gn in enumerate(avail_gnums):
+            col_css = badge_colors_css.get(int(gn), "#555")
+            # Highlight label with badge color using markdown
+            g_cols[i].markdown(
+                f'<span style="background:{col_css};color:white;border-radius:10px;'
+                f'padding:2px 8px;font-size:12px;">G{gn}</span>',
+                unsafe_allow_html=True,
+            )
+            if g_cols[i].checkbox("", value=True, key=f"dv_gn_{gn}", label_visibility="collapsed"):
+                sel_draft_gnums.append(gn)
+
+    # ── Build game list ───────────────────────────────────────────────────────
+    # Collect unique games from picks_raw
+    game_keys = (
+        picks_raw[["series_id", "game_num", "blue_team", "red_team"]]
+        .drop_duplicates()
+        .copy()
+    )
+    game_keys["series_id"] = game_keys["series_id"].astype(str)
+
+    # Merge date if available
+    if "date" in picks_raw.columns:
+        date_map = (
+            picks_raw[["series_id", "game_num", "date"]]
+            .drop_duplicates(subset=["series_id", "game_num"])
+        )
+        date_map["series_id"] = date_map["series_id"].astype(str)
+        game_keys = game_keys.merge(date_map, on=["series_id", "game_num"], how="left")
+
+    # Side filter (based on sidebar team selection)
+    tracked = sel_teams if sel_teams else list(picks_raw["team"].unique())
+    if draft_side == "🟦 Blue side":
+        game_keys = game_keys[game_keys["blue_team"].isin(tracked)]
+    elif draft_side == "🟥 Red side":
+        game_keys = game_keys[game_keys["red_team"].isin(tracked)]
+    elif sel_teams:
+        mask = game_keys["blue_team"].isin(tracked) | game_keys["red_team"].isin(tracked)
+        game_keys = game_keys[mask]
+
+    # Game number filter
+    if sel_draft_gnums:
+        game_keys = game_keys[game_keys["game_num"].isin(sel_draft_gnums)]
+
+    st.caption(f"{len(game_keys)} game(s) shown")
+    st.markdown("---")
+
+    if game_keys.empty:
+        st.info("No games match the selected filters.")
+    else:
+        COLS_PER_ROW = 3
+        sorted_games = list(game_keys.sort_values(["series_id", "game_num"]).iterrows())
+
+        for chunk_start in range(0, len(sorted_games), COLS_PER_ROW):
+            chunk = sorted_games[chunk_start : chunk_start + COLS_PER_ROW]
+            cols = st.columns(len(chunk))
+
+            for col, (_, gk) in zip(cols, chunk):
+                sid       = str(gk["series_id"])
+                gn        = int(gk["game_num"])
+                blue_team = gk["blue_team"]
+                red_team  = gk["red_team"]
+                date_str  = (
+                    gk["date"].strftime("%Y-%m-%d")
+                    if "date" in gk and pd.notna(gk.get("date"))
+                    else ""
+                )
+
+                gp = picks_raw[
+                    (picks_raw["series_id"].astype(str) == sid) &
+                    (picks_raw["game_num"] == gn)
+                ].copy()
+                gb = bans_raw[
+                    (bans_raw["series_id"].astype(str) == sid) &
+                    (bans_raw["game_num"] == gn)
+                ].copy()
+
+                if gp.empty:
+                    continue
+
+                label = f"{blue_team} vs {red_team} · G{gn}"
+                if date_str:
+                    label += f" · {date_str}"
+
+                with col:
+                    html = _render_draft_html(sid, gn, blue_team, red_team, gp, gb)
+                    st.markdown(html, unsafe_allow_html=True)
+
+
 with tab_wards:
     st.subheader("Ward Heatmap")
     st.caption(
@@ -711,7 +1021,6 @@ with tab_wards:
 
     if wards_raw.empty:
         st.error("wards.csv not found. Run `python extract_wards.py` to generate it.")
-        st.stop()
 
     # ── Apply sidebar filters ────────────────────────────────────────────────
     def apply_ward_filters(df: pd.DataFrame) -> pd.DataFrame:
@@ -1004,7 +1313,6 @@ _MOVE_ROLE_NORM  = {
     "Bottom": "BOT", "Support": "SUP",
 }
 _TEAM_COLOR      = {"Blue": "#4A90D9", "Red": "#E74C3C"}
-_DDRAGON_VERSION = "16.3.1"
 _ICON_DIR        = DATA_DIR / "champ_icons"
 _ICON_CACHE: dict[str, PILImage.Image | None] = {}
 
@@ -1490,3 +1798,6 @@ with tab_moves:
             ]
             st.dataframe(pd.DataFrame(ref_rows), hide_index=True,
                          use_container_width=True)
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
