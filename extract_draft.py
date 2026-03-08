@@ -97,15 +97,36 @@ def extract_pick_turns(events: list[dict]) -> dict[str, tuple[int, int]]:
         if name and is_pick_turn(pt):
             scheduled[name] = pt
 
-    # Second pass: find the FIRST non-zero championID for each player as we walk
-    # forward through the event timeline.  The first lock-in is the actual draft
-    # pick; any later change is a post-draft swap and should be ignored.
+    # Build a lookup: pickTurn → last event at that turn (highest sequenceIndex).
+    # The last snapshot at turn T captures all locked champions up through turn T.
+    last_at_turn: dict[int, dict] = {}
+    for e in cs_events:
+        last_at_turn[e.get("pickTurn", 0)] = e  # cs_events sorted asc, so last write wins
+
+    # Second pass: for each player, read their championID from the first snapshot
+    # AFTER their own pick turn completes (event_turn > scheduled_turn).  At that
+    # point the player's lock-in is fully committed and no longer a hover.
+    # Fallback: use the last snapshot AT their own turn (handles the final pick, turn 20).
     first_champ: dict[str, int] = {}
     for e in cs_events:
+        event_turn = e.get("pickTurn", 0)
         for player in e.get("teamOne", []) + e.get("teamTwo", []):
             name = player.get("displayName") or player.get("gameName") or player.get("summonerName", "")
             cid  = player.get("championID", 0)
-            if name and name in scheduled and name not in first_champ and cid != 0:
+            if (name and name in scheduled and name not in first_champ
+                    and cid != 0 and event_turn > scheduled[name]):
+                first_champ[name] = cid
+
+    # Fallback for any player whose turn was the last in the event stream (e.g. turn 20).
+    # Use the FIRST non-zero cid AT their own pick turn — this is their lock-in BEFORE
+    # post-draft swaps overwrite their slot in later events of that same turn.
+    for e in cs_events:
+        event_turn = e.get("pickTurn", 0)
+        for player in e.get("teamOne", []) + e.get("teamTwo", []):
+            name = player.get("displayName") or player.get("gameName") or player.get("summonerName", "")
+            cid  = player.get("championID", 0)
+            if (name and name in scheduled and name not in first_champ
+                    and cid != 0 and event_turn == scheduled[name]):
                 first_champ[name] = cid
 
     return {name: (scheduled[name], first_champ.get(name, 0)) for name in scheduled}
@@ -249,9 +270,11 @@ def main():
             # draft_champion: champion actually committed at this pick slot
             # (before end-of-draft swaps).  Falls back to final champion when
             # events are unavailable.
-            p["draft_champion"]   = champ_map.get(first_cid, p["champion"]) if first_cid else p["champion"]
-            p["series_id"]        = series_id
-            p["game_num"]         = game_num
+            p["draft_champion"]     = champ_map.get(first_cid, p["champion"]) if first_cid else p["champion"]
+            p["draft_from_events"]  = bool(first_cid)   # False → fallback to played champion
+            p["draft_champion_id"]  = first_cid or 0    # 0 if not captured from events
+            p["series_id"]          = series_id
+            p["game_num"]           = game_num
             # Remove helper key
             del p["display_name"]
 
@@ -293,6 +316,35 @@ def main():
         "ban_order", "ban_turn_global", "ban_phase",
         "win", "result",
     ]
+
+    # ── Fix draft_champions for players whose events never captured a lock-in ──
+    # When events don't record a player's champion lock (champID stays 0 throughout),
+    # draft_champion falls back to their played champion, which may cause duplicates.
+    # Fix: for each game, the set of drafted champions must equal the set of played
+    # champions (same 10 picks, just rearranged by post-draft swaps).  So any
+    # fallback player's true draft_champion = (played_set - event_drafted_set).
+    # Use champion IDs (not names) for the set-difference to avoid name-format
+    # mismatches between champ_map ("Xin Zhao") and summary JSON ("XinZhao").
+    fixed = 0
+    for (sid, gnum), idx in picks_df.groupby(["series_id", "game_num"]).groups.items():
+        game = picks_df.loc[idx]
+        fallback_idx = game.index[~game["draft_from_events"]]
+        if fallback_idx.empty:
+            continue
+        event_draft_ids  = set(game.loc[game["draft_from_events"], "draft_champion_id"])
+        played_ids       = set(game["champion_id"])
+        unaccounted_ids  = played_ids - event_draft_ids
+        if len(unaccounted_ids) == len(fallback_idx):
+            for fi, uid in zip(fallback_idx, sorted(unaccounted_ids)):
+                old = picks_df.loc[fi, "draft_champion"]
+                new_name = champ_map.get(uid, f"ID:{uid}")
+                picks_df.loc[fi, "draft_champion"]    = new_name
+                picks_df.loc[fi, "draft_champion_id"] = uid
+                print(f"  FIX fallback draft_champion '{old}' in series={sid} game={gnum}: "
+                      f"{picks_df.loc[fi, 'player']} → {new_name}")
+                fixed += 1
+    if fixed:
+        print(f"  Fixed {fixed} fallback draft_champion(s).")
 
     picks_df = picks_df[picks_cols]
     bans_df  = bans_df[bans_cols]
