@@ -1,16 +1,18 @@
 """
-fetch_lfl_solary.py
-Queries the GRID Central Data GraphQL API to find all Solary series in the
-La Ligue Française - LFL INVITATIONAL (League of Legends), then downloads:
+fetch_riftlegends_barczaca.py
+Queries the GRID Central Data GraphQL API to find all Barcząca Esports series
+in Rift Legends - Winter 2026 (League of Legends), then downloads:
 
   Local:  end_state_summary_riot_{series_id}_{game_seq}.json
           end_state_details_riot_{series_id}_{game_seq}.json
   S3:     {S3_PREFIX}/events_{series_id}_{game_seq}_riot.jsonl
 
-Discovered IDs (run once via API introspection):
-  Team:        Solary → id=48331
-  Tournaments: La Ligue Française - LFL INVITATIONAL (and all sub-stages)
-               → ids 827945–827951, 828273, 828274, 828813, 828814
+Discovered IDs (via API introspection):
+  Team:        Barcząca Esports → id=55712
+  Tournaments: Rift Legends - Winter 2026
+               Swiss: Swiss           → id=828732
+               Group Stage: Group A   → id=828784
+               Playoffs: Playoffs     → id=828734
 
 Run:
     python fetch_lfl_solary.py
@@ -39,20 +41,12 @@ S3_PREFIX  = os.environ.get("S3_PREFIX", "Competitive")
 AWS_KEY    = os.environ["AWS_ACCESS_KEY_ID"]
 AWS_SECRET = os.environ["AWS_SECRET_ACCESS_KEY"]
 
-# Discovered via API — update these if the tournament expands
-SOLARY_TEAM_ID = "48331"
-LFL_INVITATIONAL_TOURNAMENT_IDS = [
-    "827945",  # La Ligue Française - LFL INVITATIONAL (root)
-    "827946",  # (Groups)
-    "827947",  # (Groups: Group B)
-    "827948",  # (Groups: Group C)
-    "827949",  # (Groups: Group E)
-    "827950",  # (Groups: Group A)
-    "827951",  # (Groups: Group D)
-    "828273",  # (Group Stage)
-    "828274",  # (Group Stage: Group Stage)
-    "828813",  # (Playoffs)
-    "828814",  # (Playoffs: Playoffs)
+# Discovered via API introspection
+BARCZACA_TEAM_ID = "55712"
+RIFT_LEGENDS_TOURNAMENT_IDS = [
+    "828732",  # Rift Legends - Winter 2026 (Swiss: Swiss)
+    "828784",  # Rift Legends - Winter 2026 (Group Stage: Group A)
+    "828734",  # Rift Legends - Winter 2026 (Playoffs: Playoffs)
 ]
 
 # Maximum games to attempt per series format
@@ -111,8 +105,8 @@ def gql(query: str, variables: dict) -> dict:
     return body["data"]
 
 
-def fetch_solary_lfl_series() -> list[dict]:
-    """Returns all Solary series in LFL INVITATIONAL tournaments."""
+def fetch_barczaca_rift_legends_series() -> list[dict]:
+    """Returns all Barcząca Esports series in Rift Legends - Winter 2026 tournaments."""
     series: list[dict] = []
     after: str | None = None
     page = 0
@@ -122,8 +116,8 @@ def fetch_solary_lfl_series() -> list[dict]:
         variables = {
             "first": 50,
             "after": after,
-            "teamId": SOLARY_TEAM_ID,
-            "tournamentIds": {"in": LFL_INVITATIONAL_TOURNAMENT_IDS},
+            "teamId": BARCZACA_TEAM_ID,
+            "tournamentIds": {"in": RIFT_LEGENDS_TOURNAMENT_IDS},
         }
         print(f"  Querying page {page}...", end=" ", flush=True)
         data = gql(SERIES_QUERY, variables)
@@ -230,11 +224,11 @@ def upload_events_to_s3(s3_client, url: str, s3_key: str) -> bool | None:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    print("=== GRID – Solary / La Ligue Française - LFL INVITATIONAL ===\n")
+    print("=== GRID – Barcząca Esports / Rift Legends - Winter 2026 ===\n")
 
     # 1 – Discover series via GraphQL
     print("── Step 1: querying Central Data API ──")
-    series_list = fetch_solary_lfl_series()
+    series_list = fetch_barczaca_rift_legends_series()
 
     if not series_list:
         print("\nNo series found. Check team / tournament IDs.")

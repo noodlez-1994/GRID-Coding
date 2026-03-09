@@ -868,6 +868,176 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,champion,ban_order,ban_
 2901039,5,MKOI,KC,KC,MKOI,Red,Nami,3,6,1,True,Win
 2901039,5,MKOI,KC,KC,MKOI,Red,Twisted Fate,4,7,2,True,Win
 2901039,5,MKOI,KC,KC,MKOI,Red,Smolder,5,9,2,True,Win
+2901114,1,BCE,BOOM,BCE,BOOM,Blue,Akali,1,1,1,False,Loss
+2901114,1,BCE,BOOM,BCE,BOOM,Blue,Neeko,2,3,1,False,Loss
+2901114,1,BCE,BOOM,BCE,BOOM,Blue,Yasuo,3,5,1,False,Loss
+2901114,1,BCE,BOOM,BCE,BOOM,Blue,Vi,4,8,2,False,Loss
+2901114,1,BCE,BOOM,BCE,BOOM,Blue,Nautilus,5,10,2,False,Loss
+2901114,1,BCE,BOOM,BOOM,BCE,Red,Varus,1,2,1,True,Win
+2901114,1,BCE,BOOM,BOOM,BCE,Red,Orianna,2,4,1,True,Win
+2901114,1,BCE,BOOM,BOOM,BCE,Red,Jarvan IV,3,6,1,True,Win
+2901114,1,BCE,BOOM,BOOM,BCE,Red,Caitlyn,4,7,2,True,Win
+2901114,1,BCE,BOOM,BOOM,BCE,Red,Yunara,5,9,2,True,Win
+2901120,1,LDS,BCE,LDS,BCE,Blue,Jarvan IV,1,1,1,False,Loss
+2901120,1,LDS,BCE,LDS,BCE,Blue,Jayce,2,3,1,False,Loss
+2901120,1,LDS,BCE,LDS,BCE,Blue,Rumble,3,5,1,False,Loss
+2901120,1,LDS,BCE,LDS,BCE,Blue,Caitlyn,4,8,2,False,Loss
+2901120,1,LDS,BCE,LDS,BCE,Blue,Ezreal,5,10,2,False,Loss
+2901120,1,LDS,BCE,BCE,LDS,Red,Orianna,1,2,1,True,Win
+2901120,1,LDS,BCE,BCE,LDS,Red,Varus,2,4,1,True,Win
+2901120,1,LDS,BCE,BCE,LDS,Red,Lulu,3,6,1,True,Win
+2901120,1,LDS,BCE,BCE,LDS,Red,Yunara,4,7,2,True,Win
+2901120,1,LDS,BCE,BCE,LDS,Red,Jhin,5,9,2,True,Win
+2901124,1,BCE,DOC,BCE,DOC,Blue,Neeko,1,1,1,True,Win
+2901124,1,BCE,DOC,BCE,DOC,Blue,Corki,2,3,1,True,Win
+2901124,1,BCE,DOC,BCE,DOC,Blue,Karma,3,5,1,True,Win
+2901124,1,BCE,DOC,BCE,DOC,Blue,Ezreal,4,8,2,True,Win
+2901124,1,BCE,DOC,BCE,DOC,Blue,Lucian,5,10,2,True,Win
+2901124,1,BCE,DOC,DOC,BCE,Red,Varus,1,2,1,False,Loss
+2901124,1,BCE,DOC,DOC,BCE,Red,Xin Zhao,2,4,1,False,Loss
+2901124,1,BCE,DOC,DOC,BCE,Red,Yunara,3,6,1,False,Loss
+2901124,1,BCE,DOC,DOC,BCE,Red,Xayah,4,7,2,False,Loss
+2901124,1,BCE,DOC,DOC,BCE,Red,Sivir,5,9,2,False,Loss
+2901124,2,DOC,BCE,DOC,BCE,Blue,Pantheon,1,1,1,False,Loss
+2901124,2,DOC,BCE,DOC,BCE,Blue,Yunara,2,3,1,False,Loss
+2901124,2,DOC,BCE,DOC,BCE,Blue,Karma,3,5,1,False,Loss
+2901124,2,DOC,BCE,DOC,BCE,Blue,K'Sante,4,8,2,False,Loss
+2901124,2,DOC,BCE,DOC,BCE,Blue,Lulu,5,10,2,False,Loss
+2901124,2,DOC,BCE,BCE,DOC,Red,Neeko,1,2,1,True,Win
+2901124,2,DOC,BCE,BCE,DOC,Red,Varus,2,4,1,True,Win
+2901124,2,DOC,BCE,BCE,DOC,Red,Corki,3,6,1,True,Win
+2901124,2,DOC,BCE,BCE,DOC,Red,Kled,4,7,2,True,Win
+2901124,2,DOC,BCE,BCE,DOC,Red,Gnar,5,9,2,True,Win
+2901124,3,DOC,BCE,DOC,BCE,Blue,Karma,1,1,1,False,Loss
+2901124,3,DOC,BCE,DOC,BCE,Blue,Yunara,2,3,1,False,Loss
+2901124,3,DOC,BCE,DOC,BCE,Blue,Nocturne,3,5,1,False,Loss
+2901124,3,DOC,BCE,DOC,BCE,Blue,Azir,4,8,2,False,Loss
+2901124,3,DOC,BCE,DOC,BCE,Blue,Syndra,5,10,2,False,Loss
+2901124,3,DOC,BCE,BCE,DOC,Red,Neeko,1,2,1,True,Win
+2901124,3,DOC,BCE,BCE,DOC,Red,Varus,2,4,1,True,Win
+2901124,3,DOC,BCE,BCE,DOC,Red,Nami,3,6,1,True,Win
+2901124,3,DOC,BCE,BCE,DOC,Red,Akali,4,7,2,True,Win
+2901124,3,DOC,BCE,BCE,DOC,Red,Sylas,5,9,2,True,Win
+2901126,1,BCE,OAE,BCE,OAE,Blue,Neeko,1,1,1,False,Loss
+2901126,1,BCE,OAE,BCE,OAE,Blue,Akali,2,3,1,False,Loss
+2901126,1,BCE,OAE,BCE,OAE,Blue,Sejuani,3,5,1,False,Loss
+2901126,1,BCE,OAE,BCE,OAE,Blue,Rumble,4,8,2,False,Loss
+2901126,1,BCE,OAE,BCE,OAE,Blue,Renekton,5,10,2,False,Loss
+2901126,1,BCE,OAE,OAE,BCE,Red,Xin Zhao,1,2,1,True,Win
+2901126,1,BCE,OAE,OAE,BCE,Red,Orianna,2,4,1,True,Win
+2901126,1,BCE,OAE,OAE,BCE,Red,Vi,3,6,1,True,Win
+2901126,1,BCE,OAE,OAE,BCE,Red,K'Sante,4,7,2,True,Win
+2901126,1,BCE,OAE,OAE,BCE,Red,Sion,5,9,2,True,Win
+2901126,2,OAE,BCE,OAE,BCE,Blue,Xin Zhao,1,1,1,True,Win
+2901126,2,OAE,BCE,OAE,BCE,Blue,Ambessa,2,3,1,True,Win
+2901126,2,OAE,BCE,OAE,BCE,Blue,K'Sante,3,5,1,True,Win
+2901126,2,OAE,BCE,OAE,BCE,Blue,Nami,4,8,2,True,Win
+2901126,2,OAE,BCE,OAE,BCE,Blue,Anivia,5,10,2,True,Win
+2901126,2,OAE,BCE,BCE,OAE,Red,Neeko,1,2,1,False,Loss
+2901126,2,OAE,BCE,BCE,OAE,Red,Orianna,2,4,1,False,Loss
+2901126,2,OAE,BCE,BCE,OAE,Red,Rumble,3,6,1,False,Loss
+2901126,2,OAE,BCE,BCE,OAE,Red,Alistar,4,7,2,False,Loss
+2901126,2,OAE,BCE,BCE,OAE,Red,Leona,5,9,2,False,Loss
+2901126,3,BCE,OAE,BCE,OAE,Blue,K'Sante,1,1,1,True,Win
+2901126,3,BCE,OAE,BCE,OAE,Blue,Akali,2,3,1,True,Win
+2901126,3,BCE,OAE,BCE,OAE,Blue,Neeko,3,5,1,True,Win
+2901126,3,BCE,OAE,BCE,OAE,Blue,Sejuani,4,8,2,True,Win
+2901126,3,BCE,OAE,BCE,OAE,Blue,Kennen,5,10,2,True,Win
+2901126,3,BCE,OAE,OAE,BCE,Red,Xin Zhao,1,2,1,False,Loss
+2901126,3,BCE,OAE,OAE,BCE,Red,Rumble,2,4,1,False,Loss
+2901126,3,BCE,OAE,OAE,BCE,Red,Orianna,3,6,1,False,Loss
+2901126,3,BCE,OAE,OAE,BCE,Red,Taliyah,4,7,2,False,Loss
+2901126,3,BCE,OAE,OAE,BCE,Red,Azir,5,9,2,False,Loss
+2901126,4,OAE,BCE,OAE,BCE,Blue,Ambessa,1,1,1,False,Loss
+2901126,4,OAE,BCE,OAE,BCE,Blue,Anivia,2,3,1,False,Loss
+2901126,4,OAE,BCE,OAE,BCE,Blue,Taliyah,3,5,1,False,Loss
+2901126,4,OAE,BCE,OAE,BCE,Blue,Nocturne,4,8,2,False,Loss
+2901126,4,OAE,BCE,OAE,BCE,Blue,Jayce,5,10,2,False,Loss
+2901126,4,OAE,BCE,BCE,OAE,Red,Neeko,1,2,1,True,Win
+2901126,4,OAE,BCE,BCE,OAE,Red,Orianna,2,4,1,True,Win
+2901126,4,OAE,BCE,BCE,OAE,Red,Akali,3,6,1,True,Win
+2901126,4,OAE,BCE,BCE,OAE,Red,Malphite,4,7,2,True,Win
+2901126,4,OAE,BCE,BCE,OAE,Red,Alistar,5,9,2,True,Win
+2901126,5,BCE,OAE,BCE,OAE,Blue,Akali,1,1,1,True,Win
+2901126,5,BCE,OAE,BCE,OAE,Blue,Sejuani,2,3,1,True,Win
+2901126,5,BCE,OAE,BCE,OAE,Blue,Alistar,3,5,1,True,Win
+2901126,5,BCE,OAE,BCE,OAE,Blue,Jinx,4,8,2,True,Win
+2901126,5,BCE,OAE,BCE,OAE,Blue,Varus,5,10,2,True,Win
+2901126,5,BCE,OAE,OAE,BCE,Red,Orianna,1,2,1,False,Loss
+2901126,5,BCE,OAE,OAE,BCE,Red,Rumble,2,4,1,False,Loss
+2901126,5,BCE,OAE,OAE,BCE,Red,Neeko,3,6,1,False,Loss
+2901126,5,BCE,OAE,OAE,BCE,Red,Kennen,4,7,2,False,Loss
+2901126,5,BCE,OAE,OAE,BCE,Red,Anivia,5,9,2,False,Loss
+2901127,1,FSK,BCE,FSK,BCE,Blue,Xin Zhao,1,1,1,False,Loss
+2901127,1,FSK,BCE,FSK,BCE,Blue,Karma,2,3,1,False,Loss
+2901127,1,FSK,BCE,FSK,BCE,Blue,Neeko,3,5,1,False,Loss
+2901127,1,FSK,BCE,FSK,BCE,Blue,Dr. Mundo,4,8,2,False,Loss
+2901127,1,FSK,BCE,FSK,BCE,Blue,Lulu,5,10,2,False,Loss
+2901127,1,FSK,BCE,BCE,FSK,Red,Orianna,1,2,1,True,Win
+2901127,1,FSK,BCE,BCE,FSK,Red,Jarvan IV,2,4,1,True,Win
+2901127,1,FSK,BCE,BCE,FSK,Red,Vi,3,6,1,True,Win
+2901127,1,FSK,BCE,BCE,FSK,Red,Nami,4,7,2,True,Win
+2901127,1,FSK,BCE,BCE,FSK,Red,Bard,5,9,2,True,Win
+2901127,2,FSK,BCE,FSK,BCE,Blue,Neeko,1,1,1,False,Loss
+2901127,2,FSK,BCE,FSK,BCE,Blue,Xin Zhao,2,3,1,False,Loss
+2901127,2,FSK,BCE,FSK,BCE,Blue,Ambessa,3,5,1,False,Loss
+2901127,2,FSK,BCE,FSK,BCE,Blue,Kai'Sa,4,8,2,False,Loss
+2901127,2,FSK,BCE,FSK,BCE,Blue,Nocturne,5,10,2,False,Loss
+2901127,2,FSK,BCE,BCE,FSK,Red,Orianna,1,2,1,True,Win
+2901127,2,FSK,BCE,BCE,FSK,Red,Jarvan IV,2,4,1,True,Win
+2901127,2,FSK,BCE,BCE,FSK,Red,Vi,3,6,1,True,Win
+2901127,2,FSK,BCE,BCE,FSK,Red,Mel,4,7,2,True,Win
+2901127,2,FSK,BCE,BCE,FSK,Red,Viktor,5,9,2,True,Win
+2901127,3,BCE,FSK,BCE,FSK,Blue,Lulu,1,1,1,True,Win
+2901127,3,BCE,FSK,BCE,FSK,Blue,Nami,2,3,1,True,Win
+2901127,3,BCE,FSK,BCE,FSK,Blue,Jarvan IV,3,5,1,True,Win
+2901127,3,BCE,FSK,BCE,FSK,Blue,Akali,4,8,2,True,Win
+2901127,3,BCE,FSK,BCE,FSK,Blue,LeBlanc,5,10,2,True,Win
+2901127,3,BCE,FSK,FSK,BCE,Red,Neeko,1,2,1,False,Loss
+2901127,3,BCE,FSK,FSK,BCE,Red,Aurora,2,4,1,False,Loss
+2901127,3,BCE,FSK,FSK,BCE,Red,Orianna,3,6,1,False,Loss
+2901127,3,BCE,FSK,FSK,BCE,Red,Taliyah,4,7,2,False,Loss
+2901127,3,BCE,FSK,FSK,BCE,Red,Syndra,5,9,2,False,Loss
+2901128,1,BCE,BOOM,BCE,BOOM,Blue,Nunu & Willump,1,1,1,False,Loss
+2901128,1,BCE,BOOM,BCE,BOOM,Blue,Nautilus,2,3,1,False,Loss
+2901128,1,BCE,BOOM,BCE,BOOM,Blue,Neeko,3,5,1,False,Loss
+2901128,1,BCE,BOOM,BCE,BOOM,Blue,Gwen,4,8,2,False,Loss
+2901128,1,BCE,BOOM,BCE,BOOM,Blue,Ryze,5,10,2,False,Loss
+2901128,1,BCE,BOOM,BOOM,BCE,Red,Xin Zhao,1,2,1,True,Win
+2901128,1,BCE,BOOM,BOOM,BCE,Red,Rumble,2,4,1,True,Win
+2901128,1,BCE,BOOM,BOOM,BCE,Red,Orianna,3,6,1,True,Win
+2901128,1,BCE,BOOM,BOOM,BCE,Red,Anivia,4,7,2,True,Win
+2901128,1,BCE,BOOM,BOOM,BCE,Red,Ahri,5,9,2,True,Win
+2901128,2,BOOM,BCE,BOOM,BCE,Blue,Xin Zhao,1,1,1,True,Win
+2901128,2,BOOM,BCE,BOOM,BCE,Blue,Anivia,2,3,1,True,Win
+2901128,2,BOOM,BCE,BOOM,BCE,Blue,Ezreal,3,5,1,True,Win
+2901128,2,BOOM,BCE,BOOM,BCE,Blue,Nocturne,4,8,2,True,Win
+2901128,2,BOOM,BCE,BOOM,BCE,Blue,Kindred,5,10,2,True,Win
+2901128,2,BOOM,BCE,BCE,BOOM,Red,Nunu & Willump,1,2,1,False,Loss
+2901128,2,BOOM,BCE,BCE,BOOM,Red,Orianna,2,4,1,False,Loss
+2901128,2,BOOM,BCE,BCE,BOOM,Red,Ryze,3,6,1,False,Loss
+2901128,2,BOOM,BCE,BCE,BOOM,Red,Vi,4,7,2,False,Loss
+2901128,2,BOOM,BCE,BCE,BOOM,Red,Malphite,5,9,2,False,Loss
+2901128,3,BCE,BOOM,BCE,BOOM,Blue,Nunu & Willump,1,1,1,True,Win
+2901128,3,BCE,BOOM,BCE,BOOM,Blue,Akali,2,3,1,True,Win
+2901128,3,BCE,BOOM,BCE,BOOM,Blue,Nami,3,5,1,True,Win
+2901128,3,BCE,BOOM,BCE,BOOM,Blue,Varus,4,8,2,True,Win
+2901128,3,BCE,BOOM,BCE,BOOM,Blue,Kennen,5,10,2,True,Win
+2901128,3,BCE,BOOM,BOOM,BCE,Red,Xin Zhao,1,2,1,False,Loss
+2901128,3,BCE,BOOM,BOOM,BCE,Red,Ryze,2,4,1,False,Loss
+2901128,3,BCE,BOOM,BOOM,BCE,Red,Orianna,3,6,1,False,Loss
+2901128,3,BCE,BOOM,BOOM,BCE,Red,Nocturne,4,7,2,False,Loss
+2901128,3,BCE,BOOM,BOOM,BCE,Red,Vi,5,9,2,False,Loss
+2901128,4,BCE,BOOM,BCE,BOOM,Blue,Nunu & Willump,1,1,1,False,Loss
+2901128,4,BCE,BOOM,BCE,BOOM,Blue,Akali,2,3,1,False,Loss
+2901128,4,BCE,BOOM,BCE,BOOM,Blue,Tristana,3,5,1,False,Loss
+2901128,4,BCE,BOOM,BCE,BOOM,Blue,Varus,4,8,2,False,Loss
+2901128,4,BCE,BOOM,BCE,BOOM,Blue,Gwen,5,10,2,False,Loss
+2901128,4,BCE,BOOM,BOOM,BCE,Red,Xin Zhao,1,2,1,True,Win
+2901128,4,BCE,BOOM,BOOM,BCE,Red,Kindred,2,4,1,True,Win
+2901128,4,BCE,BOOM,BOOM,BCE,Red,Nocturne,3,6,1,True,Win
+2901128,4,BCE,BOOM,BOOM,BCE,Red,Sivir,4,7,2,True,Win
+2901128,4,BCE,BOOM,BOOM,BCE,Red,Kai'Sa,5,9,2,True,Win
 2903592,1,SLY,FK,SLY,FK,Blue,Dr. Mundo,1,1,1,False,Loss
 2903592,1,SLY,FK,SLY,FK,Blue,Yunara,2,3,1,False,Loss
 2903592,1,SLY,FK,SLY,FK,Blue,Jarvan IV,3,5,1,False,Loss
@@ -888,6 +1058,56 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,champion,ban_order,ban_
 2903596,1,LIL,SLY,SLY,LIL,Red,Ahri,3,6,1,True,Win
 2903596,1,LIL,SLY,SLY,LIL,Red,Caitlyn,4,7,2,True,Win
 2903596,1,LIL,SLY,SLY,LIL,Red,Kai'Sa,5,9,2,True,Win
+2903662,1,BCE,DOC,BCE,DOC,Blue,Neeko,1,1,1,True,Win
+2903662,1,BCE,DOC,BCE,DOC,Blue,Corki,2,3,1,True,Win
+2903662,1,BCE,DOC,BCE,DOC,Blue,Malphite,3,5,1,True,Win
+2903662,1,BCE,DOC,BCE,DOC,Blue,Vi,4,8,2,True,Win
+2903662,1,BCE,DOC,BCE,DOC,Blue,Naafiri,5,10,2,True,Win
+2903662,1,BCE,DOC,DOC,BCE,Red,Rumble,1,2,1,False,Loss
+2903662,1,BCE,DOC,DOC,BCE,Red,Orianna,2,4,1,False,Loss
+2903662,1,BCE,DOC,DOC,BCE,Red,Varus,3,6,1,False,Loss
+2903662,1,BCE,DOC,DOC,BCE,Red,Sion,4,7,2,False,Loss
+2903662,1,BCE,DOC,DOC,BCE,Red,Sivir,5,9,2,False,Loss
+2904260,1,BCE,ONT,BCE,ONT,Blue,Lulu,1,1,1,True,Win
+2904260,1,BCE,ONT,BCE,ONT,Blue,Jarvan IV,2,3,1,True,Win
+2904260,1,BCE,ONT,BCE,ONT,Blue,Jayce,3,5,1,True,Win
+2904260,1,BCE,ONT,BCE,ONT,Blue,Nasus,4,8,2,True,Win
+2904260,1,BCE,ONT,BCE,ONT,Blue,Kayle,5,10,2,True,Win
+2904260,1,BCE,ONT,ONT,BCE,Red,Rumble,1,2,1,False,Loss
+2904260,1,BCE,ONT,ONT,BCE,Red,Karma,2,4,1,False,Loss
+2904260,1,BCE,ONT,ONT,BCE,Red,Qiyana,3,6,1,False,Loss
+2904260,1,BCE,ONT,ONT,BCE,Red,Alistar,4,7,2,False,Loss
+2904260,1,BCE,ONT,ONT,BCE,Red,Braum,5,9,2,False,Loss
+2904260,2,BCE,ONT,BCE,ONT,Blue,Lulu,1,1,1,True,Win
+2904260,2,BCE,ONT,BCE,ONT,Blue,Jarvan IV,2,3,1,True,Win
+2904260,2,BCE,ONT,BCE,ONT,Blue,Jayce,3,5,1,True,Win
+2904260,2,BCE,ONT,BCE,ONT,Blue,Kayle,4,8,2,True,Win
+2904260,2,BCE,ONT,BCE,ONT,Blue,Nasus,5,10,2,True,Win
+2904260,2,BCE,ONT,ONT,BCE,Red,Rumble,1,2,1,False,Loss
+2904260,2,BCE,ONT,ONT,BCE,Red,Karma,2,4,1,False,Loss
+2904260,2,BCE,ONT,ONT,BCE,Red,Qiyana,3,6,1,False,Loss
+2904260,2,BCE,ONT,ONT,BCE,Red,Nautilus,4,7,2,False,Loss
+2904260,2,BCE,ONT,ONT,BCE,Red,Braum,5,9,2,False,Loss
+2904261,1,BCE,FSK,BCE,FSK,Blue,Jarvan IV,1,1,1,False,Loss
+2904261,1,BCE,FSK,BCE,FSK,Blue,Syndra,2,3,1,False,Loss
+2904261,1,BCE,FSK,BCE,FSK,Blue,Karma,3,5,1,False,Loss
+2904261,1,BCE,FSK,BCE,FSK,Blue,Xin Zhao,4,8,2,False,Loss
+2904261,1,BCE,FSK,BCE,FSK,Blue,Kled,5,10,2,False,Loss
+2904261,1,BCE,FSK,FSK,BCE,Red,Neeko,1,2,1,False,Loss
+2904261,1,BCE,FSK,FSK,BCE,Red,Rumble,2,4,1,False,Loss
+2904261,1,BCE,FSK,FSK,BCE,Red,Varus,3,6,1,False,Loss
+2904261,1,BCE,FSK,FSK,BCE,Red,Corki,4,7,2,False,Loss
+2904261,1,BCE,FSK,FSK,BCE,Red,Yunara,5,9,2,False,Loss
+2904261,2,BCE,FSK,BCE,FSK,Blue,Jarvan IV,1,1,1,False,Loss
+2904261,2,BCE,FSK,BCE,FSK,Blue,Syndra,2,3,1,False,Loss
+2904261,2,BCE,FSK,BCE,FSK,Blue,Karma,3,5,1,False,Loss
+2904261,2,BCE,FSK,BCE,FSK,Blue,Xin Zhao,4,8,2,False,Loss
+2904261,2,BCE,FSK,BCE,FSK,Blue,Kled,5,10,2,False,Loss
+2904261,2,BCE,FSK,FSK,BCE,Red,Neeko,1,2,1,True,Win
+2904261,2,BCE,FSK,FSK,BCE,Red,Rumble,2,4,1,True,Win
+2904261,2,BCE,FSK,FSK,BCE,Red,Varus,3,6,1,True,Win
+2904261,2,BCE,FSK,FSK,BCE,Red,Corki,4,7,2,True,Win
+2904261,2,BCE,FSK,FSK,BCE,Red,Yunara,5,9,2,True,Win
 2906187,1,GL,SLY,GL,SLY,Blue,Varus,1,1,1,False,Loss
 2906187,1,GL,SLY,GL,SLY,Blue,Ambessa,2,3,1,False,Loss
 2906187,1,GL,SLY,GL,SLY,Blue,Xin Zhao,3,5,1,False,Loss

@@ -3,6 +3,7 @@ extract_draft.py
 Extracts draft phase data (bans + picks) from GRID-2026-comp local summary files
 and S3 events JSONL files. Outputs picks.csv and bans.csv.
 """
+import argparse
 import json
 import os
 import re
@@ -219,14 +220,34 @@ def parse_summary(path: Path, champ_map: dict) -> tuple[list[dict], list[dict]] 
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
-def main():
+def main(rerun: bool = False):
     champ_map = load_champ_map()
     s3 = boto3.client(
         "s3",
         aws_access_key_id=AWS_KEY,
         aws_secret_access_key=AWS_SECRET,
-        region_name="eu-west-1",
+        region_name="eu-west-3",
     )
+
+    picks_out = DATA_DIR / "picks.csv"
+    bans_out  = DATA_DIR / "bans.csv"
+
+    # ── Load existing CSVs to skip already-processed games ───────────────────
+    existing_picks_df = pd.DataFrame()
+    existing_bans_df  = pd.DataFrame()
+    already_processed: set[tuple[str, int]] = set()
+
+    if not rerun and picks_out.exists():
+        existing_picks_df = pd.read_csv(picks_out, dtype={"series_id": str})
+        if bans_out.exists():
+            existing_bans_df = pd.read_csv(bans_out, dtype={"series_id": str})
+        already_processed = {
+            (str(r["series_id"]), int(r["game_num"]))
+            for _, r in existing_picks_df[["series_id", "game_num"]].drop_duplicates().iterrows()
+        }
+        if already_processed:
+            print(f"Loaded picks.csv – skipping {len(already_processed)} already-processed game(s) "
+                  f"(pass rerun=True to reprocess).\n")
 
     all_picks: list[dict] = []
     all_bans:  list[dict] = []
@@ -245,6 +266,11 @@ def main():
         if not m:
             continue
         series_id, game_num = m.group(1), int(m.group(2))
+
+        if (series_id, game_num) in already_processed:
+            print(f"Processing series={series_id}  game={game_num} ... SKIP (already in picks.csv)")
+            continue
+
         print(f"Processing series={series_id}  game={game_num} ...", end=" ")
 
         result = parse_summary(path, champ_map)
@@ -289,6 +315,10 @@ def main():
     # ── Build DataFrames ─────────────────────────────────────────────────
     picks_df = pd.DataFrame(all_picks)
     bans_df  = pd.DataFrame(all_bans)
+
+    if picks_df.empty and existing_picks_df.empty:
+        print("No data found.")
+        return
 
     # Assign pick_order (1-10) per game, sorted by pick_turn_global
     # For rows where pick_turn_global is None, fall back to participant_id ordering
@@ -346,11 +376,15 @@ def main():
     if fixed:
         print(f"  Fixed {fixed} fallback draft_champion(s).")
 
-    picks_df = picks_df[picks_cols]
-    bans_df  = bans_df[bans_cols]
+    if not picks_df.empty:
+        picks_df = picks_df[picks_cols]
+    if not bans_df.empty:
+        bans_df = bans_df[bans_cols]
 
-    picks_out = DATA_DIR / "picks.csv"
-    bans_out  = DATA_DIR / "bans.csv"
+    # Merge newly-processed rows with the existing rows that were skipped
+    picks_df = pd.concat([existing_picks_df, picks_df], ignore_index=True) if not picks_df.empty else existing_picks_df
+    bans_df  = pd.concat([existing_bans_df,  bans_df],  ignore_index=True) if not bans_df.empty  else existing_bans_df
+
     picks_df.to_csv(picks_out, index=False)
     bans_df.to_csv(bans_out,  index=False)
 
@@ -363,4 +397,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--rerun", action="store_true", default=False,
+                        help="Reprocess all series even if already in picks.csv")
+    args = parser.parse_args()
+    main(rerun=args.rerun)

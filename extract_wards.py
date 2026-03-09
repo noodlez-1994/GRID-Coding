@@ -6,6 +6,7 @@ Outputs wards.csv with positions, types, teams, timing.
 Run:
     python extract_wards.py
 """
+import argparse
 import json
 import os
 import re
@@ -55,13 +56,29 @@ def team_from_display(display_name: str) -> str:
     return parts[0] if parts else display_name
 
 
-def main():
+def main(rerun: bool = False):
     s3 = boto3.client(
         "s3",
         aws_access_key_id=AWS_KEY,
         aws_secret_access_key=AWS_SECRET,
         region_name="eu-west-3",
     )
+
+    wards_out = DATA_DIR / "wards.csv"
+
+    # ── Load existing CSV to skip already-processed games ────────────────────
+    existing_df = pd.DataFrame()
+    already_processed: set[tuple[str, int]] = set()
+
+    if not rerun and wards_out.exists():
+        existing_df = pd.read_csv(wards_out, dtype={"series_id": str})
+        already_processed = {
+            (str(r["series_id"]), int(r["game_num"]))
+            for _, r in existing_df[["series_id", "game_num"]].drop_duplicates().iterrows()
+        }
+        if already_processed:
+            print(f"Loaded wards.csv – skipping {len(already_processed)} already-processed game(s) "
+                  f"(pass --rerun to reprocess).\n")
 
     summary_files = sorted(
         DATA_DIR.glob("end_state_summary_riot_*.json"),
@@ -78,6 +95,11 @@ def main():
         if not m:
             continue
         series_id, game_num = m.group(1), int(m.group(2))
+
+        if (series_id, game_num) in already_processed:
+            print(f"Processing series={series_id} game={game_num} ... SKIP (already in wards.csv)")
+            continue
+
         patch, date = parse_game_meta(path)
 
         print(f"Processing series={series_id} game={game_num} ...", end=" ")
@@ -162,11 +184,15 @@ def main():
         print(f"OK ({ward_count} wards)")
 
     df = pd.DataFrame(all_wards)
-    out = DATA_DIR / "wards.csv"
-    df.to_csv(out, index=False)
-    print(f"\n✓ Saved {len(df)} ward rows → {out}")
+    df = pd.concat([existing_df, df], ignore_index=True) if not df.empty else existing_df
+    df.to_csv(wards_out, index=False)
+    print(f"\n✓ Saved {len(df)} ward rows → {wards_out}")
     print(df.head())
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--rerun", action="store_true", default=False,
+                        help="Reprocess all series even if already in wards.csv")
+    args = parser.parse_args()
+    main(rerun=args.rerun)
