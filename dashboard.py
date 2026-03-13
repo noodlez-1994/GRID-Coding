@@ -286,7 +286,7 @@ with tab_wr:
         st.dataframe(
             display.style.map(color_wr, subset=["WR %"]),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
             height=500,
         )
 
@@ -346,7 +346,7 @@ with tab_wr:
                         "winrate":       "WR %",
                     }).style.map(color_wr, subset=["WR %"]),
                     hide_index=True,
-                    use_container_width=True,
+                    width="stretch",
                     height=280,
                 )
 
@@ -416,7 +416,7 @@ with tab_game:
                         "winrate":  "WR %",
                     }).style.map(color_wr, subset=["WR %"]),
                     hide_index=True,
-                    use_container_width=True,
+                    width="stretch",
                     height=350,
                 )
 
@@ -472,7 +472,7 @@ with tab_team:
                 "winrate": "WR %",
             }).style.map(color_wr, subset=["WR %"]),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
             height=400,
         )
 
@@ -493,7 +493,7 @@ with tab_team:
                 "ban_wr": "Win % (when banned)",
             }),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
             height=400,
         )
 
@@ -520,7 +520,7 @@ with tab_team:
                         "winrate": "WR %",
                     }),
                     hide_index=True,
-                    use_container_width=True,
+                    width="stretch",
                     height=250,
                 )
 
@@ -585,7 +585,7 @@ with tab_bans:
                 "ban_win_pct":  "WR % (banning team)",
             }).style.map(color_wr, subset=["WR % (banning team)"]),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
             height=400,
         )
 
@@ -648,7 +648,7 @@ with tab_raw:
 
     with raw_tab1:
         st.caption(f"{len(picks)} rows after filters")
-        st.dataframe(picks, hide_index=True, use_container_width=True)
+        st.dataframe(picks, hide_index=True, width="stretch")
         st.download_button(
             "⬇️ Download picks (filtered)",
             picks.to_csv(index=False).encode(),
@@ -658,7 +658,7 @@ with tab_raw:
 
     with raw_tab2:
         st.caption(f"{len(bans)} rows after filters")
-        st.dataframe(bans, hide_index=True, use_container_width=True)
+        st.dataframe(bans, hide_index=True, width="stretch")
         st.download_button(
             "⬇️ Download bans (filtered)",
             bans.to_csv(index=False).encode(),
@@ -931,7 +931,7 @@ with tab_draft:
                 f'padding:2px 8px;font-size:12px;">G{gn}</span>',
                 unsafe_allow_html=True,
             )
-            if g_cols[i].checkbox("", value=True, key=f"dv_gn_{gn}", label_visibility="collapsed"):
+            if g_cols[i].checkbox(f"G{gn}", value=True, key=f"dv_gn_{gn}", label_visibility="collapsed"):
                 sel_draft_gnums.append(gn)
 
     # ── Build game list ───────────────────────────────────────────────────────
@@ -1172,7 +1172,7 @@ with tab_wards:
         col_map, col_stats = st.columns([3, 2])
 
         with col_map:
-            st.pyplot(fig, use_container_width=True)
+            st.pyplot(fig, width="stretch")
         plt.close(fig)
 
         # ── Right-column stats ───────────────────────────────────────────────────
@@ -1186,7 +1186,7 @@ with tab_wards:
                 .reset_index()
                 .rename(columns={"ward_type": "Type", "count": "Count"})
             )
-            st.dataframe(type_df, hide_index=True, use_container_width=True, height=190)
+            st.dataframe(type_df, hide_index=True, width="stretch", height=190)
 
             # Wards per role
             st.markdown("**Wards by role**")
@@ -1226,7 +1226,7 @@ with tab_wards:
                 "wards_placed": "Wards Placed",
             }),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
             height=350,
         )
 
@@ -1267,7 +1267,7 @@ with tab_wards:
                 ax_p.set_ylim(img_h, 0)
                 ax_p.axis("off")
                 plt.tight_layout(pad=0)
-                st.pyplot(fig_p, use_container_width=True)
+                st.pyplot(fig_p, width="stretch")
                 plt.close(fig_p)
 
 
@@ -1779,7 +1779,7 @@ with tab_moves:
                 if gif_bytes is None:
                     st.warning("No position data found in the selected window.")
                 else:
-                    st.image(gif_bytes, caption=sel_game_label, use_container_width=False)
+                    st.image(gif_bytes, caption=sel_game_label, width="content")
                     st.download_button(
                         "⬇️ Download GIF",
                         data=gif_bytes,
@@ -1803,7 +1803,7 @@ with tab_moves:
                                                           x["role"]))
                     ]
                     st.dataframe(pd.DataFrame(ref_rows), hide_index=True,
-                                 use_container_width=True)
+                                 width="stretch")
 
 
         # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
