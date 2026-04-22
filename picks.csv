@@ -5439,3 +5439,283 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,player,champion,draft_c
 2919534,2,T1,KRX,KRX,T1,Red,LazyFeel,Yunara,Yunara,BOT,8,18.0,2.0,False,Loss
 2919534,2,T1,KRX,KRX,T1,Red,Andil,Lulu,Lulu,SUP,9,19.0,2.0,False,Loss
 2919534,2,T1,KRX,T1,KRX,Blue,Keria,Seraphine,Seraphine,SUP,10,20.0,2.0,True,Win
+2925544,1,SHE,CG,SHE,CG,Blue,Brut,Gnar,Karma,TOP,1,7.0,1.0,False,Loss
+2925544,1,SHE,CG,CG,SHE,Red,Iobellan,Malphite,Xin Zhao,TOP,2,8.0,1.0,True,Win
+2925544,1,SHE,CG,CG,SHE,Red,Fragola,XinZhao,Corki,JGL,3,9.0,1.0,True,Win
+2925544,1,SHE,CG,SHE,CG,Blue,enayi,Vi,Ashe,JGL,4,10.0,1.0,False,Loss
+2925544,1,SHE,CG,SHE,CG,Blue,Divine,Galio,Vi,MID,5,11.0,1.0,False,Loss
+2925544,1,SHE,CG,CG,SHE,Red,Sharon,Aurora,Aurora,MID,6,12.0,1.0,True,Win
+2925544,1,SHE,CG,CG,SHE,Red,PiskHeLLo,Corki,Nami,BOT,7,17.0,2.0,True,Win
+2925544,1,SHE,CG,SHE,CG,Blue,xHikama,Ashe,Gnar,BOT,8,18.0,2.0,False,Loss
+2925544,1,SHE,CG,SHE,CG,Blue,S1D,Karma,Galio,SUP,9,19.0,2.0,False,Loss
+2925544,1,SHE,CG,CG,SHE,Red,Nash,Nami,Malphite,SUP,10,20.0,2.0,True,Win
+2925545,1,TTS,EKO,TTS,EKO,Blue,Lerax,Ambessa,Ambessa,TOP,1,7.0,1.0,False,Loss
+2925545,1,TTS,EKO,EKO,TTS,Red,TheMountain,Sion,Sion,TOP,2,8.0,1.0,True,Win
+2925545,1,TTS,EKO,EKO,TTS,Red,Izo,DrMundo,Ashe,JGL,3,9.0,1.0,True,Win
+2925545,1,TTS,EKO,TTS,EKO,Blue,Lesranct,Vi,Corki,JGL,4,10.0,1.0,False,Loss
+2925545,1,TTS,EKO,TTS,EKO,Blue,Dashkai,Orianna,Orianna,MID,5,11.0,1.0,False,Loss
+2925545,1,TTS,EKO,EKO,TTS,Red,Lukee,Syndra,Seraphine,MID,6,12.0,1.0,True,Win
+2925545,1,TTS,EKO,EKO,TTS,Red,Alessio,Ashe,Syndra,BOT,7,17.0,2.0,True,Win
+2925545,1,TTS,EKO,TTS,EKO,Blue,RaptoSauros,Corki,Vi,BOT,8,18.0,2.0,False,Loss
+2925545,1,TTS,EKO,TTS,EKO,Blue,Bubba,Nautilus,Nautilus,SUP,9,19.0,2.0,False,Loss
+2925545,1,TTS,EKO,EKO,TTS,Red,Corri,Seraphine,Dr. Mundo,SUP,10,20.0,2.0,True,Win
+2925546,1,ATA,ZENA,ATA,ZENA,Blue,TheSerius,Akali,Akali,TOP,1,7.0,1.0,True,Win
+2925546,1,ATA,ZENA,ZENA,ATA,Red,Raffy,Zaahen,Zaahen,TOP,2,8.0,1.0,False,Loss
+2925546,1,ATA,ZENA,ZENA,ATA,Red,Jekko,Pantheon,Pantheon,JGL,3,9.0,1.0,False,Loss
+2925546,1,ATA,ZENA,ATA,ZENA,Blue,Groudon,XinZhao,Xin Zhao,JGL,4,10.0,1.0,True,Win
+2925546,1,ATA,ZENA,ATA,ZENA,Blue,Alvanai,Smolder,Smolder,MID,5,11.0,1.0,True,Win
+2925546,1,ATA,ZENA,ZENA,ATA,Red,Xen0gan,Galio,Galio,MID,6,12.0,1.0,False,Loss
+2925546,1,ATA,ZENA,ZENA,ATA,Red,ilyy,Ashe,Ashe,BOT,7,17.0,2.0,False,Loss
+2925546,1,ATA,ZENA,ATA,ZENA,Blue,Pericolo,Ezreal,Ezreal,BOT,8,18.0,2.0,True,Win
+2925546,1,ATA,ZENA,ATA,ZENA,Blue,CloudStrike,Nautilus,Nautilus,SUP,9,19.0,2.0,True,Win
+2925546,1,ATA,ZENA,ZENA,ATA,Red,OrthoZero,Seraphine,Seraphine,SUP,10,20.0,2.0,False,Loss
+2925547,1,HMB,GMB,HMB,GMB,Blue,APP,Rumble,Rumble,TOP,1,7.0,1.0,True,Win
+2925547,1,HMB,GMB,GMB,HMB,Red,SkaR,Galio,Galio,TOP,2,8.0,1.0,False,Loss
+2925547,1,HMB,GMB,GMB,HMB,Red,Mario,Pantheon,Pantheon,JGL,3,9.0,1.0,False,Loss
+2925547,1,HMB,GMB,HMB,GMB,Blue,adi1,Poppy,Sivir,JGL,4,10.0,1.0,True,Win
+2925547,1,HMB,GMB,HMB,GMB,Blue,Vigil,Viktor,Lulu,MID,5,11.0,1.0,True,Win
+2925547,1,HMB,GMB,GMB,HMB,Red,DejaVu,Syndra,Alistar,MID,6,12.0,1.0,False,Loss
+2925547,1,HMB,GMB,GMB,HMB,Red,Rharesh,Senna,Senna,BOT,7,17.0,2.0,False,Loss
+2925547,1,HMB,GMB,HMB,GMB,Blue,Tyrone,Sivir,Viktor,BOT,8,18.0,2.0,True,Win
+2925547,1,HMB,GMB,HMB,GMB,Blue,Click,Lulu,Poppy,SUP,9,19.0,2.0,True,Win
+2925547,1,HMB,GMB,GMB,HMB,Red,Shredder,Alistar,Syndra,SUP,10,20.0,2.0,False,Loss
+2925548,1,GMB,ATA,GMB,ATA,Blue,SkaR,Ornn,Orianna,TOP,1,7.0,1.0,True,Win
+2925548,1,GMB,ATA,ATA,GMB,Red,TheSerius,Vladimir,Yone,TOP,2,8.0,1.0,False,Loss
+2925548,1,GMB,ATA,ATA,GMB,Red,Groudon,Sejuani,Sejuani,JGL,3,9.0,1.0,False,Loss
+2925548,1,GMB,ATA,GMB,ATA,Blue,Mario,Pantheon,Pantheon,JGL,4,10.0,1.0,True,Win
+2925548,1,GMB,ATA,GMB,ATA,Blue,DejaVu,Orianna,Yunara,MID,5,11.0,1.0,True,Win
+2925548,1,GMB,ATA,ATA,GMB,Red,Alvanai,Yone,Corki,MID,6,12.0,1.0,False,Loss
+2925548,1,GMB,ATA,ATA,GMB,Red,Pericolo,Corki,Rell,BOT,7,17.0,2.0,False,Loss
+2925548,1,GMB,ATA,GMB,ATA,Blue,Rharesh,Yunara,Alistar,BOT,8,18.0,2.0,True,Win
+2925548,1,GMB,ATA,GMB,ATA,Blue,Shredder,Alistar,Ornn,SUP,9,19.0,2.0,True,Win
+2925548,1,GMB,ATA,ATA,GMB,Red,CloudStrike,Rell,Vladimir,SUP,10,20.0,2.0,False,Loss
+2925549,1,HMB,CG,HMB,CG,Blue,APP,Aatrox,Aurora,TOP,1,7.0,1.0,True,Win
+2925549,1,HMB,CG,CG,HMB,Red,Iobellan,Sion,Jarvan IV,TOP,2,8.0,1.0,False,Loss
+2925549,1,HMB,CG,CG,HMB,Red,Fragola,JarvanIV,Sion,JGL,3,9.0,1.0,False,Loss
+2925549,1,HMB,CG,HMB,CG,Blue,adi1,XinZhao,Xin Zhao,JGL,4,10.0,1.0,True,Win
+2925549,1,HMB,CG,HMB,CG,Blue,Vigil,Aurora,Ezreal,MID,5,11.0,1.0,True,Win
+2925549,1,HMB,CG,CG,HMB,Red,Sharon,Syndra,Corki,MID,6,12.0,1.0,False,Loss
+2925549,1,HMB,CG,CG,HMB,Red,PiskHeLLo,Corki,Syndra,BOT,7,17.0,2.0,False,Loss
+2925549,1,HMB,CG,HMB,CG,Blue,Tyrone,Ezreal,Aatrox,BOT,8,18.0,2.0,True,Win
+2925549,1,HMB,CG,HMB,CG,Blue,Click,Rell,Rell,SUP,9,19.0,2.0,True,Win
+2925549,1,HMB,CG,CG,HMB,Red,Nash,Nautilus,Nautilus,SUP,10,20.0,2.0,False,Loss
+2925550,1,EKO,ZENA,EKO,ZENA,Blue,TheMountain,Sion,Seraphine,TOP,1,7.0,1.0,True,Win
+2925550,1,EKO,ZENA,ZENA,EKO,Red,Raffy,Ambessa,Ambessa,TOP,2,8.0,1.0,False,Loss
+2925550,1,EKO,ZENA,ZENA,EKO,Red,Jekko,Nocturne,Hwei,JGL,3,9.0,1.0,False,Loss
+2925550,1,EKO,ZENA,EKO,ZENA,Blue,Izo,XinZhao,Xin Zhao,JGL,4,10.0,1.0,True,Win
+2925550,1,EKO,ZENA,EKO,ZENA,Blue,Lukee,Anivia,Sion,MID,5,11.0,1.0,True,Win
+2925550,1,EKO,ZENA,ZENA,EKO,Red,Xen0gan,Aurora,Rell,MID,6,12.0,1.0,False,Loss
+2925550,1,EKO,ZENA,ZENA,EKO,Red,MeMo1,Hwei,Aurora,BOT,7,17.0,2.0,False,Loss
+2925550,1,EKO,ZENA,EKO,ZENA,Blue,Alessio,Varus,Varus,BOT,8,18.0,2.0,True,Win
+2925550,1,EKO,ZENA,EKO,ZENA,Blue,Corri,Seraphine,Anivia,SUP,9,19.0,2.0,True,Win
+2925550,1,EKO,ZENA,ZENA,EKO,Red,OrthoZero,Rell,Nocturne,SUP,10,20.0,2.0,False,Loss
+2925551,1,SHE,TTS,SHE,TTS,Blue,Brut,Aatrox,Karma,TOP,1,7.0,1.0,False,Loss
+2925551,1,SHE,TTS,TTS,SHE,Red,Lerax,Sion,Nautilus,TOP,2,8.0,1.0,True,Win
+2925551,1,SHE,TTS,TTS,SHE,Red,Lesranct,DrMundo,Varus,JGL,3,9.0,1.0,True,Win
+2925551,1,SHE,TTS,SHE,TTS,Blue,enayi,XinZhao,Sivir,JGL,4,10.0,1.0,False,Loss
+2925551,1,SHE,TTS,SHE,TTS,Blue,Divine,Orianna,Xin Zhao,MID,5,11.0,1.0,False,Loss
+2925551,1,SHE,TTS,TTS,SHE,Red,Dashkai,Viktor,Sion,MID,6,12.0,1.0,True,Win
+2925551,1,SHE,TTS,TTS,SHE,Red,RaptoSauros,Varus,Dr. Mundo,BOT,7,17.0,2.0,True,Win
+2925551,1,SHE,TTS,SHE,TTS,Blue,xHikama,Sivir,Aatrox,BOT,8,18.0,2.0,False,Loss
+2925551,1,SHE,TTS,SHE,TTS,Blue,S1D,Karma,Orianna,SUP,9,19.0,2.0,False,Loss
+2925551,1,SHE,TTS,TTS,SHE,Red,Bubba,Nautilus,Viktor,SUP,10,20.0,2.0,True,Win
+2925552,1,GMB,EKO,GMB,EKO,Blue,SkaR,Chogath,Pantheon,TOP,1,7.0,1.0,False,Loss
+2925552,1,GMB,EKO,EKO,GMB,Red,TheMountain,Sion,Jarvan IV,TOP,2,8.0,1.0,True,Win
+2925552,1,GMB,EKO,EKO,GMB,Red,Izo,JarvanIV,Seraphine,JGL,3,9.0,1.0,True,Win
+2925552,1,GMB,EKO,GMB,EKO,Blue,Mario,Pantheon,Caitlyn,JGL,4,10.0,1.0,False,Loss
+2925552,1,GMB,EKO,GMB,EKO,Blue,DejaVu,Aurora,Bard,MID,5,11.0,1.0,False,Loss
+2925552,1,GMB,EKO,EKO,GMB,Red,Lukee,Lissandra,Ashe,MID,6,12.0,1.0,True,Win
+2925552,1,GMB,EKO,EKO,GMB,Red,Alessio,Ashe,Sion,BOT,7,17.0,2.0,True,Win
+2925552,1,GMB,EKO,GMB,EKO,Blue,Rharesh,Caitlyn,Aurora,BOT,8,18.0,2.0,False,Loss
+2925552,1,GMB,EKO,GMB,EKO,Blue,Shredder,Bard,Cho'Gath,SUP,9,19.0,2.0,False,Loss
+2925552,1,GMB,EKO,EKO,GMB,Red,Corri,Seraphine,Lissandra,SUP,10,20.0,2.0,True,Win
+2925553,1,SHE,ZENA,SHE,ZENA,Blue,Brut,Gangplank,Corki,TOP,1,7.0,1.0,False,Loss
+2925553,1,SHE,ZENA,ZENA,SHE,Red,Raffy,Sion,Yunara,TOP,2,8.0,1.0,True,Win
+2925553,1,SHE,ZENA,ZENA,SHE,Red,Jekko,LeeSin,Lulu,JGL,3,9.0,1.0,True,Win
+2925553,1,SHE,ZENA,SHE,ZENA,Blue,enayi,JarvanIV,Nautilus,JGL,4,10.0,1.0,False,Loss
+2925553,1,SHE,ZENA,SHE,ZENA,Blue,Divine,Syndra,Jarvan IV,MID,5,11.0,1.0,False,Loss
+2925553,1,SHE,ZENA,ZENA,SHE,Red,MeMo1,Ahri,Sion,MID,6,12.0,1.0,True,Win
+2925553,1,SHE,ZENA,ZENA,SHE,Red,ilyy,Yunara,Lee Sin,BOT,7,17.0,2.0,True,Win
+2925553,1,SHE,ZENA,SHE,ZENA,Blue,xHikama,Corki,Gangplank,BOT,8,18.0,2.0,False,Loss
+2925553,1,SHE,ZENA,SHE,ZENA,Blue,S1D,Nautilus,Syndra,SUP,9,19.0,2.0,False,Loss
+2925553,1,SHE,ZENA,ZENA,SHE,Red,OrthoZero,Lulu,Ahri,SUP,10,20.0,2.0,True,Win
+2925554,1,CG,TTS,CG,TTS,Blue,Iobellan,Zaahen,Ezreal,TOP,1,7.0,1.0,True,Win
+2925554,1,CG,TTS,TTS,CG,Red,Lerax,Sion,Corki,TOP,2,8.0,1.0,False,Loss
+2925554,1,CG,TTS,TTS,CG,Red,Lesranct,DrMundo,Dr. Mundo,JGL,3,9.0,1.0,False,Loss
+2925554,1,CG,TTS,CG,TTS,Blue,Fragola,JarvanIV,Jarvan IV,JGL,4,10.0,1.0,True,Win
+2925554,1,CG,TTS,CG,TTS,Blue,Sharon,Orianna,Karma,MID,5,11.0,1.0,True,Win
+2925554,1,CG,TTS,TTS,CG,Red,Dashkai,Ryze,Nami,MID,6,12.0,1.0,False,Loss
+2925554,1,CG,TTS,TTS,CG,Red,RaptoSauros,Corki,Sion,BOT,7,17.0,2.0,False,Loss
+2925554,1,CG,TTS,CG,TTS,Blue,PiskHeLLo,Ezreal,Orianna,BOT,8,18.0,2.0,True,Win
+2925554,1,CG,TTS,CG,TTS,Blue,Nash,Karma,Zaahen,SUP,9,19.0,2.0,True,Win
+2925554,1,CG,TTS,TTS,CG,Red,Bubba,Nami,Ryze,SUP,10,20.0,2.0,False,Loss
+2925555,1,ATA,HMB,ATA,HMB,Blue,TheSerius,Camille,Ryze,TOP,1,7.0,1.0,False,Loss
+2925555,1,ATA,HMB,HMB,ATA,Red,APP,Gwen,Ezreal,TOP,2,8.0,1.0,True,Win
+2925555,1,ATA,HMB,HMB,ATA,Red,adi1,XinZhao,Xin Zhao,JGL,3,9.0,1.0,True,Win
+2925555,1,ATA,HMB,ATA,HMB,Blue,Groudon,MonkeyKing,Wukong,JGL,4,10.0,1.0,False,Loss
+2925555,1,ATA,HMB,ATA,HMB,Blue,Alvanai,Ryze,Sivir,MID,5,11.0,1.0,False,Loss
+2925555,1,ATA,HMB,HMB,ATA,Red,Vigil,Anivia,Anivia,MID,6,12.0,1.0,True,Win
+2925555,1,ATA,HMB,HMB,ATA,Red,Tyrone,Ezreal,Karma,BOT,7,17.0,2.0,True,Win
+2925555,1,ATA,HMB,ATA,HMB,Blue,Pericolo,Sivir,Camille,BOT,8,18.0,2.0,False,Loss
+2925555,1,ATA,HMB,ATA,HMB,Blue,mT,Lulu,Lulu,SUP,9,19.0,2.0,False,Loss
+2925555,1,ATA,HMB,HMB,ATA,Red,Click,Karma,Gwen,SUP,10,20.0,2.0,True,Win
+2925559,1,TTS,ZENA,TTS,ZENA,Blue,Lerax,Darius,Ezreal,TOP,1,7.0,1.0,False,Loss
+2925559,1,TTS,ZENA,ZENA,TTS,Red,Raffy,Gwen,Galio,TOP,2,8.0,1.0,True,Win
+2925559,1,TTS,ZENA,ZENA,TTS,Red,Jekko,JarvanIV,Jarvan IV,JGL,3,9.0,1.0,True,Win
+2925559,1,TTS,ZENA,TTS,ZENA,Blue,Lesranct,Aatrox,Aatrox,JGL,4,10.0,1.0,False,Loss
+2925559,1,TTS,ZENA,TTS,ZENA,Blue,Dashkai,Syndra,Syndra,MID,5,11.0,1.0,False,Loss
+2925559,1,TTS,ZENA,ZENA,TTS,Red,MeMo1,Galio,Gwen,MID,6,12.0,1.0,True,Win
+2925559,1,TTS,ZENA,ZENA,TTS,Red,ilyy,MissFortune,Miss Fortune,BOT,7,17.0,2.0,True,Win
+2925559,1,TTS,ZENA,TTS,ZENA,Blue,RaptoSauros,Ezreal,Darius,BOT,8,18.0,2.0,False,Loss
+2925559,1,TTS,ZENA,TTS,ZENA,Blue,Bubba,Bard,Bard,SUP,9,19.0,2.0,False,Loss
+2925559,1,TTS,ZENA,ZENA,TTS,Red,OrthoZero,Rell,Rell,SUP,10,20.0,2.0,True,Win
+2925560,1,EKO,HMB,EKO,HMB,Blue,TheMountain,Malphite,Qiyana,TOP,1,7.0,1.0,False,Loss
+2925560,1,EKO,HMB,HMB,EKO,Red,APP,Ambessa,Jarvan IV,TOP,2,8.0,1.0,True,Win
+2925560,1,EKO,HMB,HMB,EKO,Red,adi1,JarvanIV,Sivir,JGL,3,9.0,1.0,True,Win
+2925560,1,EKO,HMB,EKO,HMB,Blue,Izo,Qiyana,Varus,JGL,4,10.0,1.0,False,Loss
+2925560,1,EKO,HMB,EKO,HMB,Blue,Lukee,Lissandra,Lissandra,MID,5,11.0,1.0,False,Loss
+2925560,1,EKO,HMB,HMB,EKO,Red,Vigil,Viktor,Alistar,MID,6,12.0,1.0,True,Win
+2925560,1,EKO,HMB,HMB,EKO,Red,Tyrone,Sivir,Viktor,BOT,7,17.0,2.0,True,Win
+2925560,1,EKO,HMB,EKO,HMB,Blue,Alessio,Varus,Karma,BOT,8,18.0,2.0,False,Loss
+2925560,1,EKO,HMB,EKO,HMB,Blue,Corri,Karma,Malphite,SUP,9,19.0,2.0,False,Loss
+2925560,1,EKO,HMB,HMB,EKO,Red,Click,Alistar,Ambessa,SUP,10,20.0,2.0,True,Win
+2925561,1,GMB,SHE,GMB,SHE,Blue,SkaR,Rumble,Rumble,TOP,1,7.0,1.0,True,Win
+2925561,1,GMB,SHE,SHE,GMB,Red,Brut,Gnar,Corki,TOP,2,8.0,1.0,False,Loss
+2925561,1,GMB,SHE,SHE,GMB,Red,enayi,Maokai,Nami,JGL,3,9.0,1.0,False,Loss
+2925561,1,GMB,SHE,GMB,SHE,Blue,Mario,Nocturne,Nocturne,JGL,4,10.0,1.0,True,Win
+2925561,1,GMB,SHE,GMB,SHE,Blue,DejaVu,Aurora,Rakan,MID,5,11.0,1.0,True,Win
+2925561,1,GMB,SHE,SHE,GMB,Red,Divine,Veigar,Gnar,MID,6,12.0,1.0,False,Loss
+2925561,1,GMB,SHE,SHE,GMB,Red,xHikama,Corki,Maokai,BOT,7,17.0,2.0,False,Loss
+2925561,1,GMB,SHE,GMB,SHE,Blue,Rharesh,Caitlyn,Caitlyn,BOT,8,18.0,2.0,True,Win
+2925561,1,GMB,SHE,GMB,SHE,Blue,Shredder,Rakan,Aurora,SUP,9,19.0,2.0,True,Win
+2925561,1,GMB,SHE,SHE,GMB,Red,S1D,Nami,Veigar,SUP,10,20.0,2.0,False,Loss
+2925562,1,ATA,CG,ATA,CG,Blue,TheSerius,Camille,Camille,TOP,1,7.0,1.0,False,Loss
+2925562,1,ATA,CG,CG,ATA,Red,Iobellan,Zaahen,Ezreal,TOP,2,8.0,1.0,True,Win
+2925562,1,ATA,CG,CG,ATA,Red,Fragola,Vi,Vi,JGL,3,9.0,1.0,True,Win
+2925562,1,ATA,CG,ATA,CG,Blue,Groudon,XinZhao,Xin Zhao,JGL,4,10.0,1.0,False,Loss
+2925562,1,ATA,CG,ATA,CG,Blue,Alvanai,Aurora,Aurora,MID,5,11.0,1.0,False,Loss
+2925562,1,ATA,CG,CG,ATA,Red,Sharon,Ahri,Karma,MID,6,12.0,1.0,True,Win
+2925562,1,ATA,CG,CG,ATA,Red,PiskHeLLo,Ezreal,Ahri,BOT,7,17.0,2.0,True,Win
+2925562,1,ATA,CG,ATA,CG,Blue,Pericolo,Varus,Varus,BOT,8,18.0,2.0,False,Loss
+2925562,1,ATA,CG,ATA,CG,Blue,CloudStrike,Nautilus,Nautilus,SUP,9,19.0,2.0,False,Loss
+2925562,1,ATA,CG,CG,ATA,Red,Nash,Karma,Zaahen,SUP,10,20.0,2.0,True,Win
+2925563,1,ATA,EKO,ATA,EKO,Blue,TheSerius,Gwen,Ezreal,TOP,1,7.0,1.0,False,Loss
+2925563,1,ATA,EKO,EKO,ATA,Red,TheMountain,Gnar,Xin Zhao,TOP,2,8.0,1.0,True,Win
+2925563,1,ATA,EKO,EKO,ATA,Red,Izo,XinZhao,Yunara,JGL,3,9.0,1.0,True,Win
+2925563,1,ATA,EKO,ATA,EKO,Blue,Groudon,Vi,Vi,JGL,4,10.0,1.0,False,Loss
+2925563,1,ATA,EKO,ATA,EKO,Blue,Alvanai,Viktor,Gwen,MID,5,11.0,1.0,False,Loss
+2925563,1,ATA,EKO,EKO,ATA,Red,Lukee,Ryze,Lulu,MID,6,12.0,1.0,True,Win
+2925563,1,ATA,EKO,EKO,ATA,Red,Alessio,Yunara,Gnar,BOT,7,17.0,2.0,True,Win
+2925563,1,ATA,EKO,ATA,EKO,Blue,Pericolo,Ezreal,Rell,BOT,8,18.0,2.0,False,Loss
+2925563,1,ATA,EKO,ATA,EKO,Blue,CloudStrike,Rell,Viktor,SUP,9,19.0,2.0,False,Loss
+2925563,1,ATA,EKO,EKO,ATA,Red,Corri,Lulu,Ryze,SUP,10,20.0,2.0,True,Win
+2925564,1,GMB,TTS,GMB,TTS,Blue,SkaR,Camille,Nocturne,TOP,1,7.0,1.0,True,Win
+2925564,1,GMB,TTS,TTS,GMB,Red,Lerax,Ornn,Orianna,TOP,2,8.0,1.0,False,Loss
+2925564,1,GMB,TTS,TTS,GMB,Red,Lesranct,JarvanIV,Jarvan IV,JGL,3,9.0,1.0,False,Loss
+2925564,1,GMB,TTS,GMB,TTS,Blue,Mario,Nocturne,Syndra,JGL,4,10.0,1.0,True,Win
+2925564,1,GMB,TTS,GMB,TTS,Blue,DejaVu,Syndra,Sivir,MID,5,11.0,1.0,True,Win
+2925564,1,GMB,TTS,TTS,GMB,Red,Dashkai,Orianna,Ezreal,MID,6,12.0,1.0,False,Loss
+2925564,1,GMB,TTS,TTS,GMB,Red,RaptoSauros,Ezreal,Ornn,BOT,7,17.0,2.0,False,Loss
+2925564,1,GMB,TTS,GMB,TTS,Blue,Rharesh,Sivir,Rakan,BOT,8,18.0,2.0,True,Win
+2925564,1,GMB,TTS,GMB,TTS,Blue,Shredder,Rakan,Camille,SUP,9,19.0,2.0,True,Win
+2925564,1,GMB,TTS,TTS,GMB,Red,Bubba,Nautilus,Nautilus,SUP,10,20.0,2.0,False,Loss
+2925565,1,SHE,HMB,SHE,HMB,Blue,Brut,Rumble,Rumble,TOP,1,7.0,1.0,False,Loss
+2925565,1,SHE,HMB,HMB,SHE,Red,APP,KSante,K'Sante,TOP,2,8.0,1.0,True,Win
+2925565,1,SHE,HMB,HMB,SHE,Red,adi1,XinZhao,Xin Zhao,JGL,3,9.0,1.0,True,Win
+2925565,1,SHE,HMB,SHE,HMB,Blue,enayi,Vi,Orianna,JGL,4,10.0,1.0,False,Loss
+2925565,1,SHE,HMB,SHE,HMB,Blue,Divine,Orianna,Vi,MID,5,11.0,1.0,False,Loss
+2925565,1,SHE,HMB,HMB,SHE,Red,Vigil,Akali,Akali,MID,6,12.0,1.0,True,Win
+2925565,1,SHE,HMB,HMB,SHE,Red,Tyrone,Xayah,Xayah,BOT,7,17.0,2.0,True,Win
+2925565,1,SHE,HMB,SHE,HMB,Blue,xHikama,Yunara,Yunara,BOT,8,18.0,2.0,False,Loss
+2925565,1,SHE,HMB,SHE,HMB,Blue,S1D,Rakan,Rakan,SUP,9,19.0,2.0,False,Loss
+2925565,1,SHE,HMB,HMB,SHE,Red,Click,Bard,Bard,SUP,10,20.0,2.0,True,Win
+2925566,1,CG,ZENA,CG,ZENA,Blue,Iobellan,Fiora,Yunara,TOP,1,7.0,1.0,False,Loss
+2925566,1,CG,ZENA,ZENA,CG,Red,Raffy,Sion,Lulu,TOP,2,8.0,1.0,True,Win
+2925566,1,CG,ZENA,ZENA,CG,Red,Jekko,LeeSin,Sion,JGL,3,9.0,1.0,True,Win
+2925566,1,CG,ZENA,CG,ZENA,Blue,Fragola,XinZhao,Xin Zhao,JGL,4,10.0,1.0,False,Loss
+2925566,1,CG,ZENA,CG,ZENA,Blue,Sharon,Orianna,Orianna,MID,5,11.0,1.0,False,Loss
+2925566,1,CG,ZENA,ZENA,CG,Red,MeMo1,Morgana,Ezreal,MID,6,12.0,1.0,True,Win
+2925566,1,CG,ZENA,ZENA,CG,Red,ilyy,Ezreal,Morgana,BOT,7,17.0,2.0,True,Win
+2925566,1,CG,ZENA,CG,ZENA,Blue,PiskHeLLo,Yunara,Fiora,BOT,8,18.0,2.0,False,Loss
+2925566,1,CG,ZENA,CG,ZENA,Blue,Nash,Nami,Nami,SUP,9,19.0,2.0,False,Loss
+2925566,1,CG,ZENA,ZENA,CG,Red,OrthoZero,Lulu,Lee Sin,SUP,10,20.0,2.0,True,Win
+2925569,1,HMB,TTS,HMB,TTS,Blue,APP,Renekton,Azir,TOP,1,7.0,1.0,True,Win
+2925569,1,HMB,TTS,TTS,HMB,Red,Lerax,Ornn,Yone,TOP,2,8.0,1.0,False,Loss
+2925569,1,HMB,TTS,TTS,HMB,Red,Lesranct,Zyra,Varus,JGL,3,9.0,1.0,False,Loss
+2925569,1,HMB,TTS,HMB,TTS,Blue,adi1,Pantheon,Pantheon,JGL,4,10.0,1.0,True,Win
+2925569,1,HMB,TTS,HMB,TTS,Blue,Vigil,Azir,Renekton,MID,5,11.0,1.0,True,Win
+2925569,1,HMB,TTS,TTS,HMB,Red,Dashkai,Yone,Ornn,MID,6,12.0,1.0,False,Loss
+2925569,1,HMB,TTS,TTS,HMB,Red,RaptoSauros,Varus,Zyra,BOT,7,17.0,2.0,False,Loss
+2925569,1,HMB,TTS,HMB,TTS,Blue,Tyrone,Ashe,Ashe,BOT,8,18.0,2.0,True,Win
+2925569,1,HMB,TTS,HMB,TTS,Blue,Click,Seraphine,Seraphine,SUP,9,19.0,2.0,True,Win
+2925569,1,HMB,TTS,TTS,HMB,Red,Bubba,Anivia,Anivia,SUP,10,20.0,2.0,False,Loss
+2925571,1,ATA,SHE,ATA,SHE,Blue,TheSerius,KSante,Ryze,TOP,1,7.0,1.0,False,Loss
+2925571,1,ATA,SHE,SHE,ATA,Red,Brut,Gwen,Xin Zhao,TOP,2,8.0,1.0,True,Win
+2925571,1,ATA,SHE,SHE,ATA,Red,enayi,XinZhao,Anivia,JGL,3,9.0,1.0,True,Win
+2925571,1,ATA,SHE,ATA,SHE,Blue,Groudon,JarvanIV,Ashe,JGL,4,10.0,1.0,False,Loss
+2925571,1,ATA,SHE,ATA,SHE,Blue,Alvanai,Ryze,Seraphine,MID,5,11.0,1.0,False,Loss
+2925571,1,ATA,SHE,SHE,ATA,Red,Divine,Anivia,Draven,MID,6,12.0,1.0,True,Win
+2925571,1,ATA,SHE,SHE,ATA,Red,xHikama,Draven,Blitzcrank,BOT,7,17.0,2.0,True,Win
+2925571,1,ATA,SHE,ATA,SHE,Blue,Pericolo,Ashe,Jarvan IV,BOT,8,18.0,2.0,False,Loss
+2925571,1,ATA,SHE,ATA,SHE,Blue,CloudStrike,Seraphine,K'Sante,SUP,9,19.0,2.0,False,Loss
+2925571,1,ATA,SHE,SHE,ATA,Red,S1D,Blitzcrank,Gwen,SUP,10,20.0,2.0,True,Win
+2925573,1,CG,EKO,CG,EKO,Blue,Iobellan,Sett,Zaahen,TOP,1,7.0,1.0,True,Win
+2925573,1,CG,EKO,EKO,CG,Red,TheMountain,Rumble,Jarvan IV,TOP,2,8.0,1.0,False,Loss
+2925573,1,CG,EKO,EKO,CG,Red,Izo,JarvanIV,Karma,JGL,3,9.0,1.0,False,Loss
+2925573,1,CG,EKO,CG,EKO,Blue,Yesu,Zaahen,Ezreal,JGL,4,10.0,1.0,True,Win
+2925573,1,CG,EKO,CG,EKO,Blue,Sharon,Leblanc,Sett,MID,5,11.0,1.0,True,Win
+2925573,1,CG,EKO,EKO,CG,Red,Lukee,Syndra,Rumble,MID,6,12.0,1.0,False,Loss
+2925573,1,CG,EKO,EKO,CG,Red,Alessio,Caitlyn,Caitlyn,BOT,7,17.0,2.0,False,Loss
+2925573,1,CG,EKO,CG,EKO,Blue,gwisin,Ezreal,Rakan,BOT,8,18.0,2.0,True,Win
+2925573,1,CG,EKO,CG,EKO,Blue,Nash,Rakan,LeBlanc,SUP,9,19.0,2.0,True,Win
+2925573,1,CG,EKO,EKO,CG,Red,Corri,Karma,Syndra,SUP,10,20.0,2.0,False,Loss
+2925574,1,GMB,ZENA,GMB,ZENA,Blue,SkaR,Jax,Orianna,TOP,1,7.0,1.0,True,Win
+2925574,1,GMB,ZENA,ZENA,GMB,Red,Raffy,Aatrox,Lulu,TOP,2,8.0,1.0,False,Loss
+2925574,1,GMB,ZENA,ZENA,GMB,Red,Jekko,JarvanIV,Jarvan IV,JGL,3,9.0,1.0,False,Loss
+2925574,1,GMB,ZENA,GMB,ZENA,Blue,Mario,Nocturne,Nocturne,JGL,4,10.0,1.0,True,Win
+2925574,1,GMB,ZENA,GMB,ZENA,Blue,DejaVu,Orianna,Yunara,MID,5,11.0,1.0,True,Win
+2925574,1,GMB,ZENA,ZENA,GMB,Red,MeMo1,Galio,Galio,MID,6,12.0,1.0,False,Loss
+2925574,1,GMB,ZENA,ZENA,GMB,Red,ilyy,Aphelios,Aphelios,BOT,7,17.0,2.0,False,Loss
+2925574,1,GMB,ZENA,GMB,ZENA,Blue,Rharesh,Yunara,Leona,BOT,8,18.0,2.0,True,Win
+2925574,1,GMB,ZENA,GMB,ZENA,Blue,Shredder,Leona,Jax,SUP,9,19.0,2.0,True,Win
+2925574,1,GMB,ZENA,ZENA,GMB,Red,OrthoZero,Lulu,Aatrox,SUP,10,20.0,2.0,False,Loss
+2925575,1,HMB,ZENA,HMB,ZENA,Blue,APP,Varus,Varus,TOP,1,7.0,1.0,True,Win
+2925575,1,HMB,ZENA,ZENA,HMB,Red,Raffy,Ambessa,Ambessa,TOP,2,8.0,1.0,False,Loss
+2925575,1,HMB,ZENA,ZENA,HMB,Red,Jekko,LeeSin,Lulu,JGL,3,9.0,1.0,False,Loss
+2925575,1,HMB,ZENA,HMB,ZENA,Blue,adi1,Pantheon,Pantheon,JGL,4,10.0,1.0,True,Win
+2925575,1,HMB,ZENA,HMB,ZENA,Blue,Vigil,Syndra,Nautilus,MID,5,11.0,1.0,True,Win
+2925575,1,HMB,ZENA,ZENA,HMB,Red,MeMo1,Hwei,Yunara,MID,6,12.0,1.0,False,Loss
+2925575,1,HMB,ZENA,ZENA,HMB,Red,ilyy,Yunara,Hwei,BOT,7,17.0,2.0,False,Loss
+2925575,1,HMB,ZENA,HMB,ZENA,Blue,Tyrone,Kaisa,Kai'Sa,BOT,8,18.0,2.0,True,Win
+2925575,1,HMB,ZENA,HMB,ZENA,Blue,Click,Nautilus,Syndra,SUP,9,19.0,2.0,True,Win
+2925575,1,HMB,ZENA,ZENA,HMB,Red,OrthoZero,Lulu,Lee Sin,SUP,10,20.0,2.0,False,Loss
+2925576,1,GMB,CG,GMB,CG,Blue,SkaR,Renekton,Xin Zhao,TOP,1,7.0,1.0,False,Loss
+2925576,1,GMB,CG,CG,GMB,Red,Iobellan,Zaahen,Zaahen,TOP,2,8.0,1.0,True,Win
+2925576,1,GMB,CG,CG,GMB,Red,Yesu,JarvanIV,Ezreal,JGL,3,9.0,1.0,True,Win
+2925576,1,GMB,CG,GMB,CG,Blue,Mario,XinZhao,Sivir,JGL,4,10.0,1.0,False,Loss
+2925576,1,GMB,CG,GMB,CG,Blue,DejaVu,Viktor,Lulu,MID,5,11.0,1.0,False,Loss
+2925576,1,GMB,CG,CG,GMB,Red,Sharon,Syndra,Rakan,MID,6,12.0,1.0,True,Win
+2925576,1,GMB,CG,CG,GMB,Red,gwisin,Ezreal,Syndra,BOT,7,17.0,2.0,True,Win
+2925576,1,GMB,CG,GMB,CG,Blue,Rharesh,Sivir,Viktor,BOT,8,18.0,2.0,False,Loss
+2925576,1,GMB,CG,GMB,CG,Blue,Shredder,Lulu,Renekton,SUP,9,19.0,2.0,False,Loss
+2925576,1,GMB,CG,CG,GMB,Red,Nash,Rakan,Jarvan IV,SUP,10,20.0,2.0,True,Win
+2925577,1,ATA,TTS,ATA,TTS,Blue,TheSerius,Fiora,Jarvan IV,TOP,1,7.0,1.0,False,Loss
+2925577,1,ATA,TTS,TTS,ATA,Red,Lerax,Ornn,Xin Zhao,TOP,2,8.0,1.0,True,Win
+2925577,1,ATA,TTS,TTS,ATA,Red,Lesranct,XinZhao,Yunara,JGL,3,9.0,1.0,True,Win
+2925577,1,ATA,TTS,ATA,TTS,Blue,Groudon,JarvanIV,Varus,JGL,4,10.0,1.0,False,Loss
+2925577,1,ATA,TTS,ATA,TTS,Blue,Alvanai,Azir,Azir,MID,5,11.0,1.0,False,Loss
+2925577,1,ATA,TTS,TTS,ATA,Red,Dashkai,Viktor,Lulu,MID,6,12.0,1.0,True,Win
+2925577,1,ATA,TTS,TTS,ATA,Red,RaptoSauros,Yunara,Viktor,BOT,7,17.0,2.0,True,Win
+2925577,1,ATA,TTS,ATA,TTS,Blue,Pericolo,Varus,Rell,BOT,8,18.0,2.0,False,Loss
+2925577,1,ATA,TTS,ATA,TTS,Blue,CloudStrike,Rell,Fiora,SUP,9,19.0,2.0,False,Loss
+2925577,1,ATA,TTS,TTS,ATA,Red,Bubba,Lulu,Ornn,SUP,10,20.0,2.0,True,Win
+2925578,1,SHE,EKO,SHE,EKO,Blue,Brut,Gnar,Ashe,TOP,1,7.0,1.0,False,Loss
+2925578,1,SHE,EKO,EKO,SHE,Red,TheMountain,Ornn,Seraphine,TOP,2,8.0,1.0,True,Win
+2925578,1,SHE,EKO,EKO,SHE,Red,Izo,XinZhao,Xin Zhao,JGL,3,9.0,1.0,True,Win
+2925578,1,SHE,EKO,SHE,EKO,Blue,enayi,JarvanIV,Karma,JGL,4,10.0,1.0,False,Loss
+2925578,1,SHE,EKO,SHE,EKO,Blue,Divine,Viktor,Jarvan IV,MID,5,11.0,1.0,False,Loss
+2925578,1,SHE,EKO,EKO,SHE,Red,Lukee,Mel,Senna,MID,6,12.0,1.0,True,Win
+2925578,1,SHE,EKO,EKO,SHE,Red,Alessio,Senna,Ornn,BOT,7,17.0,2.0,True,Win
+2925578,1,SHE,EKO,SHE,EKO,Blue,xHikama,Ashe,Gnar,BOT,8,18.0,2.0,False,Loss
+2925578,1,SHE,EKO,SHE,EKO,Blue,S1D,Karma,Viktor,SUP,9,19.0,2.0,False,Loss
+2925578,1,SHE,EKO,EKO,SHE,Red,Corri,Seraphine,Mel,SUP,10,20.0,2.0,True,Win

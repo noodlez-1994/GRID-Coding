@@ -186,7 +186,7 @@ def apply_filters(df: pd.DataFrame, team_col: str = "team") -> pd.DataFrame:
         out = out[out["game_num"].isin(sel_game_nums)]
     if sel_dates and len(sel_dates) == 2 and "date" in out.columns:
         d0, d1 = pd.Timestamp(sel_dates[0]), pd.Timestamp(sel_dates[1])
-        out = out[(out["date"] >= d0) & (out["date"] <= d1)]
+        out = out[out["date"].isna() | ((out["date"] >= d0) & (out["date"] <= d1))]
     if sel_patches and "patch" in out.columns:
         out = out[out["patch"].isin(sel_patches)]
     return out
@@ -1101,7 +1101,7 @@ with tab_wards:
             out = out[out["game_num"].isin(sel_game_nums)]
         if sel_dates and len(sel_dates) == 2 and "date" in out.columns:
             d0, d1 = pd.Timestamp(sel_dates[0]), pd.Timestamp(sel_dates[1])
-            out = out[(out["date"] >= d0) & (out["date"] <= d1)]
+            out = out[out["date"].isna() | ((out["date"] >= d0) & (out["date"] <= d1))]
         if sel_patches and "patch" in out.columns:
             out = out[out["patch"].isin(sel_patches)]
         return out
@@ -1470,7 +1470,7 @@ with tab_wards:
         """
         key = f"{S3_PREFIX}/events_{series_id}_{game_num}_riot.jsonl"
         try:
-            raw    = _s3_client().get_object(Bucket="s3-lol-datastorage", Key=key)["Body"].read().decode()
+            raw    = _s3_client().get_object(Bucket=os.environ.get("S3_BUCKET", "s3-lol-datastorage"), Key=key)["Body"].read().decode()
             events = [json.loads(ln) for ln in raw.splitlines() if ln.strip()]
         except Exception as e:
             st.error(f"S3 error: {e}")
@@ -1682,6 +1682,13 @@ with tab_moves:
         "Select a game and a time window (or an objective event) to generate an "
         "animated GIF of champion positions overlaid on the minimap."
     )
+
+    _col_title, _col_refresh = st.columns([6, 1])
+    with _col_refresh:
+        if st.button("🔄 Refresh games", key="moves_refresh"):
+            load_games_meta.clear()
+            load_game_positions.clear()
+            st.rerun()
 
     # ── Step 1 – pick a game ────────────────────────────────────────────────
     st.markdown("#### 1 · Select a game")

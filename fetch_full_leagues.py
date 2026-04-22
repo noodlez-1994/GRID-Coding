@@ -54,30 +54,31 @@ LEAGUES: dict[str, dict] = {
     "LIT": {
         "label": "LoL Italian Tournament - Winter 2026",
         "tournament_ids": [
-            "827826",  # Regular Season
-            "827828",  # Playoffs
+            # "827826",  # Regular Season
+            # "827828",  # Playoffs
+            "829137",
         ],
     },
-    "LEC": {
-        "label": "LoL EMEA Championship - Spring 2026",
-        "tournament_ids": [
-            # TODO: inserire IDs dopo --discover
-            # Esempio: "830001", "830002", ...
-            "827701",
-            "828729",
-            "828973"
-        ],
-    },
-    "LCK": {
-        "label": "LoL Champions Korea - Spring 2026",
-        "tournament_ids": [
-            # TODO: inserire IDs dopo --discover
-            "827844",
-            "827846",
-            "827848",
-            "829039",
-        ],
-    },
+    # "LEC": {
+    #     "label": "LoL EMEA Championship - Spring 2026",
+    #     "tournament_ids": [
+    #         # TODO: inserire IDs dopo --discover
+    #         # Esempio: "830001", "830002", ...
+    #         "827701",
+    #         "828729",
+    #         "828973"
+    #     ],
+    # },
+    # "LCK": {
+    #     "label": "LoL Champions Korea - Spring 2026",
+    #     "tournament_ids": [
+    #         # TODO: inserire IDs dopo --discover
+    #         "827844",
+    #         "827846",
+    #         "827848",
+    #         "829039",
+    #     ],
+    # },
 }
 
 FORMAT_MAX_GAMES = {"Bo1": 1, "Bo2": 2, "Bo3": 3, "Bo5": 5, "Bo7": 7}
