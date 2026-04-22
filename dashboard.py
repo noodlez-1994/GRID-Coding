@@ -29,6 +29,8 @@ from yaml.loader import SafeLoader
 
 load_dotenv(Path(__file__).parent / ".env")
 
+S3_PREFIX = os.environ.get("S3_PREFIX", "Competitive")
+
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="GRID 2026 – Draft Dashboard",
@@ -111,6 +113,10 @@ all_teams     = sorted(set(picks_raw["team"].unique()))
 all_roles     = ["TOP", "JGL", "MID", "BOT", "SUP"]
 all_game_nums = sorted(picks_raw["game_num"].unique())
 all_patches   = sorted(picks_raw["patch"].dropna().unique())
+
+# ── Fearless tracker session state ────────────────────────────────────────────
+if "fl_out" not in st.session_state:
+    st.session_state["fl_out"] = []
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 st.sidebar.title("Filters")
@@ -235,7 +241,7 @@ if picks.empty:
     st.stop()
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
-tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves, tab_draft = st.tabs([
+tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves, tab_draft, tab_fearless = st.tabs([
     "🏆 Champion Winrates",
     "🎮 By Game #",
     "🛡️ Team Deep Dive",
@@ -244,6 +250,7 @@ tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves, tab_draft =
     "🗺️ Ward Heatmap",
     "🎬 Movements",
     "📋 Draft Viewer",
+    "⚔️ Fearless Tracker",
 ])
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -750,6 +757,60 @@ def _icon_b64(champion: str) -> str:
             pass
 
     return ""
+
+
+def _ddragon_url(champion: str) -> str:
+    """Return the DDragon URL for a champion icon (no local download needed)."""
+    name = re.sub(r"[^a-zA-Z0-9]", "", champion)
+    return f"https://ddragon.leagueoflegends.com/cdn/{_DDRAGON_VERSION}/img/champion/{name}.png"
+
+
+# ── All champions + fearless pool builder ─────────────────────────────────────
+@st.cache_data
+def _load_all_champs() -> list[str]:
+    p = DATA_DIR / "champs.json"
+    if p.exists():
+        with open(p) as f:
+            d = json.load(f)
+        return sorted(d["data"].keys())
+    return sorted(picks_raw["champion"].dropna().unique())
+
+
+_ALL_CHAMPS = _load_all_champs()
+
+
+@st.cache_data
+def _build_fearless_pools(
+    team: str,
+    date_from: str,
+    date_to: str,
+    vs: str,
+) -> dict[str, pd.DataFrame]:
+    pool = picks_raw[picks_raw["team"] == team].copy()
+    if "date" in pool.columns and pool["date"].notna().any():
+        if date_from:
+            pool = pool[pool["date"] >= pd.Timestamp(date_from)]
+        if date_to:
+            pool = pool[pool["date"] <= pd.Timestamp(date_to)]
+    if vs.strip() and "opp_team" in pool.columns:
+        pool = pool[pool["opp_team"].str.upper() == vs.strip().upper()]
+    result: dict[str, pd.DataFrame] = {}
+    for player in pool["player"].unique():
+        pp = (
+            pool[pool["player"] == player]
+            .groupby("champion")
+            .agg(n=("win", "count"), wins=("win", "sum"))
+            .reset_index()
+            .sort_values("n", ascending=False)
+        )
+        pp["wr"] = (pp["wins"] / pp["n"] * 100).round(0).astype(int)
+        if "role" in pool.columns:
+            role_counts = pool[pool["player"] == player]["role"].value_counts()
+            pp.attrs["role"] = role_counts.index[0] if not role_counts.empty else player
+        else:
+            pp.attrs["role"] = player
+        result[player] = pp
+    return result
 
 
 def _img_tag(b64: str, size: int, extra_style: str = "") -> str:
@@ -1407,7 +1468,7 @@ with tab_wards:
         objectives: list of dicts  {monster_type, game_time_ms, side, label, x, z}
         pid_info: {pid: {player, champion, side, role}}
         """
-        key = f"Competitive/events_{series_id}_{game_num}_riot.jsonl"
+        key = f"{S3_PREFIX}/events_{series_id}_{game_num}_riot.jsonl"
         try:
             raw    = _s3_client().get_object(Bucket="s3-lol-datastorage", Key=key)["Body"].read().decode()
             events = [json.loads(ln) for ln in raw.splitlines() if ln.strip()]
@@ -1807,3 +1868,165 @@ with tab_moves:
 
 
         # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# TAB 9 – Fearless Tracker
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+@st.fragment
+def _fearless_tab():
+    st.subheader("⚔️ Fearless Tracker")
+
+    # ── Team selector ─────────────────────────────────────────────────────────
+    default_team = sel_teams[0] if sel_teams else (all_teams[0] if all_teams else None)
+    _fl_team = st.selectbox(
+        "Team",
+        options=all_teams,
+        index=all_teams.index(default_team) if default_team in all_teams else 0,
+        key="fl_team",
+    )
+
+    # ── Controls ──────────────────────────────────────────────────────────────
+    _fc1, _fc2 = st.columns([3, 1])
+    with _fc1:
+        _fl_vs = st.text_input("vs (lascia vuoto = tutti gli avversari)", value="", key="fl_vs")
+    with _fc2:
+        st.markdown("<br>", unsafe_allow_html=True)
+        if st.button("🔄 Reset", use_container_width=True, key="fl_reset"):
+            st.session_state["fl_out"] = []
+            st.rerun(scope="fragment")
+
+    # ── Read global sidebar date range ────────────────────────────────────────
+    _dr = st.session_state.get("date_range")
+    _date_from = str(_dr[0]) if _dr and len(_dr) >= 1 else ""
+    _date_to   = str(_dr[1]) if _dr and len(_dr) >= 2 else ""
+
+    # ── Pool data (cached) ────────────────────────────────────────────────────
+    _fl_player_pools = _build_fearless_pools(_fl_team, _date_from, _date_to, _fl_vs)
+
+    _fl_players = sorted(_fl_player_pools.keys())
+
+    if not _fl_players:
+        st.warning("Nessun dato per questa combinazione di filtri.")
+        return
+
+    # Ordered pool champions (union across players)
+    _fl_all_pool: list[str] = []
+    _seen: set[str] = set()
+    for _p in _fl_players:
+        for _c in _fl_player_pools[_p]["champion"]:
+            if _c not in _seen:
+                _fl_all_pool.append(_c)
+                _seen.add(_c)
+
+    st.markdown("---")
+
+    # ── Main layout: player cols (left) + right panel ─────────────────────────
+    _n_p       = len(_fl_players)
+    _main_cols = st.columns([1] * _n_p + [2])
+
+    _fl_out_set: set[str] = set(st.session_state.get("fl_out_ms", []))
+
+    # ── Player pool columns ───────────────────────────────────────────────────
+    for _pi, _player in enumerate(_fl_players):
+        _pp = _fl_player_pools[_player]
+        with _main_cols[_pi]:
+            st.markdown(
+                f'<div style="text-align:center;font-weight:bold;font-size:12px;color:#ddd;'
+                f'margin-bottom:4px;border-bottom:1px solid #333;padding-bottom:3px;">'
+                f'{_player}</div>'
+                f'<div style="display:flex;gap:2px;font-size:9px;color:#666;margin-bottom:2px;">'
+                f'<span style="width:22px;"></span>'
+                f'<span style="flex:1;text-align:right;padding-right:2px;">N</span>'
+                f'<span style="width:30px;text-align:right;">WR</span></div>',
+                unsafe_allow_html=True,
+            )
+            _rows = ""
+            for _, _row in _pp.iterrows():
+                _c   = _row["champion"]
+                _n   = int(_row["n"])
+                _wr  = int(_row["wr"])
+                _out = _c in _fl_out_set
+                _op  = "0.15" if _out else "1.0"
+                _tc  = "#444"  if _out else "#ccc"
+                _wrc = "#444"  if _out else (
+                    "#dc3545" if _wr < 40 else "#ffc107" if _wr < 50 else "#28a745"
+                )
+                _img = (
+                    f'<img src="{_ddragon_url(_c)}" width="20" height="20" '
+                    f'style="border-radius:3px;opacity:{_op};flex-shrink:0;">'
+                )
+                _rows += (
+                    f'<div style="display:flex;align-items:center;gap:3px;margin:1px 0;">'
+                    f'{_img}'
+                    f'<span style="font-size:9px;color:{_tc};flex:1;white-space:nowrap;'
+                    f'overflow:hidden;text-overflow:ellipsis;">{_c}</span>'
+                    f'<span style="font-size:9px;color:{_tc};width:14px;text-align:right;">{_n}</span>'
+                    f'<span style="font-size:9px;color:{_wrc};width:28px;text-align:right;">{_wr}%</span>'
+                    f'</div>'
+                )
+            st.markdown(_rows, unsafe_allow_html=True)
+
+    # ── Right panel ───────────────────────────────────────────────────────────
+    with _main_cols[-1]:
+        _selected_out = st.multiselect(
+            "Segna campioni OUT",
+            options=sorted(_fl_all_pool),
+            default=list(_fl_out_set & set(_fl_all_pool)),
+            key="fl_out_ms",
+        )
+
+        # OUT icons
+        st.markdown(
+            f'<div style="font-weight:bold;font-size:13px;color:#dc3545;margin:6px 0 3px 0;">'
+            f'Campioni OUT ({len(_selected_out)})</div>',
+            unsafe_allow_html=True,
+        )
+        _out_html = '<div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;">'
+        for _c in _selected_out:
+            _out_html += (
+                f'<img src="{_ddragon_url(_c)}" width="34" height="34" '
+                f'style="border-radius:4px;opacity:0.35;filter:grayscale(60%);" title="{_c}">'
+            )
+        _out_html += '</div>'
+        st.markdown(_out_html, unsafe_allow_html=True)
+
+        # AVAILABLE per player sub-columns
+        _total_avail = sum(
+            1 for _pp in _fl_player_pools.values()
+            for _c in _pp["champion"] if _c not in _fl_out_set
+        )
+        st.markdown(
+            f'<div style="font-weight:bold;font-size:13px;color:#28a745;margin:4px 0 6px 0;">'
+            f'Campioni ANCORA DISPONIBILI ({_total_avail})</div>',
+            unsafe_allow_html=True,
+        )
+        _avail_subcols = st.columns(_n_p)
+        for _pi, _player in enumerate(_fl_players):
+            _pp           = _fl_player_pools[_player]
+            _role_lbl     = _pp.attrs.get("role", _player)
+            _player_avail = [_c for _c in _pp["champion"] if _c not in _fl_out_set]
+            with _avail_subcols[_pi]:
+                st.markdown(
+                    f'<div style="text-align:center;font-size:10px;font-weight:bold;color:#aaa;'
+                    f'border-bottom:1px solid #333;padding-bottom:2px;margin-bottom:4px;">'
+                    f'{_player}<br><span style="font-size:9px;color:#666;">{_role_lbl}</span></div>',
+                    unsafe_allow_html=True,
+                )
+                _col_html = ""
+                for _c in _player_avail:
+                    _col_html += (
+                        f'<div style="text-align:center;margin-bottom:2px;">'
+                        f'<img src="{_ddragon_url(_c)}" width="32" height="32" '
+                        f'style="border-radius:3px;border:1px solid #1a5f2e;" title="{_c}">'
+                        f'<div style="font-size:6px;color:#6abf7a;white-space:nowrap;'
+                        f'overflow:hidden;text-overflow:ellipsis;">{_c}</div></div>'
+                    )
+                st.markdown(
+                    _col_html or '<div style="font-size:9px;color:#555;text-align:center;">—</div>',
+                    unsafe_allow_html=True,
+                )
+
+
+with tab_fearless:
+    _fearless_tab()

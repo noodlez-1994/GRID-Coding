@@ -10,6 +10,7 @@ import re
 from pathlib import Path
 
 import boto3
+from botocore.config import Config
 import pandas as pd
 from dotenv import load_dotenv
 
@@ -227,6 +228,7 @@ def main(rerun: bool = False):
         aws_access_key_id=AWS_KEY,
         aws_secret_access_key=AWS_SECRET,
         region_name="eu-west-3",
+        config=Config(connect_timeout=3, read_timeout=5, retries={"max_attempts": 1}),
     )
 
     picks_out = DATA_DIR / "picks.csv"
@@ -285,23 +287,25 @@ def main(rerun: bool = False):
         if events:
             pick_turns = extract_pick_turns(events)
 
+        # Only accept event champion IDs that are actually played in this game.
+        # Phantom IDs (S3 data errors) are treated as missing so the fallback
+        # can assign the correct champion by elimination.
+        played_cids_game = {q["champion_id"] for q in picks}
+
         for p in picks:
             info = pick_turns.get(p["display_name"])
             if info:
                 pt, first_cid = info
             else:
                 pt, first_cid = None, None
-            p["pick_turn_global"] = pt          # 7-20 (None if events unavailable)
+            p["pick_turn_global"] = pt
             p["pick_phase"]       = pick_phase(pt) if pt else None
-            # draft_champion: champion actually committed at this pick slot
-            # (before end-of-draft swaps).  Falls back to final champion when
-            # events are unavailable.
-            p["draft_champion"]     = champ_map.get(first_cid, p["champion"]) if first_cid else p["champion"]
-            p["draft_from_events"]  = bool(first_cid)   # False → fallback to played champion
-            p["draft_champion_id"]  = first_cid or 0    # 0 if not captured from events
+            valid_cid = first_cid if (first_cid and first_cid in played_cids_game) else None
+            p["draft_champion"]     = champ_map.get(valid_cid, p["champion"]) if valid_cid else p["champion"]
+            p["draft_from_events"]  = bool(valid_cid)
+            p["draft_champion_id"]  = valid_cid or 0
             p["series_id"]          = series_id
             p["game_num"]           = game_num
-            # Remove helper key
             del p["display_name"]
 
         for b in bans:
@@ -321,14 +325,14 @@ def main(rerun: bool = False):
         return
 
     # Assign pick_order (1-10) per game, sorted by pick_turn_global
-    # For rows where pick_turn_global is None, fall back to participant_id ordering
-    picks_df = picks_df.sort_values(
-        ["series_id", "game_num", "pick_turn_global", "participant_id"],
-        na_position="last",
-    )
-    picks_df["pick_order"] = (
-        picks_df.groupby(["series_id", "game_num"]).cumcount() + 1
-    )
+    if not picks_df.empty:
+        picks_df = picks_df.sort_values(
+            ["series_id", "game_num", "pick_turn_global", "participant_id"],
+            na_position="last",
+        )
+        picks_df["pick_order"] = (
+            picks_df.groupby(["series_id", "game_num"]).cumcount() + 1
+        )
 
     picks_cols = [
         "series_id", "game_num",
@@ -364,7 +368,7 @@ def main(rerun: bool = False):
         event_draft_ids  = set(game.loc[game["draft_from_events"], "draft_champion_id"])
         played_ids       = set(game["champion_id"])
         unaccounted_ids  = played_ids - event_draft_ids
-        if len(unaccounted_ids) == len(fallback_idx):
+        if len(unaccounted_ids) == len(fallback_idx) and event_draft_ids:
             for fi, uid in zip(fallback_idx, sorted(unaccounted_ids)):
                 old = picks_df.loc[fi, "draft_champion"]
                 new_name = champ_map.get(uid, f"ID:{uid}")
