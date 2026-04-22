@@ -1688,6 +1688,7 @@ with tab_moves:
         if st.button("🔄 Refresh games", key="moves_refresh"):
             load_games_meta.clear()
             load_game_positions.clear()
+            _s3_client.clear()
             st.rerun()
 
     # ── Step 1 – pick a game ────────────────────────────────────────────────
