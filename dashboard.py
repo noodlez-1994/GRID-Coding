@@ -447,12 +447,8 @@ with tab_team:
 
     chosen_team = st.selectbox("Select a team", options=all_teams, key="team_dd")
 
-    team_picks = picks_raw[picks_raw["team"] == chosen_team].copy()
-    team_bans  = bans_raw[bans_raw["team"] == chosen_team].copy()
-
-    if sel_game_nums:
-        team_picks = team_picks[team_picks["game_num"].isin(sel_game_nums)]
-        team_bans  = team_bans[team_bans["game_num"].isin(sel_game_nums)]
+    team_picks = picks[picks["team"] == chosen_team].copy()
+    team_bans  = bans[bans["team"] == chosen_team].copy()
 
     # Each game the chosen team contributes exactly 5 rows (one per player)
     t_games = len(team_picks) // 5
@@ -1452,6 +1448,7 @@ with tab_wards:
 
     @st.cache_resource
     def _s3_client():
+        load_dotenv(DATA_DIR / ".env", override=True)
         return boto3.client(
             "s3",
             aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
