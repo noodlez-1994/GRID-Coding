@@ -502,6 +502,8 @@ with tab_team:
 
     st.markdown("---")
     st.subheader(f"{chosen_team} – Pick breakdown by role")
+    role_height = st.slider("Role section height (px)", min_value=150, max_value=800, value=250, step=50, key="role_height")
+
     for role in all_roles:
         role_picks = team_picks[team_picks["role"] == role]
         if role_picks.empty:
@@ -512,7 +514,7 @@ with tab_team:
             with c_r1:
                 st.bar_chart(
                     role_wr.set_index("champion")[["winrate"]].sort_values("winrate"),
-                    height=250,
+                    height=role_height,
                 )
             with c_r2:
                 st.dataframe(
@@ -524,7 +526,7 @@ with tab_team:
                     }),
                     hide_index=True,
                     width="stretch",
-                    height=250,
+                    height=role_height,
                 )
 
     st.markdown("---")
