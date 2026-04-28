@@ -57,28 +57,29 @@ LEAGUES: dict[str, dict] = {
             # "827826",  # Regular Season
             # "827828",  # Playoffs
             "829137",
+            "829139",
         ],
     },
-    # "LEC": {
-    #     "label": "LoL EMEA Championship - Spring 2026",
-    #     "tournament_ids": [
-    #         # TODO: inserire IDs dopo --discover
-    #         # Esempio: "830001", "830002", ...
-    #         "827701",
-    #         "828729",
-    #         "828973"
-    #     ],
-    # },
-    # "LCK": {
-    #     "label": "LoL Champions Korea - Spring 2026",
-    #     "tournament_ids": [
-    #         # TODO: inserire IDs dopo --discover
-    #         "827844",
-    #         "827846",
-    #         "827848",
-    #         "829039",
-    #     ],
-    # },
+    "LEC": {
+        "label": "LoL EMEA Championship - Spring 2026",
+        "tournament_ids": [
+            # TODO: inserire IDs dopo --discover
+            # Esempio: "830001", "830002", ...
+            "827701",
+            "828729",
+            "828973"
+        ],
+    },
+    "LCK": {
+        "label": "LoL Champions Korea - Spring 2026",
+        "tournament_ids": [
+            # TODO: inserire IDs dopo --discover
+            "827844",
+            "827846",
+            "827848",
+            "829039",
+        ],
+    },
 }
 
 FORMAT_MAX_GAMES = {"Bo1": 1, "Bo2": 2, "Bo3": 3, "Bo5": 5, "Bo7": 7}
@@ -408,8 +409,10 @@ def main() -> None:
                 s3_key       = f"{S3_PREFIX}/events_{sid}_{gn}_riot.jsonl"
 
                 print(f"    game {gn}:")
-                if summary_path.exists() and details_path.exists():
-                    print(f"      SKIP (già scaricato)")
+                local_done = summary_path.exists() and details_path.exists()
+                if local_done:
+                    # File locali già presenti — controlla solo se S3 manca
+                    upload_events_to_s3(s3, events_url, s3_key)
                     continue
                 sum_result = download_json(summary_url, summary_path)
                 if sum_result is None and gn > 1:
