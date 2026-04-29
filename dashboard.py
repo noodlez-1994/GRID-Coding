@@ -531,17 +531,14 @@ with tab_team:
 
     st.markdown("---")
     st.subheader(f"{chosen_team} – Results by series game number")
-    team_by_game = (
-        team_picks.groupby("game_num")
-        .apply(
-            lambda df: pd.Series({
-                "games": df["series_id"].nunique(),
-                "wins":  int(df.groupby("series_id")["win"].first().sum()),
-            }),
-            include_groups=False,
-        )
+    _series_results = (
+        team_picks.groupby(["game_num", "series_id"])["win"]
+        .first()
         .reset_index()
     )
+    _games_count = _series_results.groupby("game_num").size().reset_index(name="games")
+    _wins_count  = _series_results.groupby("game_num")["win"].sum().reset_index(name="wins")
+    team_by_game = _games_count.merge(_wins_count, on="game_num")
     team_by_game["winrate"] = (team_by_game["wins"] / team_by_game["games"].replace(0, 1) * 100).round(1)
     st.bar_chart(team_by_game.set_index("game_num")[["winrate"]], color="#E67E22")
 
