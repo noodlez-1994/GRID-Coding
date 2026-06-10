@@ -50,24 +50,24 @@ AWS_KEY    = os.environ["AWS_ACCESS_KEY_ID"]
 AWS_SECRET = os.environ["AWS_SECRET_ACCESS_KEY"]
 
 # Solo partite a partire da questa data
-DATE_FROM = "2026-03-01"
+DATE_FROM = "2026-06-01"
 
 # ── Team config (riempire dopo --discover) ────────────────────────────────────
 TEAMS: dict[str, dict] = {
     "MISA": {
         "label": "Misa (TCL – Turkey)",
         "team_id": "53133",          # es. "XXXXX"
-        "tournament_ids": ['828727', '828822', '828833', '829240', '829587'],   # es. ["XXXXX", "XXXXX"]
+        "tournament_ids": ['828727', '828822', '828833', '829240', '829587', '829647'], # es. ["XXXXX", "XXXXX"]
     },
     "UCAM": {
         "label": "UCAM Esports (Superliga – Spain)",
         "team_id": "52457",
-        "tournament_ids": ['828825', '829106', '829108'],
+        "tournament_ids": ['828825', '829106', '829108', '829647'],
     },
     "EWE": {
         "label": "E WIE EINFACH E-SPORTS (Prime League – Germany)",
         "team_id": "19899",
-        "tournament_ids": ['829086', '829355', '829358', '829642', '829644'],
+        "tournament_ids": ['829086', '829355', '829358', '829642', '829644', '829647'],
     },
 }
 

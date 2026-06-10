@@ -8809,3 +8809,53 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,player,champion,draft_c
 2957088,2,EWI,GOAL,GOAL,EWI,Red,DRUXY,Varus,Gnar,BOT,8,18.0,2.0,False,Loss
 2957088,2,EWI,GOAL,GOAL,EWI,Red,Abagnale,Rell,Aurelion Sol,SUP,9,19.0,2.0,False,Loss
 2957088,2,EWI,GOAL,EWI,GOAL,Blue,Wildenbruch,Seraphine,Aurora,SUP,10,20.0,2.0,True,Win
+2957093,1,HMB,UCAM,HMB,UCAM,Blue,APP,Rumble,Nocturne,TOP,1,7.0,1.0,True,Win
+2957093,1,HMB,UCAM,UCAM,HMB,Red,Kozi,KSante,Wukong,TOP,2,8.0,1.0,False,Loss
+2957093,1,HMB,UCAM,UCAM,HMB,Red,bluerzor,MonkeyKing,Neeko,JGL,3,9.0,1.0,False,Loss
+2957093,1,HMB,UCAM,HMB,UCAM,Blue,adi1,Nocturne,Caitlyn,JGL,4,10.0,1.0,True,Win
+2957093,1,HMB,UCAM,HMB,UCAM,Blue,Vigil,Ahri,Rumble,MID,5,11.0,1.0,True,Win
+2957093,1,HMB,UCAM,UCAM,HMB,Red,ESCIK,Leblanc,Jhin,MID,6,12.0,1.0,False,Loss
+2957093,1,HMB,UCAM,UCAM,HMB,Red,ANDARIEL,Jhin,K'Sante,BOT,7,17.0,2.0,False,Loss
+2957093,1,HMB,UCAM,HMB,UCAM,Blue,Tyrone,Caitlyn,Lux,BOT,8,18.0,2.0,True,Win
+2957093,1,HMB,UCAM,HMB,UCAM,Blue,Click,Lux,Ahri,SUP,9,19.0,2.0,True,Win
+2957093,1,HMB,UCAM,UCAM,HMB,Red,iLevi,Neeko,LeBlanc,SUP,10,20.0,2.0,False,Loss
+2957093,2,HMB,UCAM,UCAM,HMB,Red,Kozi,Olaf,Pantheon,TOP,1,7.0,1.0,True,Win
+2957093,2,HMB,UCAM,HMB,UCAM,Blue,APP,Renekton,Senna,TOP,2,8.0,1.0,False,Loss
+2957093,2,HMB,UCAM,HMB,UCAM,Blue,adi1,Poppy,Nautilus,JGL,3,9.0,1.0,False,Loss
+2957093,2,HMB,UCAM,UCAM,HMB,Red,bluerzor,Pantheon,Rell,JGL,4,10.0,1.0,True,Win
+2957093,2,HMB,UCAM,UCAM,HMB,Red,ESCIK,Viktor,Tristana,MID,5,11.0,1.0,True,Win
+2957093,2,HMB,UCAM,HMB,UCAM,Blue,Vigil,Akali,Poppy,MID,6,12.0,1.0,False,Loss
+2957093,2,HMB,UCAM,HMB,UCAM,Blue,Tyrone,Senna,Renekton,BOT,7,17.0,2.0,False,Loss
+2957093,2,HMB,UCAM,UCAM,HMB,Red,ANDARIEL,Tristana,Olaf,BOT,8,18.0,2.0,True,Win
+2957093,2,HMB,UCAM,UCAM,HMB,Red,iLevi,Rell,Viktor,SUP,9,19.0,2.0,True,Win
+2957093,2,HMB,UCAM,HMB,UCAM,Blue,Click,Nautilus,Akali,SUP,10,20.0,2.0,False,Loss
+2957093,3,HMB,UCAM,HMB,UCAM,Blue,APP,Sion,Jarvan IV,TOP,1,7.0,1.0,False,Loss
+2957093,3,HMB,UCAM,UCAM,HMB,Red,Kozi,Gnar,Ezreal,TOP,2,8.0,1.0,True,Win
+2957093,3,HMB,UCAM,UCAM,HMB,Red,bluerzor,XinZhao,Seraphine,JGL,3,9.0,1.0,True,Win
+2957093,3,HMB,UCAM,HMB,UCAM,Blue,adi1,JarvanIV,Lucian,JGL,4,10.0,1.0,False,Loss
+2957093,3,HMB,UCAM,HMB,UCAM,Blue,Vigil,Hwei,Milio,MID,5,11.0,1.0,False,Loss
+2957093,3,HMB,UCAM,UCAM,HMB,Red,ESCIK,Ryze,Xin Zhao,MID,6,12.0,1.0,True,Win
+2957093,3,HMB,UCAM,UCAM,HMB,Red,ANDARIEL,Ezreal,Ryze,BOT,7,17.0,2.0,True,Win
+2957093,3,HMB,UCAM,HMB,UCAM,Blue,Tyrone,Lucian,Sion,BOT,8,18.0,2.0,False,Loss
+2957093,3,HMB,UCAM,HMB,UCAM,Blue,Click,Milio,Hwei,SUP,9,19.0,2.0,False,Loss
+2957093,3,HMB,UCAM,UCAM,HMB,Red,iLevi,Seraphine,Gnar,SUP,10,20.0,2.0,True,Win
+2957094,1,EWI,MISA,MISA,EWI,Red,Ragner,KSante,Ezreal,TOP,1,7.0,1.0,True,Win
+2957094,1,EWI,MISA,EWI,MISA,Blue,Vizicsacsi,Rumble,Sion,TOP,2,8.0,1.0,False,Loss
+2957094,1,EWI,MISA,EWI,MISA,Blue,Afroboi,Naafiri,Bard,JGL,3,9.0,1.0,False,Loss
+2957094,1,EWI,MISA,MISA,EWI,Red,113,Trundle,Anivia,JGL,4,10.0,1.0,True,Win
+2957094,1,EWI,MISA,MISA,EWI,Red,Kofte,Anivia,Seraphine,MID,5,11.0,1.0,True,Win
+2957094,1,EWI,MISA,EWI,MISA,Blue,Relative,Sion,Caitlyn,MID,6,12.0,1.0,False,Loss
+2957094,1,EWI,MISA,EWI,MISA,Blue,noz2k,Caitlyn,Naafiri,BOT,7,17.0,2.0,False,Loss
+2957094,1,EWI,MISA,MISA,EWI,Red,Ruep,Ezreal,Trundle,BOT,8,18.0,2.0,True,Win
+2957094,1,EWI,MISA,MISA,EWI,Red,Carry,Seraphine,K'Sante,SUP,9,19.0,2.0,True,Win
+2957094,1,EWI,MISA,EWI,MISA,Blue,Wildenbruch,Bard,Rumble,SUP,10,20.0,2.0,False,Loss
+2957094,2,MISA,EWI,EWI,MISA,Red,Vizicsacsi,Gnar,Cassiopeia,TOP,1,7.0,1.0,False,Loss
+2957094,2,MISA,EWI,MISA,EWI,Blue,Ragner,Jayce,Viktor,TOP,2,8.0,1.0,True,Win
+2957094,2,MISA,EWI,MISA,EWI,Blue,113,Skarner,Ashe,JGL,3,9.0,1.0,True,Win
+2957094,2,MISA,EWI,EWI,MISA,Red,Afroboi,DrMundo,Varus,JGL,4,10.0,1.0,False,Loss
+2957094,2,MISA,EWI,EWI,MISA,Red,Relative,Cassiopeia,Neeko,MID,5,11.0,1.0,False,Loss
+2957094,2,MISA,EWI,MISA,EWI,Blue,Kofte,Viktor,Lulu,MID,6,12.0,1.0,True,Win
+2957094,2,MISA,EWI,MISA,EWI,Blue,Ruep,Ashe,Jayce,BOT,7,17.0,2.0,True,Win
+2957094,2,MISA,EWI,EWI,MISA,Red,noz2k,Varus,Dr. Mundo,BOT,8,18.0,2.0,False,Loss
+2957094,2,MISA,EWI,EWI,MISA,Red,Wildenbruch,Neeko,Gnar,SUP,9,19.0,2.0,False,Loss
+2957094,2,MISA,EWI,MISA,EWI,Blue,Carry,Lulu,Skarner,SUP,10,20.0,2.0,True,Win
