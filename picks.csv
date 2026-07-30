@@ -8859,3 +8859,123 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,player,champion,draft_c
 2957094,2,MISA,EWI,EWI,MISA,Red,noz2k,Varus,Dr. Mundo,BOT,8,18.0,2.0,False,Loss
 2957094,2,MISA,EWI,EWI,MISA,Red,Wildenbruch,Neeko,Gnar,SUP,9,19.0,2.0,False,Loss
 2957094,2,MISA,EWI,MISA,EWI,Blue,Carry,Lulu,Skarner,SUP,10,20.0,2.0,True,Win
+2977794,1,CG,ZENA,CG,ZENA,Blue,SkaR,Ambessa,Cassiopeia,TOP,1,7.0,1.0,True,Win
+2977794,1,CG,ZENA,ZENA,CG,Red,Gemon,Zaahen,Jarvan IV,TOP,2,8.0,1.0,False,Loss
+2977794,1,CG,ZENA,ZENA,CG,Red,Jekko,JarvanIV,Hwei,JGL,3,9.0,1.0,False,Loss
+2977794,1,CG,ZENA,CG,ZENA,Blue,Jeykup,LeeSin,Lee Sin,JGL,4,10.0,1.0,True,Win
+2977794,1,CG,ZENA,CG,ZENA,Blue,Azuka,Cassiopeia,Ambessa,MID,5,11.0,1.0,True,Win
+2977794,1,CG,ZENA,ZENA,CG,Red,JayJay,Hwei,Zaahen,MID,6,12.0,1.0,False,Loss
+2977794,1,CG,ZENA,ZENA,CG,Red,Pericolo,Ezreal,Ezreal,BOT,7,17.0,2.0,False,Loss
+2977794,1,CG,ZENA,CG,ZENA,Blue,xHikama,Kaisa,Rell,BOT,8,18.0,2.0,True,Win
+2977794,1,CG,ZENA,CG,ZENA,Blue,Shredder,Rell,Kai'Sa,SUP,9,19.0,2.0,True,Win
+2977794,1,CG,ZENA,ZENA,CG,Red,OrthoZero,Braum,Braum,SUP,10,20.0,2.0,False,Loss
+2977795,1,HMB,GMB,HMB,GMB,Blue,APP,Rumble,Rumble,TOP,1,7.0,1.0,True,Win
+2977795,1,HMB,GMB,GMB,HMB,Red,Strava,Ambessa,Syndra,TOP,2,8.0,1.0,False,Loss
+2977795,1,HMB,GMB,GMB,HMB,Red,Izo,LeeSin,Leona,JGL,3,9.0,1.0,False,Loss
+2977795,1,HMB,GMB,HMB,GMB,Blue,Carnage,Vi,Vi,JGL,4,10.0,1.0,True,Win
+2977795,1,HMB,GMB,HMB,GMB,Blue,Vigil,Yasuo,Rell,MID,5,11.0,1.0,True,Win
+2977795,1,HMB,GMB,GMB,HMB,Red,lightcat,Syndra,Ambessa,MID,6,12.0,1.0,False,Loss
+2977795,1,HMB,GMB,GMB,HMB,Red,Rharesh,Cassiopeia,Lee Sin,BOT,7,17.0,2.0,False,Loss
+2977795,1,HMB,GMB,HMB,GMB,Blue,Tyrone,Ziggs,Ziggs,BOT,8,18.0,2.0,True,Win
+2977795,1,HMB,GMB,HMB,GMB,Blue,Click,Rell,Yasuo,SUP,9,19.0,2.0,True,Win
+2977795,1,HMB,GMB,GMB,HMB,Red,Darkchri99,Leona,Cassiopeia,SUP,10,20.0,2.0,False,Loss
+2977796,1,TTS,EKO,TTS,EKO,Blue,Mikizzo,Malphite,Syndra,TOP,1,7.0,1.0,True,Win
+2977796,1,TTS,EKO,EKO,TTS,Red,Kaylem,Ambessa,Ziggs,TOP,2,8.0,1.0,False,Loss
+2977796,1,TTS,EKO,EKO,TTS,Red,SpeeDy,MonkeyKing,Wukong,JGL,3,9.0,1.0,False,Loss
+2977796,1,TTS,EKO,TTS,EKO,Blue,Ryu,LeeSin,Lee Sin,JGL,4,10.0,1.0,True,Win
+2977796,1,TTS,EKO,TTS,EKO,Blue,Lukee,Syndra,Alistar,MID,5,11.0,1.0,True,Win
+2977796,1,TTS,EKO,EKO,TTS,Red,Crocomux,Ahri,Leona,MID,6,12.0,1.0,False,Loss
+2977796,1,TTS,EKO,EKO,TTS,Red,Mihai,Ziggs,Ambessa,BOT,7,17.0,2.0,False,Loss
+2977796,1,TTS,EKO,TTS,EKO,Blue,Creon,Kalista,Kalista,BOT,8,18.0,2.0,True,Win
+2977796,1,TTS,EKO,TTS,EKO,Blue,AwerpiS,Alistar,Malphite,SUP,9,19.0,2.0,True,Win
+2977796,1,TTS,EKO,EKO,TTS,Red,Corriragazz,Leona,Ahri,SUP,10,20.0,2.0,False,Loss
+2977797,1,P11,ATA,P11,ATA,Blue,Limoncello,Renekton,Sion,TOP,1,7.0,1.0,False,Loss
+2977797,1,P11,ATA,ATA,P11,Red,Niki,Ambessa,Orianna,TOP,2,8.0,1.0,True,Win
+2977797,1,P11,ATA,ATA,P11,Red,Goliah,Naafiri,Seraphine,JGL,3,9.0,1.0,True,Win
+2977797,1,P11,ATA,P11,ATA,Blue,Maciejka,Pantheon,Ziggs,JGL,4,10.0,1.0,False,Loss
+2977797,1,P11,ATA,P11,ATA,Blue,Furby,Sion,Pantheon,MID,5,11.0,1.0,False,Loss
+2977797,1,P11,ATA,ATA,P11,Red,Faded2,Orianna,Naafiri,MID,6,12.0,1.0,True,Win
+2977797,1,P11,ATA,ATA,P11,Red,Kyte,Seraphine,Rakan,BOT,7,17.0,2.0,True,Win
+2977797,1,P11,ATA,P11,ATA,Blue,gwisin,Ziggs,Rell,BOT,8,18.0,2.0,False,Loss
+2977797,1,P11,ATA,P11,ATA,Blue,Pinguino,Rell,Renekton,SUP,9,19.0,2.0,False,Loss
+2977797,1,P11,ATA,ATA,P11,Red,CloudStrike,Rakan,Ambessa,SUP,10,20.0,2.0,True,Win
+2977799,1,EKO,P11,EKO,P11,Blue,Kaylem,Aatrox,Jarvan IV,TOP,1,7.0,1.0,False,Loss
+2977799,1,EKO,P11,P11,EKO,Red,Limoncello,Ornn,Ornn,TOP,2,8.0,1.0,False,Loss
+2977799,1,EKO,P11,P11,EKO,Red,Maciejka,Kindred,Kindred,JGL,3,9.0,1.0,False,Loss
+2977799,1,EKO,P11,EKO,P11,Blue,SpeeDy,JarvanIV,Ezreal,JGL,4,10.0,1.0,False,Loss
+2977799,1,EKO,P11,EKO,P11,Blue,Crocomux,Lux,Braum,MID,5,11.0,1.0,False,Loss
+2977799,1,EKO,P11,P11,EKO,Red,Furby,Syndra,Syndra,MID,6,12.0,1.0,False,Loss
+2977799,1,EKO,P11,P11,EKO,Red,gwisin,Kaisa,Kai'Sa,BOT,7,17.0,2.0,False,Loss
+2977799,1,EKO,P11,EKO,P11,Blue,Mihai,Ezreal,Lux,BOT,8,18.0,2.0,False,Loss
+2977799,1,EKO,P11,EKO,P11,Blue,Corriragazz,Braum,Aatrox,SUP,9,19.0,2.0,False,Loss
+2977799,1,EKO,P11,P11,EKO,Red,Pinguino,Nautilus,Nautilus,SUP,10,20.0,2.0,False,Loss
+2977800,1,ZENA,ATA,ZENA,ATA,Blue,Gemon,Shen,Nocturne,TOP,1,7.0,1.0,False,Loss
+2977800,1,ZENA,ATA,ATA,ZENA,Red,Niki,Ambessa,Orianna,TOP,2,8.0,1.0,True,Win
+2977800,1,ZENA,ATA,ATA,ZENA,Red,Goliah,MonkeyKing,Wukong,JGL,3,9.0,1.0,True,Win
+2977800,1,ZENA,ATA,ZENA,ATA,Blue,Jekko,Nocturne,Syndra,JGL,4,10.0,1.0,False,Loss
+2977800,1,ZENA,ATA,ZENA,ATA,Blue,JayJay,Syndra,Shen,MID,5,11.0,1.0,False,Loss
+2977800,1,ZENA,ATA,ATA,ZENA,Red,Faded2,Orianna,Ambessa,MID,6,12.0,1.0,True,Win
+2977800,1,ZENA,ATA,ATA,ZENA,Red,Kyte,Ziggs,Ziggs,BOT,7,17.0,2.0,True,Win
+2977800,1,ZENA,ATA,ZENA,ATA,Blue,Pericolo,Kaisa,Rell,BOT,8,18.0,2.0,False,Loss
+2977800,1,ZENA,ATA,ZENA,ATA,Blue,OrthoZero,Rell,Kai'Sa,SUP,9,19.0,2.0,False,Loss
+2977800,1,ZENA,ATA,ATA,ZENA,Red,CloudStrike,Leona,Leona,SUP,10,20.0,2.0,True,Win
+2977801,1,GMB,TTS,GMB,TTS,Blue,Strava,Ambessa,Viktor,TOP,1,7.0,1.0,True,Win
+2977801,1,GMB,TTS,TTS,GMB,Red,Mikizzo,KSante,Syndra,TOP,2,8.0,1.0,False,Loss
+2977801,1,GMB,TTS,TTS,GMB,Red,Ryu,MonkeyKing,Ezreal,JGL,3,9.0,1.0,False,Loss
+2977801,1,GMB,TTS,GMB,TTS,Blue,Izo,JarvanIV,Jarvan IV,JGL,4,10.0,1.0,True,Win
+2977801,1,GMB,TTS,GMB,TTS,Blue,lightcat,Viktor,Ambessa,MID,5,11.0,1.0,True,Win
+2977801,1,GMB,TTS,TTS,GMB,Red,Lukee,Syndra,K'Sante,MID,6,12.0,1.0,False,Loss
+2977801,1,GMB,TTS,TTS,GMB,Red,Creon,Ezreal,Rell,BOT,7,17.0,2.0,False,Loss
+2977801,1,GMB,TTS,GMB,TTS,Blue,Rharesh,Cassiopeia,Nautilus,BOT,8,18.0,2.0,True,Win
+2977801,1,GMB,TTS,GMB,TTS,Blue,Darkchri99,Nautilus,Cassiopeia,SUP,9,19.0,2.0,True,Win
+2977801,1,GMB,TTS,TTS,GMB,Red,AwerpiS,Rell,Wukong,SUP,10,20.0,2.0,False,Loss
+2977802,1,CG,HMB,CG,HMB,Blue,SkaR,Ambessa,Vi,TOP,1,7.0,1.0,False,Loss
+2977802,1,CG,HMB,HMB,CG,Red,APP,Rumble,Rumble,TOP,2,8.0,1.0,True,Win
+2977802,1,CG,HMB,HMB,CG,Red,Carnage,Pantheon,Pantheon,JGL,3,9.0,1.0,True,Win
+2977802,1,CG,HMB,CG,HMB,Blue,Jeykup,Vi,Sion,JGL,4,10.0,1.0,False,Loss
+2977802,1,CG,HMB,CG,HMB,Blue,Azuka,Ahri,Ahri,MID,5,11.0,1.0,False,Loss
+2977802,1,CG,HMB,HMB,CG,Red,Vigil,Sylas,Sylas,MID,6,12.0,1.0,True,Win
+2977802,1,CG,HMB,HMB,CG,Red,Tyrone,Xayah,Rakan,BOT,7,17.0,2.0,True,Win
+2977802,1,CG,HMB,CG,HMB,Blue,xHikama,Sion,Rell,BOT,8,18.0,2.0,False,Loss
+2977802,1,CG,HMB,CG,HMB,Blue,Shredder,Rell,Ambessa,SUP,9,19.0,2.0,False,Loss
+2977802,1,CG,HMB,HMB,CG,Red,Click,Rakan,Xayah,SUP,10,20.0,2.0,True,Win
+2977803,1,GMB,P11,GMB,P11,Blue,Strava,Ambessa,Ziggs,TOP,1,7.0,1.0,True,Win
+2977803,1,GMB,P11,P11,GMB,Red,Limoncello,Ornn,Ornn,TOP,2,8.0,1.0,False,Loss
+2977803,1,GMB,P11,P11,GMB,Red,Maciejka,Pantheon,Pantheon,JGL,3,9.0,1.0,False,Loss
+2977803,1,GMB,P11,GMB,P11,Blue,Izo,Sylas,Leona,JGL,4,10.0,1.0,True,Win
+2977803,1,GMB,P11,GMB,P11,Blue,lightcat,Yone,Yone,MID,5,11.0,1.0,True,Win
+2977803,1,GMB,P11,P11,GMB,Red,Furby,Orianna,Orianna,MID,6,12.0,1.0,False,Loss
+2977803,1,GMB,P11,P11,GMB,Red,gwisin,Ezreal,Ezreal,BOT,7,17.0,2.0,False,Loss
+2977803,1,GMB,P11,GMB,P11,Blue,Rharesh,Ziggs,Ambessa,BOT,8,18.0,2.0,True,Win
+2977803,1,GMB,P11,GMB,P11,Blue,Darkchri99,Leona,Sylas,SUP,9,19.0,2.0,True,Win
+2977803,1,GMB,P11,P11,GMB,Red,Pinguino,Nautilus,Nautilus,SUP,10,20.0,2.0,False,Loss
+2977804,1,CG,TTS,CG,TTS,Blue,SkaR,Renekton,Cassiopeia,TOP,1,7.0,1.0,True,Win
+2977804,1,CG,TTS,TTS,CG,Red,Mikizzo,KSante,Anivia,TOP,2,8.0,1.0,False,Loss
+2977804,1,CG,TTS,TTS,CG,Red,Ryu,JarvanIV,Jarvan IV,JGL,3,9.0,1.0,False,Loss
+2977804,1,CG,TTS,CG,TTS,Blue,Jeykup,Vi,Vi,JGL,4,10.0,1.0,True,Win
+2977804,1,CG,TTS,CG,TTS,Blue,Azuka,Akali,Renekton,MID,5,11.0,1.0,True,Win
+2977804,1,CG,TTS,TTS,CG,Red,Lukee,Anivia,K'Sante,MID,6,12.0,1.0,False,Loss
+2977804,1,CG,TTS,TTS,CG,Red,Creon,Xayah,Xayah,BOT,7,17.0,2.0,False,Loss
+2977804,1,CG,TTS,CG,TTS,Blue,xHikama,Cassiopeia,Akali,BOT,8,18.0,2.0,True,Win
+2977804,1,CG,TTS,CG,TTS,Blue,Shredder,Rakan,Rakan,SUP,9,19.0,2.0,True,Win
+2977804,1,CG,TTS,TTS,CG,Red,AwerpiS,Bard,Bard,SUP,10,20.0,2.0,False,Loss
+2977805,1,ZENA,HMB,ZENA,HMB,Blue,Gemon,Zaahen,Lee Sin,TOP,1,7.0,1.0,False,Loss
+2977805,1,ZENA,HMB,HMB,ZENA,Red,APP,Vayne,Cassiopeia,TOP,2,8.0,1.0,True,Win
+2977805,1,ZENA,HMB,HMB,ZENA,Red,Carnage,Vi,Vi,JGL,3,9.0,1.0,True,Win
+2977805,1,ZENA,HMB,ZENA,HMB,Blue,Jekko,LeeSin,Akali,JGL,4,10.0,1.0,False,Loss
+2977805,1,ZENA,HMB,ZENA,HMB,Blue,JayJay,Akali,Ziggs,MID,5,11.0,1.0,False,Loss
+2977805,1,ZENA,HMB,HMB,ZENA,Red,Vigil,Sylas,Camille,MID,6,12.0,1.0,True,Win
+2977805,1,ZENA,HMB,HMB,ZENA,Red,Tyrone,Cassiopeia,Sylas,BOT,7,17.0,2.0,True,Win
+2977805,1,ZENA,HMB,ZENA,HMB,Blue,Pericolo,Ziggs,Nautilus,BOT,8,18.0,2.0,False,Loss
+2977805,1,ZENA,HMB,ZENA,HMB,Blue,OrthoZero,Nautilus,Zaahen,SUP,9,19.0,2.0,False,Loss
+2977805,1,ZENA,HMB,HMB,ZENA,Red,Click,Camille,Vayne,SUP,10,20.0,2.0,True,Win
+2977806,1,ATA,EKO,ATA,EKO,Blue,Niki,KSante,Ziggs,TOP,1,7.0,1.0,False,Loss
+2977806,1,ATA,EKO,EKO,ATA,Red,Kaylem,Gnar,Sivir,TOP,2,8.0,1.0,True,Win
+2977806,1,ATA,EKO,EKO,ATA,Red,SpeeDy,JarvanIV,Jarvan IV,JGL,3,9.0,1.0,True,Win
+2977806,1,ATA,EKO,ATA,EKO,Blue,Goliah,LeeSin,Lee Sin,JGL,4,10.0,1.0,False,Loss
+2977806,1,ATA,EKO,ATA,EKO,Blue,Faded2,Ahri,Rell,MID,5,11.0,1.0,False,Loss
+2977806,1,ATA,EKO,EKO,ATA,Red,Crocomux,Lux,Leona,MID,6,12.0,1.0,True,Win
+2977806,1,ATA,EKO,EKO,ATA,Red,Mihai,Sivir,Lux,BOT,7,17.0,2.0,True,Win
+2977806,1,ATA,EKO,ATA,EKO,Blue,Kyte,Ziggs,Ahri,BOT,8,18.0,2.0,False,Loss
+2977806,1,ATA,EKO,ATA,EKO,Blue,CloudStrike,Rell,K'Sante,SUP,9,19.0,2.0,False,Loss
+2977806,1,ATA,EKO,EKO,ATA,Red,Corriragazz,Leona,Gnar,SUP,10,20.0,2.0,True,Win

@@ -50,7 +50,7 @@ AWS_KEY    = os.environ["AWS_ACCESS_KEY_ID"]
 AWS_SECRET = os.environ["AWS_SECRET_ACCESS_KEY"]
 
 # Solo partite a partire da questa data
-DATE_FROM = "2026-06-01"
+DATE_FROM = "2026-06-7"
 
 # ── Team config (riempire dopo --discover) ────────────────────────────────────
 TEAMS: dict[str, dict] = {
