@@ -38,7 +38,7 @@ load_dotenv(Path(__file__).parent / ".env")
 
 # ── Config ────────────────────────────────────────────────────────────────────
 DATA_DIR     = Path(__file__).parent
-GRID_API_KEY = "9I7w6vKGjhw9TF0Vgr4oGwSbKUi7IEgvE4zYKRZC"
+GRID_API_KEY = "kD1D0BzNJxQLIapJkvDKNsq5UrSCGPVnNugdXLIS"
 GQL_URL      = "https://api.grid.gg/central-data/graphql"
 DL_BASE      = "https://api.grid.gg/file-download"
 
