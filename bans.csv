@@ -9035,3 +9035,43 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,champion,ban_order,ban_
 2977816,1,ZENA,TTS,TTS,ZENA,Red,ID:805,3,6,1,False,Loss
 2977816,1,ZENA,TTS,TTS,ZENA,Red,Jarvan IV,4,7,2,False,Loss
 2977816,1,ZENA,TTS,TTS,ZENA,Red,Ziggs,5,9,2,False,Loss
+2977818,1,HMB,ATA,HMB,ATA,Blue,Orianna,1,1,1,True,Win
+2977818,1,HMB,ATA,HMB,ATA,Blue,Nocturne,2,3,1,True,Win
+2977818,1,HMB,ATA,HMB,ATA,Blue,Naafiri,3,5,1,True,Win
+2977818,1,HMB,ATA,HMB,ATA,Blue,Zeri,4,8,2,True,Win
+2977818,1,HMB,ATA,HMB,ATA,Blue,Lee Sin,5,10,2,True,Win
+2977818,1,HMB,ATA,ATA,HMB,Red,Camille,1,2,1,False,Loss
+2977818,1,HMB,ATA,ATA,HMB,Red,Jarvan IV,2,4,1,False,Loss
+2977818,1,HMB,ATA,ATA,HMB,Red,Vi,3,6,1,False,Loss
+2977818,1,HMB,ATA,ATA,HMB,Red,Pantheon,4,7,2,False,Loss
+2977818,1,HMB,ATA,ATA,HMB,Red,Ezreal,5,9,2,False,Loss
+2977819,1,EKO,CG,EKO,CG,Blue,Cassiopeia,1,1,1,True,Win
+2977819,1,EKO,CG,EKO,CG,Blue,Jayce,2,3,1,True,Win
+2977819,1,EKO,CG,EKO,CG,Blue,Ambessa,3,5,1,True,Win
+2977819,1,EKO,CG,EKO,CG,Blue,Ahri,4,8,2,True,Win
+2977819,1,EKO,CG,EKO,CG,Blue,Akali,5,10,2,True,Win
+2977819,1,EKO,CG,CG,EKO,Red,Poppy,1,2,1,False,Loss
+2977819,1,EKO,CG,CG,EKO,Red,Seraphine,2,4,1,False,Loss
+2977819,1,EKO,CG,CG,EKO,Red,Jarvan IV,3,6,1,False,Loss
+2977819,1,EKO,CG,CG,EKO,Red,Gnar,4,7,2,False,Loss
+2977819,1,EKO,CG,CG,EKO,Red,Olaf,5,9,2,False,Loss
+2977820,1,ZENA,GMB,ZENA,GMB,Blue,Aurora,1,1,1,False,Loss
+2977820,1,ZENA,GMB,ZENA,GMB,Blue,Viktor,2,3,1,False,Loss
+2977820,1,ZENA,GMB,ZENA,GMB,Blue,Jarvan IV,3,5,1,False,Loss
+2977820,1,ZENA,GMB,ZENA,GMB,Blue,Cassiopeia,4,8,2,False,Loss
+2977820,1,ZENA,GMB,ZENA,GMB,Blue,Ziggs,5,10,2,False,Loss
+2977820,1,ZENA,GMB,GMB,ZENA,Red,Nocturne,1,2,1,True,Win
+2977820,1,ZENA,GMB,GMB,ZENA,Red,Camille,2,4,1,True,Win
+2977820,1,ZENA,GMB,GMB,ZENA,Red,Syndra,3,6,1,True,Win
+2977820,1,ZENA,GMB,GMB,ZENA,Red,Malphite,4,7,2,True,Win
+2977820,1,ZENA,GMB,GMB,ZENA,Red,Irelia,5,9,2,True,Win
+2977821,1,P11,TTS,P11,TTS,Blue,Nocturne,1,1,1,False,Loss
+2977821,1,P11,TTS,P11,TTS,Blue,Tristana,2,3,1,False,Loss
+2977821,1,P11,TTS,P11,TTS,Blue,Poppy,3,5,1,False,Loss
+2977821,1,P11,TTS,P11,TTS,Blue,Kalista,4,8,2,False,Loss
+2977821,1,P11,TTS,P11,TTS,Blue,Olaf,5,10,2,False,Loss
+2977821,1,P11,TTS,TTS,P11,Red,Cassiopeia,1,2,1,True,Win
+2977821,1,P11,TTS,TTS,P11,Red,Ornn,2,4,1,True,Win
+2977821,1,P11,TTS,TTS,P11,Red,Jarvan IV,3,6,1,True,Win
+2977821,1,P11,TTS,TTS,P11,Red,Ziggs,4,7,2,True,Win
+2977821,1,P11,TTS,TTS,P11,Red,Sylas,5,9,2,True,Win
