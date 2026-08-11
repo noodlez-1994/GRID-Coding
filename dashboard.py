@@ -227,6 +227,33 @@ def winrate_table(df: pd.DataFrame, group_col: str, min_games: int = 1) -> pd.Da
     return agg
 
 
+# ── Champion icons (DDragon) ──────────────────────────────────────────────────
+_DDRAGON_VERSION = "16.3.1"
+
+# champs.json name → correctly-cased DDragon champion id (only where they differ
+# after stripping punctuation/spaces; DDragon's CDN is case-sensitive)
+_CHAMP_ALIAS = {"wukong": "MonkeyKing", "renataglasc": "Renata"}
+
+
+def _ddragon_url(champion: str) -> str:
+    """Return the DDragon CDN URL for a champion icon (no download, browser fetches it)."""
+    if not isinstance(champion, str) or not champion:
+        return ""
+    name = re.sub(r"[^a-zA-Z0-9]", "", champion)
+    name = _CHAMP_ALIAS.get(name.lower(), name)
+    return f"https://ddragon.leagueoflegends.com/cdn/{_DDRAGON_VERSION}/img/champion/{name}.png"
+
+
+ICON_COLUMN_CONFIG = {"Icon": st.column_config.ImageColumn("", width="small")}
+
+
+def with_champ_icons(df: pd.DataFrame, champ_col: str) -> pd.DataFrame:
+    """Return a copy of df with an 'Icon' column (DDragon image URL) inserted first."""
+    out = df.copy()
+    out.insert(0, "Icon", out[champ_col].map(_ddragon_url))
+    return out
+
+
 # ── Title ─────────────────────────────────────────────────────────────────────
 st.title("⚔️ GRID 2026 Competitive Draft Dashboard")
 
@@ -241,7 +268,7 @@ if picks.empty:
     st.stop()
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
-tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves, tab_draft, tab_fearless = st.tabs([
+tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves, tab_draft, tab_fearless, tab_obj = st.tabs([
     "🏆 Champion Winrates",
     "🎮 By Game #",
     "🛡️ Team Deep Dive",
@@ -251,12 +278,68 @@ tab_wr, tab_game, tab_team, tab_bans, tab_raw, tab_wards, tab_moves, tab_draft, 
     "🎬 Movements",
     "📋 Draft Viewer",
     "⚔️ Fearless Tracker",
+    "🐉 Objectives",
 ])
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 1 – Champion Winrates
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab_wr:
+    # ── Role Pick Pools ──────────────────────────────────────────────────────
+    st.subheader("Role Pick Pools")
+
+    pp_team = sel_teams[0] if sel_teams else (all_teams[0] if all_teams else None)
+    st.caption(f"Team: **{pp_team}** (from sidebar filter, defaults to the first team)")
+
+    # Same pattern as Draft Slot Analysis: apply date/patch/game_num filters,
+    # but pick the team explicitly rather than via the sidebar team filter.
+    pp_picks_raw = picks_raw.copy()
+    if sel_game_nums:
+        pp_picks_raw = pp_picks_raw[pp_picks_raw["game_num"].isin(sel_game_nums)]
+    if sel_dates and len(sel_dates) == 2 and "date" in pp_picks_raw.columns:
+        _pp_d0, _pp_d1 = pd.Timestamp(sel_dates[0]), pd.Timestamp(sel_dates[1])
+        pp_picks_raw = pp_picks_raw[pp_picks_raw["date"].isna() | ((pp_picks_raw["date"] >= _pp_d0) & (pp_picks_raw["date"] <= _pp_d1))]
+    if sel_patches and "patch" in pp_picks_raw.columns:
+        pp_picks_raw = pp_picks_raw[pp_picks_raw["patch"].isin(sel_patches)]
+
+    team_pp_picks = pp_picks_raw[pp_picks_raw["team"] == pp_team] if pp_team else pp_picks_raw.iloc[0:0]
+
+    if team_pp_picks.empty:
+        st.info(f"No picks found for {pp_team} with the current filters.")
+    else:
+        pp_roles = [r for r in all_roles if not team_pp_picks[team_pp_picks["role"] == r].empty]
+        pp_cols = st.columns(len(pp_roles))
+        for pp_col, role in zip(pp_cols, pp_roles):
+            role_rows = team_pp_picks[team_pp_picks["role"] == role]
+
+            # Players who played this role, sorted by number of games (desc)
+            player_counts = role_rows["player"].value_counts()
+            players_label = ", ".join(player_counts.index.tolist())
+
+            pp_agg = (
+                role_rows.groupby("champion")
+                .agg(Pick=("win", "count"), wins=("win", "sum"))
+                .reset_index()
+                .sort_values("Pick", ascending=False)
+            )
+            pp_agg["WR %"] = (pp_agg["wins"] / pp_agg["Pick"] * 100).round(1)
+            pp_agg = pp_agg.rename(columns={"champion": "Champion"})[
+                ["Champion", "Pick", "WR %"]
+            ]
+            pp_agg = with_champ_icons(pp_agg, "Champion")
+
+            with pp_col:
+                st.markdown(f"**{role}** ({players_label})")
+                st.dataframe(
+                    pp_agg.style.map(color_wr, subset=["WR %"]),
+                    hide_index=True,
+                    width="stretch",
+                    height=min(500, 38 * (len(pp_agg) + 1)),
+                    column_config=ICON_COLUMN_CONFIG,
+                )
+
+    st.markdown("---")
+
     st.subheader("Champion Winrates (Picks)")
 
     c1, c2 = st.columns([1, 3])
@@ -290,11 +373,13 @@ with tab_wr:
             "wins":     "Wins",
             "winrate":  "WR %",
         })
+        display = with_champ_icons(display, "Champion")
         st.dataframe(
             display.style.map(color_wr, subset=["WR %"]),
             hide_index=True,
             width="stretch",
             height=500,
+            column_config=ICON_COLUMN_CONFIG,
         )
 
     # ── Draft Slot Analysis ────────────────────────────────────────────────
@@ -345,16 +430,19 @@ with tab_wr:
                     height=280,
                 )
             with c_right:
+                slot_display = slot_wr.rename(columns={
+                    "slot_champion": "Champion",
+                    "games":         "Picks",
+                    "wins":          "Wins",
+                    "winrate":       "WR %",
+                })
+                slot_display = with_champ_icons(slot_display, "Champion")
                 st.dataframe(
-                    slot_wr.rename(columns={
-                        "slot_champion": "Champion",
-                        "games":         "Picks",
-                        "wins":          "Wins",
-                        "winrate":       "WR %",
-                    }).style.map(color_wr, subset=["WR %"]),
+                    slot_display.style.map(color_wr, subset=["WR %"]),
                     hide_index=True,
                     width="stretch",
                     height=280,
+                    column_config=ICON_COLUMN_CONFIG,
                 )
 
 
@@ -415,16 +503,19 @@ with tab_game:
                     height=350,
                 )
             with c_right:
+                wr_gn_display = wr_gn.rename(columns={
+                    "champion": "Champion",
+                    "games":    "Picks",
+                    "wins":     "Wins",
+                    "winrate":  "WR %",
+                })
+                wr_gn_display = with_champ_icons(wr_gn_display, "Champion")
                 st.dataframe(
-                    wr_gn.rename(columns={
-                        "champion": "Champion",
-                        "games":    "Picks",
-                        "wins":     "Wins",
-                        "winrate":  "WR %",
-                    }).style.map(color_wr, subset=["WR %"]),
+                    wr_gn_display.style.map(color_wr, subset=["WR %"]),
                     hide_index=True,
                     width="stretch",
                     height=350,
+                    column_config=ICON_COLUMN_CONFIG,
                 )
 
     # Unique champions per game number
@@ -467,16 +558,19 @@ with tab_team:
     with col_picks:
         st.markdown(f"**{chosen_team} – Pick pool**")
         tp_wr = winrate_table(team_picks, "champion", 1).head(20)
+        tp_display = tp_wr.rename(columns={
+            "champion": "Champion",
+            "games": "Games",
+            "wins": "Wins",
+            "winrate": "WR %",
+        })
+        tp_display = with_champ_icons(tp_display, "Champion")
         st.dataframe(
-            tp_wr.rename(columns={
-                "champion": "Champion",
-                "games": "Games",
-                "wins": "Wins",
-                "winrate": "WR %",
-            }).style.map(color_wr, subset=["WR %"]),
+            tp_display.style.map(color_wr, subset=["WR %"]),
             hide_index=True,
             width="stretch",
             height=400,
+            column_config=ICON_COLUMN_CONFIG,
         )
 
     with col_bans:
@@ -488,16 +582,19 @@ with tab_team:
             .sort_values("times_banned", ascending=False)
         )
         tb_agg["ban_wr"] = (tb_agg["wins"] / tb_agg["times_banned"] * 100).round(1)
+        tb_display = tb_agg.rename(columns={
+            "champion": "Champion",
+            "times_banned": "Times Banned",
+            "wins": "Wins",
+            "ban_wr": "Win % (when banned)",
+        })
+        tb_display = with_champ_icons(tb_display, "Champion")
         st.dataframe(
-            tb_agg.rename(columns={
-                "champion": "Champion",
-                "times_banned": "Times Banned",
-                "wins": "Wins",
-                "ban_wr": "Win % (when banned)",
-            }),
+            tb_display,
             hide_index=True,
             width="stretch",
             height=400,
+            column_config=ICON_COLUMN_CONFIG,
         )
 
     st.markdown("---")
@@ -517,16 +614,19 @@ with tab_team:
                     height=role_height,
                 )
             with c_r2:
+                role_display = role_wr.rename(columns={
+                    "champion": "Champion",
+                    "games": "Games",
+                    "wins": "Wins",
+                    "winrate": "WR %",
+                })
+                role_display = with_champ_icons(role_display, "Champion")
                 st.dataframe(
-                    role_wr.rename(columns={
-                        "champion": "Champion",
-                        "games": "Games",
-                        "wins": "Wins",
-                        "winrate": "WR %",
-                    }),
+                    role_display,
                     hide_index=True,
                     width="stretch",
                     height=role_height,
+                    column_config=ICON_COLUMN_CONFIG,
                 )
 
     st.markdown("---")
@@ -579,16 +679,19 @@ with tab_bans:
 
     with c_wr:
         st.markdown("**Win % of team that banned the champion**")
+        ban_display = ban_agg.rename(columns={
+            "champion":     "Champion",
+            "times_banned": "# Bans",
+            "wins":         "Wins",
+            "ban_win_pct":  "WR % (banning team)",
+        })
+        ban_display = with_champ_icons(ban_display, "Champion")
         st.dataframe(
-            ban_agg.rename(columns={
-                "champion":     "Champion",
-                "times_banned": "# Bans",
-                "wins":         "Wins",
-                "ban_win_pct":  "WR % (banning team)",
-            }).style.map(color_wr, subset=["WR % (banning team)"]),
+            ban_display.style.map(color_wr, subset=["WR % (banning team)"]),
             hide_index=True,
             width="stretch",
             height=400,
+            column_config=ICON_COLUMN_CONFIG,
         )
 
     # Phase-split view
@@ -650,7 +753,12 @@ with tab_raw:
 
     with raw_tab1:
         st.caption(f"{len(picks)} rows after filters")
-        st.dataframe(picks, hide_index=True, width="stretch")
+        st.dataframe(
+            with_champ_icons(picks, "champion"),
+            hide_index=True,
+            width="stretch",
+            column_config=ICON_COLUMN_CONFIG,
+        )
         st.download_button(
             "⬇️ Download picks (filtered)",
             picks.to_csv(index=False).encode(),
@@ -660,7 +768,12 @@ with tab_raw:
 
     with raw_tab2:
         st.caption(f"{len(bans)} rows after filters")
-        st.dataframe(bans, hide_index=True, width="stretch")
+        st.dataframe(
+            with_champ_icons(bans, "champion"),
+            hide_index=True,
+            width="stretch",
+            column_config=ICON_COLUMN_CONFIG,
+        )
         st.download_button(
             "⬇️ Download bans (filtered)",
             bans.to_csv(index=False).encode(),
@@ -719,7 +832,6 @@ _PHASE1_PAIRS = [(1, 2), (4, 3), (5, 6)]
 _PHASE2_PAIRS = [(8, 7), (9, 10)]
 
 _ROLE_ABBR = {"TOP": "T", "JGL": "J", "MID": "M", "BOT": "A", "SUP": "S"}
-_DDRAGON_VERSION = "16.3.1"
 
 
 @st.cache_data
@@ -752,12 +864,6 @@ def _icon_b64(champion: str) -> str:
             pass
 
     return ""
-
-
-def _ddragon_url(champion: str) -> str:
-    """Return the DDragon URL for a champion icon (no local download needed)."""
-    name = re.sub(r"[^a-zA-Z0-9]", "", champion)
-    return f"https://ddragon.leagueoflegends.com/cdn/{_DDRAGON_VERSION}/img/champion/{name}.png"
 
 
 # ── All champions + fearless pool builder ─────────────────────────────────────
@@ -1273,17 +1379,20 @@ with tab_wards:
             .reset_index()
             .sort_values("wards_placed", ascending=False)
         )
+        player_display = player_df.rename(columns={
+            "team":         "Team",
+            "player":       "Player",
+            "role":         "Role",
+            "champion":     "Champion",
+            "wards_placed": "Wards Placed",
+        })
+        player_display = with_champ_icons(player_display, "Champion")
         st.dataframe(
-            player_df.rename(columns={
-                "team":         "Team",
-                "player":       "Player",
-                "role":         "Role",
-                "champion":     "Champion",
-                "wards_placed": "Wards Placed",
-            }),
+            player_display,
             hide_index=True,
             width="stretch",
             height=350,
+            column_config=ICON_COLUMN_CONFIG,
         )
 
         # Per-player heatmaps in expanders
@@ -1867,8 +1976,9 @@ with tab_moves:
                                            key=lambda x: (0 if x["side"] == "Blue" else 1,
                                                           x["role"]))
                     ]
-                    st.dataframe(pd.DataFrame(ref_rows), hide_index=True,
-                                 width="stretch")
+                    ref_display = with_champ_icons(pd.DataFrame(ref_rows), "Champion")
+                    st.dataframe(ref_display, hide_index=True,
+                                 width="stretch", column_config=ICON_COLUMN_CONFIG)
 
 
         # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2034,3 +2144,234 @@ def _fearless_tab():
 
 with tab_fearless:
     _fearless_tab()
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# TAB 10 – Objectives (drake / voidgrub / herald / baron control + gold swing)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+with tab_obj:
+
+    _OBJ_CATEGORIES = ["1st Drake", "Drakes (Total)", "Voidgrubs", "Herald", "Baron", "Elder Dragon"]
+
+    @st.cache_data(show_spinner=False)
+    def _load_timeline_json(series_id: str, game_num: int):
+        """Load the raw match timeline (1-min frames) for one game, or None if missing."""
+        path = DATA_DIR / f"end_state_details_riot_{series_id}_{game_num}.json"
+        if not path.exists():
+            return None
+        try:
+            with open(path) as f:
+                return json.load(f)
+        except Exception:
+            return None
+
+    @st.cache_data(show_spinner=False)
+    def _extract_game_objective_events(series_id: str, game_num: int, team_id: int):
+        """
+        Returns a list of dicts, one per elite-monster kill in the game:
+          {category, taken_by_team, swing}
+        `swing` is the change in (team_id's gold - opponent's gold) between the
+        moment the objective is taken and 60s later, i.e. the gold lead created
+        in the minute right after the objective.  Riot timelines always assign
+        participantIds 1-5 to teamId 100 and 6-10 to teamId 200.
+        """
+        data = _load_timeline_json(series_id, game_num)
+        if data is None:
+            return None
+
+        frames = data.get("frames", [])
+        ts_list, diff_list = [], []
+        for fr in frames:
+            pf = fr.get("participantFrames", {})
+            g100 = sum(pf[str(pid)]["totalGold"] for pid in range(1, 6) if str(pid) in pf)
+            g200 = sum(pf[str(pid)]["totalGold"] for pid in range(6, 11) if str(pid) in pf)
+            ts_list.append(fr.get("timestamp", 0))
+            diff_list.append(g100 - g200)
+
+        if not ts_list:
+            return []
+
+        ts_arr = np.array(ts_list, dtype=float)
+        raw_diff_arr = np.array(diff_list, dtype=float)
+        sign = 1.0 if team_id == 100 else -1.0
+        team_diff_arr = raw_diff_arr * sign
+
+        def gold_lead_at(t: float) -> float:
+            return float(np.interp(t, ts_arr, team_diff_arr))
+
+        events: list[dict] = []
+        seen_first_drake = False
+        for fr in frames:
+            for e in fr.get("events", []):
+                if e.get("type") != "ELITE_MONSTER_KILL":
+                    continue
+                mtype = e.get("monsterType")
+                sub = e.get("monsterSubType")
+                ts = e.get("timestamp", 0)
+                taken_by_team = e.get("killerTeamId") == team_id
+                swing = gold_lead_at(ts + 60000) - gold_lead_at(ts)
+
+                if mtype == "DRAGON" and sub != "ELDER_DRAGON":
+                    events.append({"category": "Drakes (Total)", "taken_by_team": taken_by_team, "swing": swing})
+                    if not seen_first_drake:
+                        events.append({"category": "1st Drake", "taken_by_team": taken_by_team, "swing": swing})
+                        seen_first_drake = True
+                elif mtype == "DRAGON" and sub == "ELDER_DRAGON":
+                    events.append({"category": "Elder Dragon", "taken_by_team": taken_by_team, "swing": swing})
+                elif mtype == "HORDE":
+                    events.append({"category": "Voidgrubs", "taken_by_team": taken_by_team, "swing": swing})
+                elif mtype == "RIFTHERALD":
+                    events.append({"category": "Herald", "taken_by_team": taken_by_team, "swing": swing})
+                elif mtype == "BARON_NASHOR":
+                    events.append({"category": "Baron", "taken_by_team": taken_by_team, "swing": swing})
+
+        return events
+
+    st.subheader("Objective Control & Gold Impact")
+    st.caption(
+        "For each objective: how often the selected team secures it, and the gold lead "
+        "it creates in the 60 seconds right after it's taken (isolated from any pre-existing "
+        "gold lead) — split by who secured it. From local timeline data."
+    )
+
+    _obj_default_team = sel_teams[0] if sel_teams else (all_teams[0] if all_teams else None)
+    _obj_team = st.selectbox(
+        "Team",
+        options=all_teams,
+        index=all_teams.index(_obj_default_team) if _obj_default_team in all_teams else 0,
+        key="obj_team_select",
+    )
+
+    # Same date/patch/game_num filters as the rest of the dashboard, but the team
+    # is picked explicitly here (mirrors the Role Pick Pools pattern in Tab 1).
+    _obj_picks_raw = picks_raw.copy()
+    if sel_game_nums:
+        _obj_picks_raw = _obj_picks_raw[_obj_picks_raw["game_num"].isin(sel_game_nums)]
+    if sel_dates and len(sel_dates) == 2 and "date" in _obj_picks_raw.columns:
+        _obj_d0, _obj_d1 = pd.Timestamp(sel_dates[0]), pd.Timestamp(sel_dates[1])
+        _obj_picks_raw = _obj_picks_raw[_obj_picks_raw["date"].isna() | ((_obj_picks_raw["date"] >= _obj_d0) & (_obj_picks_raw["date"] <= _obj_d1))]
+    if sel_patches and "patch" in _obj_picks_raw.columns:
+        _obj_picks_raw = _obj_picks_raw[_obj_picks_raw["patch"].isin(sel_patches)]
+
+    _obj_games = (
+        _obj_picks_raw[_obj_picks_raw["team"] == _obj_team][["series_id", "game_num", "side"]]
+        .drop_duplicates()
+    )
+    _obj_games["team_id"] = _obj_games["side"].map({"Blue": 100, "Red": 200})
+
+    if _obj_games.empty:
+        st.info(f"No games found for {_obj_team} with the current filters.")
+    else:
+        _all_events: list[dict] = []
+        _missing = 0
+        for _, _g in _obj_games.iterrows():
+            _evs = _extract_game_objective_events(_g["series_id"], int(_g["game_num"]), int(_g["team_id"]))
+            if _evs is None:
+                _missing += 1
+                continue
+            _all_events.extend(_evs)
+
+        _games_used = len(_obj_games) - _missing
+        st.caption(f"**{_games_used}** games with timeline data" + (f" ({_missing} missing, skipped)" if _missing else ""))
+
+        if _games_used == 0:
+            st.warning("No timeline data available for these games.")
+        else:
+            _rows = []
+            for _cat in _OBJ_CATEGORIES:
+                _cat_events = [e for e in _all_events if e["category"] == _cat]
+                _team_events = [e for e in _cat_events if e["taken_by_team"]]
+                _opp_events = [e for e in _cat_events if not e["taken_by_team"]]
+                _total_taken = len(_cat_events)
+                _team_n = len(_team_events)
+                _opp_n = len(_opp_events)
+
+                _team_per_game = _team_n / _games_used
+                _opp_per_game = _opp_n / _games_used
+                _rel_pct = (_team_n / _total_taken * 100) if _total_taken else float("nan")
+                _team_swing = float(np.mean([e["swing"] for e in _team_events])) if _team_events else float("nan")
+                _opp_swing = float(np.mean([e["swing"] for e in _opp_events])) if _opp_events else float("nan")
+
+                _rows.append({
+                    "Objective": _cat,
+                    "Taken (total)": _total_taken,
+                    f"{_obj_team} secured": _team_n,
+                    "Opponent secured": _opp_n,
+                    f"{_obj_team} per game": round(_team_per_game, 2),
+                    "Opponent per game": round(_opp_per_game, 2),
+                    "Relative %": round(_rel_pct, 1) if _total_taken else None,
+                    f"Avg gold swing ({_obj_team} takes it)": round(_team_swing) if _team_events else None,
+                    "Avg gold swing (opponent takes it)": round(_opp_swing) if _opp_events else None,
+                })
+
+            _summary_df = pd.DataFrame(_rows)
+
+            st.caption(
+                f"**{_obj_team} / Opponent per game** = raw average count secured per game played "
+                "(e.g. 1.55 means they average more than one takedown of that objective per game — "
+                "objectives that can spawn more than once won't cap at 1). "
+                "**Relative %** = secured ÷ times the objective was actually taken by either team "
+                "(who wins it when it's actually up for grabs)."
+            )
+
+            def _color_pct(val):
+                try:
+                    v = float(val)
+                except (TypeError, ValueError):
+                    return ""
+                if v >= 60:
+                    return "background-color: #1e7e34; color: white"
+                elif v >= 50:
+                    return "background-color: #28a745; color: white"
+                elif v >= 40:
+                    return "background-color: #ffc107"
+                else:
+                    return "background-color: #dc3545; color: white"
+
+            def _color_swing(val):
+                try:
+                    v = float(val)
+                except (TypeError, ValueError):
+                    return ""
+                if v > 0:
+                    return "color: #28a745"
+                elif v < 0:
+                    return "color: #dc3545"
+                return ""
+
+            st.dataframe(
+                _summary_df.style
+                    .map(_color_pct, subset=["Relative %"])
+                    .map(_color_swing, subset=[f"Avg gold swing ({_obj_team} takes it)", "Avg gold swing (opponent takes it)"])
+                    .format({
+                        f"{_obj_team} per game": "{:.2f}",
+                        "Opponent per game": "{:.2f}",
+                        "Relative %": lambda v: f"{v:.1f}%" if pd.notna(v) else "—",
+                        f"Avg gold swing ({_obj_team} takes it)": lambda v: f"{v:+.0f}g" if pd.notna(v) else "—",
+                        "Avg gold swing (opponent takes it)": lambda v: f"{v:+.0f}g" if pd.notna(v) else "—",
+                    }),
+                hide_index=True,
+                width="stretch",
+            )
+
+            st.markdown("---")
+
+            _c_freq, _c_rel, _c_swing = st.columns(3)
+
+            with _c_freq:
+                st.markdown(f"**Secured per game — {_obj_team} vs Opponent**")
+                _freq_chart = _summary_df.set_index("Objective")[
+                    [f"{_obj_team} per game", "Opponent per game"]
+                ]
+                st.bar_chart(_freq_chart, color=["#4A90D9", "#F1C40F"], height=380, stack=False)
+
+            with _c_rel:
+                st.markdown(f"**{_obj_team}'s share when the objective is taken**")
+                _rel_chart = _summary_df.set_index("Objective")[["Relative %"]]
+                st.bar_chart(_rel_chart, color=["#4A90D9"], height=380)
+
+            with _c_swing:
+                st.markdown("**Avg. gold swing 60s after objective is taken**")
+                _swing_chart = _summary_df.set_index("Objective")[
+                    [f"Avg gold swing ({_obj_team} takes it)", "Avg gold swing (opponent takes it)"]
+                ]
+                st.bar_chart(_swing_chart, color=["#28a745", "#dc3545"], height=380, stack=False)
