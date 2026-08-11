@@ -9075,3 +9075,42 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,champion,ban_order,ban_
 2977821,1,P11,TTS,TTS,P11,Red,Jarvan IV,3,6,1,True,Win
 2977821,1,P11,TTS,TTS,P11,Red,Ziggs,4,7,2,True,Win
 2977821,1,P11,TTS,TTS,P11,Red,Sylas,5,9,2,True,Win
+2977822,1,ATA,TTS,ATA,TTS,Blue,Camille,2,3,1,True,Win
+2977822,1,ATA,TTS,ATA,TTS,Blue,Lee Sin,3,5,1,True,Win
+2977822,1,ATA,TTS,ATA,TTS,Blue,Yone,4,8,2,True,Win
+2977822,1,ATA,TTS,ATA,TTS,Blue,Darius,5,10,2,True,Win
+2977822,1,ATA,TTS,TTS,ATA,Red,Ambessa,1,2,1,False,Loss
+2977822,1,ATA,TTS,TTS,ATA,Red,Naafiri,2,4,1,False,Loss
+2977822,1,ATA,TTS,TTS,ATA,Red,Nocturne,3,6,1,False,Loss
+2977822,1,ATA,TTS,TTS,ATA,Red,Rumble,4,7,2,False,Loss
+2977822,1,ATA,TTS,TTS,ATA,Red,Zeri,5,9,2,False,Loss
+2977823,1,P11,ZENA,P11,ZENA,Blue,Graves,1,1,1,False,Loss
+2977823,1,P11,ZENA,P11,ZENA,Blue,Ambessa,2,3,1,False,Loss
+2977823,1,P11,ZENA,P11,ZENA,Blue,Poppy,3,5,1,False,Loss
+2977823,1,P11,ZENA,P11,ZENA,Blue,Camille,4,8,2,False,Loss
+2977823,1,P11,ZENA,P11,ZENA,Blue,Kai'Sa,5,10,2,False,Loss
+2977823,1,P11,ZENA,ZENA,P11,Red,Ryze,1,2,1,True,Win
+2977823,1,P11,ZENA,ZENA,P11,Red,Nautilus,2,4,1,True,Win
+2977823,1,P11,ZENA,ZENA,P11,Red,Ezreal,3,6,1,True,Win
+2977823,1,P11,ZENA,ZENA,P11,Red,Rell,4,7,2,True,Win
+2977823,1,P11,ZENA,ZENA,P11,Red,Yunara,5,9,2,True,Win
+2977824,1,EKO,HMB,EKO,HMB,Blue,Cassiopeia,1,1,1,False,Loss
+2977824,1,EKO,HMB,EKO,HMB,Blue,Camille,2,3,1,False,Loss
+2977824,1,EKO,HMB,EKO,HMB,Blue,Yasuo,3,5,1,False,Loss
+2977824,1,EKO,HMB,EKO,HMB,Blue,Orianna,4,8,2,False,Loss
+2977824,1,EKO,HMB,EKO,HMB,Blue,Yone,5,10,2,False,Loss
+2977824,1,EKO,HMB,HMB,EKO,Red,Poppy,1,2,1,True,Win
+2977824,1,EKO,HMB,HMB,EKO,Red,Jarvan IV,2,4,1,True,Win
+2977824,1,EKO,HMB,HMB,EKO,Red,Seraphine,3,6,1,True,Win
+2977824,1,EKO,HMB,HMB,EKO,Red,Olaf,4,7,2,True,Win
+2977824,1,EKO,HMB,HMB,EKO,Red,Wukong,5,9,2,True,Win
+2977825,1,CG,GMB,CG,GMB,Blue,Aurora,1,1,1,True,Win
+2977825,1,CG,GMB,CG,GMB,Blue,Syndra,2,3,1,True,Win
+2977825,1,CG,GMB,CG,GMB,Blue,Jarvan IV,3,5,1,True,Win
+2977825,1,CG,GMB,CG,GMB,Blue,Rumble,4,8,2,True,Win
+2977825,1,CG,GMB,CG,GMB,Blue,Renekton,5,10,2,True,Win
+2977825,1,CG,GMB,GMB,CG,Red,Jayce,1,2,1,False,Loss
+2977825,1,CG,GMB,GMB,CG,Red,Cassiopeia,2,4,1,False,Loss
+2977825,1,CG,GMB,GMB,CG,Red,Nocturne,3,6,1,False,Loss
+2977825,1,CG,GMB,GMB,CG,Red,Wukong,4,7,2,False,Loss
+2977825,1,CG,GMB,GMB,CG,Red,Qiyana,5,9,2,False,Loss
