@@ -63,7 +63,7 @@ elif st.session_state.get("authentication_status") is None:
 DATA_DIR = Path(__file__).parent
 
 # ── Data loading ──────────────────────────────────────────────────────────────
-@st.cache_data
+@st.cache_data(ttl=300)
 def load_data():
     picks = pd.read_csv(DATA_DIR / "picks.csv")
     bans  = pd.read_csv(DATA_DIR / "bans.csv")
@@ -143,6 +143,10 @@ sel_game_nums = st.sidebar.multiselect(
 )
 
 st.sidebar.markdown("---")
+
+if st.sidebar.button("Refresh data", help="Clear cache and reload picks/bans/dates"):
+    st.cache_data.clear()
+    st.rerun()
 
 # Date filter
 has_dates = picks_raw["date"].notna().any()

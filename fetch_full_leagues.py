@@ -59,6 +59,7 @@ LEAGUES: dict[str, dict] = {
             #"829137",
             #"829139",
             "830354",
+            "830356"
         ],
     },
     # "LEC": {
@@ -192,7 +193,7 @@ def discover_tournaments(keywords: list[str]) -> None:
         for edge in edges:
             node  = edge["node"]
             date  = node.get("startTimeScheduled", "")[:10]
-            if date and date < "2026-01-01":
+            if date and date < "2026-08-01":
                 stop = True
                 break
             tourn = (node.get("tournament") or {})
