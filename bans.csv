@@ -9144,3 +9144,133 @@ series_id,game_num,blue_team,red_team,team,opp_team,side,champion,ban_order,ban_
 2977829,3,TTS,P11,P11,TTS,Red,Nocturne,3,6,1,False,Loss
 2977829,3,TTS,P11,P11,TTS,Red,Anivia,4,7,2,False,Loss
 2977829,3,TTS,P11,P11,TTS,Red,Darius,5,9,2,False,Loss
+2977831,1,GMB,HMB,GMB,HMB,Blue,Nocturne,1,1,1,False,Loss
+2977831,1,GMB,HMB,GMB,HMB,Blue,Cassiopeia,2,3,1,False,Loss
+2977831,1,GMB,HMB,GMB,HMB,Blue,Jayce,3,5,1,False,Loss
+2977831,1,GMB,HMB,GMB,HMB,Blue,Ryze,4,8,2,False,Loss
+2977831,1,GMB,HMB,GMB,HMB,Blue,Naafiri,5,10,2,False,Loss
+2977831,1,GMB,HMB,HMB,GMB,Red,Jarvan IV,1,2,1,True,Win
+2977831,1,GMB,HMB,HMB,GMB,Red,Viktor,2,4,1,True,Win
+2977831,1,GMB,HMB,HMB,GMB,Red,Leona,3,6,1,True,Win
+2977831,1,GMB,HMB,HMB,GMB,Red,Yone,4,7,2,True,Win
+2977831,1,GMB,HMB,HMB,GMB,Red,Qiyana,5,9,2,True,Win
+2977831,2,HMB,GMB,HMB,GMB,Blue,Jarvan IV,1,1,1,True,Win
+2977831,2,HMB,GMB,HMB,GMB,Blue,Viktor,2,3,1,True,Win
+2977831,2,HMB,GMB,HMB,GMB,Blue,Vi,3,5,1,True,Win
+2977831,2,HMB,GMB,HMB,GMB,Blue,Camille,4,8,2,True,Win
+2977831,2,HMB,GMB,HMB,GMB,Blue,Vayne,5,10,2,True,Win
+2977831,2,HMB,GMB,GMB,HMB,Red,Nocturne,1,2,1,False,Loss
+2977831,2,HMB,GMB,GMB,HMB,Red,Cassiopeia,2,4,1,False,Loss
+2977831,2,HMB,GMB,GMB,HMB,Red,Yorick,3,6,1,False,Loss
+2977831,2,HMB,GMB,GMB,HMB,Red,Skarner,4,7,2,False,Loss
+2977831,2,HMB,GMB,GMB,HMB,Red,Pantheon,5,9,2,False,Loss
+2977831,3,HMB,GMB,HMB,GMB,Blue,Jarvan IV,1,1,1,True,Win
+2977831,3,HMB,GMB,HMB,GMB,Blue,Yone,2,3,1,True,Win
+2977831,3,HMB,GMB,HMB,GMB,Blue,Akali,3,5,1,True,Win
+2977831,3,HMB,GMB,HMB,GMB,Blue,Camille,4,8,2,True,Win
+2977831,3,HMB,GMB,HMB,GMB,Blue,Gnar,5,10,2,True,Win
+2977831,3,HMB,GMB,GMB,HMB,Red,Nocturne,1,2,1,False,Loss
+2977831,3,HMB,GMB,GMB,HMB,Red,Cassiopeia,2,4,1,False,Loss
+2977831,3,HMB,GMB,GMB,HMB,Red,Ziggs,3,6,1,False,Loss
+2977831,3,HMB,GMB,GMB,HMB,Red,Vayne,4,7,2,False,Loss
+2977831,3,HMB,GMB,GMB,HMB,Red,Sylas,5,9,2,False,Loss
+2977832,1,CG,ATA,CG,ATA,Blue,Jarvan IV,1,1,1,False,Loss
+2977832,1,CG,ATA,CG,ATA,Blue,Nautilus,2,3,1,False,Loss
+2977832,1,CG,ATA,CG,ATA,Blue,Wukong,3,5,1,False,Loss
+2977832,1,CG,ATA,CG,ATA,Blue,Kai'Sa,4,8,2,False,Loss
+2977832,1,CG,ATA,CG,ATA,Blue,Corki,5,10,2,False,Loss
+2977832,1,CG,ATA,ATA,CG,Red,Cassiopeia,1,2,1,True,Win
+2977832,1,CG,ATA,ATA,CG,Red,Vi,2,4,1,True,Win
+2977832,1,CG,ATA,ATA,CG,Red,Nocturne,3,6,1,True,Win
+2977832,1,CG,ATA,ATA,CG,Red,Jayce,4,7,2,True,Win
+2977832,1,CG,ATA,ATA,CG,Red,Renekton,5,9,2,True,Win
+2977832,2,CG,ATA,CG,ATA,Blue,Jarvan IV,1,1,1,True,Win
+2977832,2,CG,ATA,CG,ATA,Blue,Nautilus,2,3,1,True,Win
+2977832,2,CG,ATA,CG,ATA,Blue,Wukong,3,5,1,True,Win
+2977832,2,CG,ATA,CG,ATA,Blue,Lee Sin,4,8,2,True,Win
+2977832,2,CG,ATA,CG,ATA,Blue,Pantheon,5,10,2,True,Win
+2977832,2,CG,ATA,ATA,CG,Red,Cassiopeia,1,2,1,False,Loss
+2977832,2,CG,ATA,ATA,CG,Red,Vi,2,4,1,False,Loss
+2977832,2,CG,ATA,ATA,CG,Red,Nocturne,3,6,1,False,Loss
+2977832,2,CG,ATA,ATA,CG,Red,Anivia,4,7,2,False,Loss
+2977832,2,CG,ATA,ATA,CG,Red,Syndra,5,9,2,False,Loss
+2977832,3,CG,ATA,CG,ATA,Blue,Wukong,1,1,1,True,Win
+2977832,3,CG,ATA,CG,ATA,Blue,Nautilus,2,3,1,True,Win
+2977832,3,CG,ATA,CG,ATA,Blue,Lee Sin,3,5,1,True,Win
+2977832,3,CG,ATA,CG,ATA,Blue,Jax,4,8,2,True,Win
+2977832,3,CG,ATA,CG,ATA,Blue,Kled,5,10,2,True,Win
+2977832,3,CG,ATA,ATA,CG,Red,Cassiopeia,1,2,1,False,Loss
+2977832,3,CG,ATA,ATA,CG,Red,Vi,2,4,1,False,Loss
+2977832,3,CG,ATA,ATA,CG,Red,Jarvan IV,3,6,1,False,Loss
+2977832,3,CG,ATA,ATA,CG,Red,Akali,4,7,2,False,Loss
+2977832,3,CG,ATA,ATA,CG,Red,Ahri,5,9,2,False,Loss
+2977832,4,CG,ATA,CG,ATA,Blue,Wukong,1,1,1,True,Win
+2977832,4,CG,ATA,CG,ATA,Blue,Lee Sin,2,3,1,True,Win
+2977832,4,CG,ATA,CG,ATA,Blue,Anivia,3,5,1,True,Win
+2977832,4,CG,ATA,CG,ATA,Blue,K'Sante,4,8,2,True,Win
+2977832,4,CG,ATA,CG,ATA,Blue,Jax,5,10,2,True,Win
+2977832,4,CG,ATA,ATA,CG,Red,Cassiopeia,1,2,1,False,Loss
+2977832,4,CG,ATA,ATA,CG,Red,Vi,2,4,1,False,Loss
+2977832,4,CG,ATA,ATA,CG,Red,Jarvan IV,3,6,1,False,Loss
+2977832,4,CG,ATA,ATA,CG,Red,Tristana,4,7,2,False,Loss
+2977832,4,CG,ATA,ATA,CG,Red,Draven,5,9,2,False,Loss
+2977833,1,TTS,EKO,TTS,EKO,Blue,Ziggs,1,1,1,True,Win
+2977833,1,TTS,EKO,TTS,EKO,Blue,Seraphine,2,3,1,True,Win
+2977833,1,TTS,EKO,TTS,EKO,Blue,Jarvan IV,3,5,1,True,Win
+2977833,1,TTS,EKO,TTS,EKO,Blue,Leona,4,8,2,True,Win
+2977833,1,TTS,EKO,TTS,EKO,Blue,Nautilus,5,10,2,True,Win
+2977833,1,TTS,EKO,EKO,TTS,Red,Hwei,1,2,1,False,Loss
+2977833,1,TTS,EKO,EKO,TTS,Red,Lissandra,2,4,1,False,Loss
+2977833,1,TTS,EKO,EKO,TTS,Red,Nocturne,3,6,1,False,Loss
+2977833,1,TTS,EKO,EKO,TTS,Red,Kai'Sa,4,7,2,False,Loss
+2977833,1,TTS,EKO,EKO,TTS,Red,Sivir,5,9,2,False,Loss
+2977833,2,TTS,EKO,TTS,EKO,Blue,Ziggs,1,1,1,True,Win
+2977833,2,TTS,EKO,TTS,EKO,Blue,Seraphine,2,3,1,True,Win
+2977833,2,TTS,EKO,TTS,EKO,Blue,Jarvan IV,3,5,1,True,Win
+2977833,2,TTS,EKO,TTS,EKO,Blue,Kha'Zix,4,8,2,True,Win
+2977833,2,TTS,EKO,TTS,EKO,Blue,Lee Sin,5,10,2,True,Win
+2977833,2,TTS,EKO,EKO,TTS,Red,Hwei,1,2,1,False,Loss
+2977833,2,TTS,EKO,EKO,TTS,Red,Nocturne,2,4,1,False,Loss
+2977833,2,TTS,EKO,EKO,TTS,Red,Viktor,3,6,1,False,Loss
+2977833,2,TTS,EKO,EKO,TTS,Red,Nautilus,4,7,2,False,Loss
+2977833,2,TTS,EKO,EKO,TTS,Red,Braum,5,9,2,False,Loss
+2977833,3,TTS,EKO,TTS,EKO,Blue,Seraphine,1,1,1,True,Win
+2977833,3,TTS,EKO,TTS,EKO,Blue,Ziggs,2,3,1,True,Win
+2977833,3,TTS,EKO,TTS,EKO,Blue,Jarvan IV,3,5,1,True,Win
+2977833,3,TTS,EKO,TTS,EKO,Blue,Vi,4,8,2,True,Win
+2977833,3,TTS,EKO,TTS,EKO,Blue,Xin Zhao,5,10,2,True,Win
+2977833,3,TTS,EKO,EKO,TTS,Red,Nocturne,1,2,1,False,Loss
+2977833,3,TTS,EKO,EKO,TTS,Red,Hwei,2,4,1,False,Loss
+2977833,3,TTS,EKO,EKO,TTS,Red,Naafiri,3,6,1,False,Loss
+2977833,3,TTS,EKO,EKO,TTS,Red,Yone,4,7,2,False,Loss
+2977833,3,TTS,EKO,EKO,TTS,Red,Darius,5,9,2,False,Loss
+2977835,1,TTS,ZENA,TTS,ZENA,Blue,Orianna,1,1,1,False,Loss
+2977835,1,TTS,ZENA,TTS,ZENA,Blue,Ambessa,2,3,1,False,Loss
+2977835,1,TTS,ZENA,TTS,ZENA,Blue,Cassiopeia,3,5,1,False,Loss
+2977835,1,TTS,ZENA,TTS,ZENA,Blue,Kai'Sa,4,8,2,False,Loss
+2977835,1,TTS,ZENA,TTS,ZENA,Blue,Viktor,5,10,2,False,Loss
+2977835,1,TTS,ZENA,ZENA,TTS,Red,Lissandra,1,2,1,True,Win
+2977835,1,TTS,ZENA,ZENA,TTS,Red,Syndra,2,4,1,True,Win
+2977835,1,TTS,ZENA,ZENA,TTS,Red,Hwei,3,6,1,True,Win
+2977835,1,TTS,ZENA,ZENA,TTS,Red,Wukong,4,7,2,True,Win
+2977835,1,TTS,ZENA,ZENA,TTS,Red,Vi,5,9,2,True,Win
+2977835,2,ZENA,TTS,ZENA,TTS,Blue,Lissandra,1,1,1,True,Win
+2977835,2,ZENA,TTS,ZENA,TTS,Blue,Hwei,2,3,1,True,Win
+2977835,2,ZENA,TTS,ZENA,TTS,Blue,Lucian,3,5,1,True,Win
+2977835,2,ZENA,TTS,ZENA,TTS,Blue,Sivir,4,8,2,True,Win
+2977835,2,ZENA,TTS,ZENA,TTS,Blue,Kai'Sa,5,10,2,True,Win
+2977835,2,ZENA,TTS,TTS,ZENA,Red,Orianna,1,2,1,False,Loss
+2977835,2,ZENA,TTS,TTS,ZENA,Red,Ambessa,2,4,1,False,Loss
+2977835,2,ZENA,TTS,TTS,ZENA,Red,Graves,3,6,1,False,Loss
+2977835,2,ZENA,TTS,TTS,ZENA,Red,Ezreal,4,7,2,False,Loss
+2977835,2,ZENA,TTS,TTS,ZENA,Red,Caitlyn,5,9,2,False,Loss
+2977835,3,ZENA,TTS,ZENA,TTS,Blue,Lissandra,1,1,1,True,Win
+2977835,3,ZENA,TTS,ZENA,TTS,Blue,Lucian,2,3,1,True,Win
+2977835,3,ZENA,TTS,ZENA,TTS,Blue,Hwei,3,5,1,True,Win
+2977835,3,ZENA,TTS,ZENA,TTS,Blue,Xayah,4,8,2,True,Win
+2977835,3,ZENA,TTS,ZENA,TTS,Blue,Ezreal,5,10,2,True,Win
+2977835,3,ZENA,TTS,TTS,ZENA,Red,Orianna,1,2,1,False,Loss
+2977835,3,ZENA,TTS,TTS,ZENA,Red,Ambessa,2,4,1,False,Loss
+2977835,3,ZENA,TTS,TTS,ZENA,Red,Graves,3,6,1,False,Loss
+2977835,3,ZENA,TTS,TTS,ZENA,Red,Camille,4,7,2,False,Loss
+2977835,3,ZENA,TTS,TTS,ZENA,Red,Neeko,5,9,2,False,Loss
