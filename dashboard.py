@@ -2174,9 +2174,11 @@ with tab_obj:
         Returns a list of dicts, one per elite-monster kill in the game:
           {category, taken_by_team, swing}
         `swing` is the change in (team_id's gold - opponent's gold) between the
-        moment the objective is taken and 60s later, i.e. the gold lead created
-        in the minute right after the objective.  Riot timelines always assign
-        participantIds 1-5 to teamId 100 and 6-10 to teamId 200.
+        moment the objective is taken and N seconds later, i.e. the gold lead
+        created in the window right after the objective. That window is 180s
+        (3 min) for Baron and Elder Dragon, and 60s (1 min) for every other
+        objective.  Riot timelines always assign participantIds 1-5 to teamId
+        100 and 6-10 to teamId 200.
         """
         data = _load_timeline_json(series_id, game_num)
         if data is None:
@@ -2212,7 +2214,9 @@ with tab_obj:
                 sub = e.get("monsterSubType")
                 ts = e.get("timestamp", 0)
                 taken_by_team = e.get("killerTeamId") == team_id
-                swing = gold_lead_at(ts + 60000) - gold_lead_at(ts)
+                is_baron_or_elder = mtype == "BARON_NASHOR" or (mtype == "DRAGON" and sub == "ELDER_DRAGON")
+                swing_window_ms = 180000 if is_baron_or_elder else 60000
+                swing = gold_lead_at(ts + swing_window_ms) - gold_lead_at(ts)
 
                 if mtype == "DRAGON" and sub != "ELDER_DRAGON":
                     events.append({"category": "Drakes (Total)", "taken_by_team": taken_by_team, "swing": swing})
@@ -2233,8 +2237,9 @@ with tab_obj:
     st.subheader("Objective Control & Gold Impact")
     st.caption(
         "For each objective: how often the selected team secures it, and the gold lead "
-        "it creates in the 60 seconds right after it's taken (isolated from any pre-existing "
-        "gold lead) — split by who secured it. From local timeline data."
+        "it creates in the seconds right after it's taken — 180s for Baron/Elder Dragon, "
+        "60s for other objectives (isolated from any pre-existing gold lead) — split by "
+        "who secured it. From local timeline data."
     )
 
     _obj_default_team = sel_teams[0] if sel_teams else (all_teams[0] if all_teams else None)
@@ -2374,7 +2379,7 @@ with tab_obj:
                 st.bar_chart(_rel_chart, color=["#4A90D9"], height=380)
 
             with _c_swing:
-                st.markdown("**Avg. gold swing 60s after objective is taken**")
+                st.markdown("**Avg. gold swing after objective is taken (180s for Baron/Elder Dragon, 60s otherwise)**")
                 _swing_chart = _summary_df.set_index("Objective")[
                     [f"Avg gold swing ({_obj_team} takes it)", "Avg gold swing (opponent takes it)"]
                 ]
