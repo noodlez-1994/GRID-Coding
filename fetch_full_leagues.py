@@ -62,11 +62,29 @@ LEAGUES: dict[str, dict] = {
             "830356"
         ],
     },
+    "LES": {
+        "label": "LES - Summer 2026",
+        "tournament_ids": [
+            "830179",
+            "830181"
+        ],
+    },
+    "EMEA": {
+        "label": "EMEA Masters - Summer 2026",
+        "tournament_ids": [
+            "830958",
+            "830957",
+            "830956",
+            "830955",
+            "830960",
+            "830962"
+        ],
+    },
     # "LEC": {
     #     "label": "LoL EMEA Championship - Spring 2026",
     #     "tournament_ids": [
     #         # TODO: inserire IDs dopo --discover
-    #         # Esempio: "830001", "830002", ...
+    #         # Esempio: "830001", "830002", ... 
     #         #"827701",
     #         #"828729",
     #         #"828973"
@@ -193,7 +211,7 @@ def discover_tournaments(keywords: list[str]) -> None:
         for edge in edges:
             node  = edge["node"]
             date  = node.get("startTimeScheduled", "")[:10]
-            if date and date < "2026-08-01":
+            if date and date < "2026-07-01":
                 stop = True
                 break
             tourn = (node.get("tournament") or {})
@@ -201,7 +219,7 @@ def discover_tournaments(keywords: list[str]) -> None:
             tname = tourn.get("name", "")
             if tid and tid not in seen_ids:
                 seen_ids.add(tid)
-                if any(kw in tname.lower() for kw in keywords_lower):
+                if not keywords_lower or any(kw in tname.lower() for kw in keywords_lower):
                     found.append({"id": tid, "name": tname, "date": date})
 
         if stop or not conn["pageInfo"]["hasNextPage"]:
@@ -249,7 +267,7 @@ def fetch_league_series(league_label: str, tournament_ids: list[str]) -> list[di
         for edge in edges:
             n     = edge["node"]
             date  = n.get("startTimeScheduled", "")[:10]
-            if date >= today:
+            if date > today:
                 print(f"    STOP – series {n['id']} ({date}) è futura, interrompo")
                 stop = True
                 break
@@ -356,7 +374,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.discover:
-        discover_tournaments(["lec", "lck", "italian", "lit"])
+        discover_tournaments([])
         return
 
     # Verifica che ci siano IDs configurati per ogni lega richiesta
