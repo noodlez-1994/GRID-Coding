@@ -80,6 +80,13 @@ LEAGUES: dict[str, dict] = {
             "830962"
         ],
     },
+    "LPT": {
+        "label": "Liga Portoguesa - Summer 2026",
+        "tournament_ids": [
+            "829833",
+            "829835"
+        ],
+    },
     # "LEC": {
     #     "label": "LoL EMEA Championship - Spring 2026",
     #     "tournament_ids": [
