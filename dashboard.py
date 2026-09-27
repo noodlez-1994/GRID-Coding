@@ -1933,15 +1933,19 @@ with tab_moves:
 
             # ── Ward overlay option ───────────────────────────────────────────────────
             show_wards = st.checkbox("Show ward placements", value=True, key="move_show_wards")
-            game_wards_df: pd.DataFrame | None = None
-            if show_wards and not wards_raw.empty:
+
+            def _wards_in_window(w_start_ms: int, w_end_ms: int) -> pd.DataFrame | None:
+                if not show_wards or wards_raw.empty:
+                    return None
                 gw = wards_raw[
                     (wards_raw["series_id"].astype(str) == sel_sid) &
                     (wards_raw["game_num"] == sel_gnum)
                 ].copy()
                 gw["game_time_ms"] = (gw["game_time_s"] * 1000).astype(int)
-                gw = gw[(gw["game_time_ms"] >= start_ms) & (gw["game_time_ms"] <= end_ms)]
-                game_wards_df = gw if not gw.empty else None
+                gw = gw[(gw["game_time_ms"] >= w_start_ms) & (gw["game_time_ms"] <= w_end_ms)]
+                return gw if not gw.empty else None
+
+            game_wards_df = _wards_in_window(start_ms, end_ms)
 
             # ── Generate ─────────────────────────────────────────────────────────────
             if st.button("▶ Generate GIF", type="primary", key="move_gen"):
@@ -1965,6 +1969,74 @@ with tab_moves:
                         mime="image/gif",
                         key="move_dl",
                     )
+
+            # ── Quick exports (0-2 min + Rift Herald ±90s) ───────────────────────────
+            st.markdown("#### ⚡ Quick exports")
+            st.caption(
+                "One click renders the **0:00 → 2:00** GIF and the **Rift Herald ±90s** GIF "
+                "for this game, using the champion filter, animation and ward settings above."
+            )
+            quick_key = f"move_quick_{sel_sid}_{sel_gnum}"
+            if st.button("⚡ Generate 0-2 min + Herald GIFs", key="move_quick_gen"):
+                quick: dict[str, bytes | None] = {}
+                with st.spinner("Rendering 0-2 min GIF…"):
+                    q_end = min(120_000, int(pos_df["game_time_ms"].max()))
+                    quick["early"] = _build_gif(
+                        pos_df, 0, q_end,
+                        sample_s=sample_s, fps=fps,
+                        highlight_pids=highlight_pids,
+                        objective=None,
+                        wards_df=_wards_in_window(0, q_end),
+                    )
+                herald = next(
+                    (o for o in objectives if o["monster_type"] == "riftHerald"), None
+                )
+                quick["herald"] = None
+                if herald is not None:
+                    with st.spinner("Rendering Rift Herald GIF…"):
+                        h_start = max(0, herald["game_time_ms"] - 90_000)
+                        h_end   = min(int(pos_df["game_time_ms"].max()),
+                                      herald["game_time_ms"] + 90_000)
+                        quick["herald"] = _build_gif(
+                            pos_df, h_start, h_end,
+                            sample_s=sample_s, fps=fps,
+                            highlight_pids=highlight_pids,
+                            objective=herald,
+                            wards_df=_wards_in_window(h_start, h_end),
+                        )
+                quick["herald_found"] = herald is not None
+                st.session_state[quick_key] = quick
+
+            # Stored in session_state so the buttons survive the rerun a download triggers
+            quick = st.session_state.get(quick_key)
+            if quick:
+                qc1, qc2 = st.columns(2)
+                with qc1:
+                    if quick["early"] is None:
+                        st.warning("No position data in the first 2 minutes.")
+                    else:
+                        st.download_button(
+                            "⬇️ Download 0-2 min GIF",
+                            data=quick["early"],
+                            file_name=f"movements_{sel_sid}_g{sel_gnum}_0-2min.gif",
+                            mime="image/gif",
+                            key="move_quick_dl_early",
+                            type="primary",
+                        )
+                with qc2:
+                    if not quick["herald_found"]:
+                        st.warning("No Rift Herald kill in this game.")
+                    elif quick["herald"] is None:
+                        st.warning("No position data around the Rift Herald kill.")
+                    else:
+                        st.download_button(
+                            "⬇️ Download Rift Herald GIF",
+                            data=quick["herald"],
+                            file_name=f"movements_{sel_sid}_g{sel_gnum}_herald_90s.gif",
+                            mime="image/gif",
+                            key="move_quick_dl_herald",
+                            type="primary",
+                        )
 
             # ── Participant reference ─────────────────────────────────────────────────
             if pid_info:

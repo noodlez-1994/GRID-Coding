@@ -51,24 +51,24 @@ AWS_SECRET = os.environ["AWS_SECRET_ACCESS_KEY"]
 # Esegui prima `python fetch_full_leagues.py --discover` per trovare gli ID
 # mancanti di LEC e LCK, poi riempili qui.
 LEAGUES: dict[str, dict] = {
-    "LIT": {
-        "label": "LoL Italian Tournament - Winter 2026",
-        "tournament_ids": [
-            # "827826",  # Regular Season
-            # "827828",  # Playoffs
-            #"829137",
-            #"829139",
-            "830354",
-            "830356"
-        ],
-    },
-    "LES": {
-        "label": "LES - Summer 2026",
-        "tournament_ids": [
-            "830179",
-            "830181"
-        ],
-    },
+    # "LIT": {
+    #     "label": "LoL Italian Tournament - Winter 2026",
+    #     "tournament_ids": [
+    #         # "827826",  # Regular Season
+    #         # "827828",  # Playoffs
+    #         #"829137",
+    #         #"829139",
+    #         "830354",
+    #         "830356"
+    #     ],
+    # },
+    # "LES": {
+    #     "label": "LES - Summer 2026",
+    #     "tournament_ids": [
+    #         "830179",
+    #         "830181"
+    #     ],
+    # },
     "EMEA": {
         "label": "EMEA Masters - Summer 2026",
         "tournament_ids": [
@@ -80,11 +80,20 @@ LEAGUES: dict[str, dict] = {
             "830962"
         ],
     },
-    "LPT": {
-        "label": "Liga Portoguesa - Summer 2026",
+    # "LPT": {
+    #     "label": "Liga Portoguesa - Summer 2026",
+    #     "tournament_ids": [
+    #         "829833",
+    #         "829835"
+    #     ],
+    # },
+    "PRM": {
+        "label": "Prime League - Summer 2026",
         "tournament_ids": [
-            "829833",
-            "829835"
+            "830368",
+            "830365",
+            "830366",
+            "829734"
         ],
     },
     # "LEC": {
