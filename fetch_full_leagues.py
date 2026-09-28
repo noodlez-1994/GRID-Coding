@@ -87,15 +87,15 @@ LEAGUES: dict[str, dict] = {
     #         "829835"
     #     ],
     # },
-    "PRM": {
-        "label": "Prime League - Summer 2026",
-        "tournament_ids": [
-            "830368",
-            "830365",
-            "830366",
-            "829734"
-        ],
-    },
+    # "PRM": {
+    #     "label": "Prime League - Summer 2026",
+    #     "tournament_ids": [
+    #         "830368",
+    #         "830365",
+    #         "830366",
+    #         "829734"
+    #     ],
+    # },
     # "LEC": {
     #     "label": "LoL EMEA Championship - Spring 2026",
     #     "tournament_ids": [
